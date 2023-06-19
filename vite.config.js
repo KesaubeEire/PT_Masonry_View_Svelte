@@ -36,7 +36,7 @@ export default defineConfig({
         license: "MIT",
 
         // NOTE: 经常修改这里就行了
-        version: "0.4.16",
+        version: "0.0.1",
       },
     }),
   ],
