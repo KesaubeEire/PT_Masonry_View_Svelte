@@ -1,5 +1,5 @@
 <script>
-  import { _show_originTable } from "./stores";
+  import { _show_originTable, _Global_Masonry } from "./stores";
 
   // ------------------------------------------------
 
@@ -15,6 +15,10 @@
     $_show_originTable = $_show_originTable == 0 ? 1 : 0;
     originTable.style.display = $_show_originTable === 1 ? "" : "none";
   }
+
+  function __sort_masonry() {
+    $_Global_Masonry.layout();
+  }
 </script>
 
 <div class="sideP">
@@ -28,7 +32,7 @@
     <button class="sideP__btn" on:click={__show_originTable}>原有列表</button>
 
     <!-- 按钮2: 手动整理布局 -->
-    <button class="sideP__btn">整理布局</button>
+    <button class="sideP__btn" on:click={__sort_masonry}>整理布局</button>
 
     <!-- 按钮3: 呼出完整侧边栏 -->
     <button class="sideP__btn">呼出边栏</button>

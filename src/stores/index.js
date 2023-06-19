@@ -8,8 +8,12 @@ const _show_originTable = writable(0);
 /**当前所在站点域名 */
 const _current_domain = writable("");
 
+/**全局Masonry */
+const _Global_Masonry = writable({});
+
 
 export {
   _show_originTable,
-  _current_domain
+  _current_domain,
+  _Global_Masonry
 }

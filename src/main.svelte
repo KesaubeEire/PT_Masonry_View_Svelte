@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import Sidepanel from "./sidepanel.svelte";
   import Waterfall from "./sites/_index.svelte";
+  import { _Global_Masonry } from "./stores";
 
   // ------------------------------------------------
 
@@ -38,6 +39,7 @@
   console.log(waterfallNode);
 
   // ------------------------------------------------
+  let masonry;
   /** 启动项目配置*/
   onMount(() => {
     // UI -> 1. 边栏配置
@@ -57,5 +59,19 @@
         originTable: _ORIGIN_TL_Node,
       },
     });
+
+    // TODO: 将 Masonry 从这里迁移到 _index.svelte
+
+    masonry = new Masonry(waterfallNode, {
+      itemSelector: ".card",
+      columnWidth: 100,
+      // gutter: GET_CARD_GUTTER(waterfallNode, CARD.CARD_WIDTH),
+      gutter: 10,
+    });
+
+    $_Global_Masonry = masonry;
+    window.masonry = masonry;
+
+    masonry.layout();
   });
 </script>
