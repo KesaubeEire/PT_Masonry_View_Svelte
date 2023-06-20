@@ -1,5 +1,5 @@
 <script>
-  import { _show_originTable, _Global_Masonry } from "./stores";
+  import { _show_originTable, _Global_Masonry, _card_width } from "./stores";
 
   // ------------------------------------------------
 
@@ -16,8 +16,16 @@
     originTable.style.display = $_show_originTable === 1 ? "" : "none";
   }
 
+  /**按钮2函数: 手动整理瀑布流布局*/
   function __sort_masonry() {
+    // @ts-ignore
     $_Global_Masonry.layout();
+  }
+
+  /**按钮4函数: debug*/
+  function debug() {
+    $_card_width = $_card_width == 300 ? 200 : 300;
+    console.log(`[debug]\$card_width: ${$_card_width}`);
   }
 </script>
 
@@ -36,6 +44,9 @@
 
     <!-- 按钮3: 呼出完整侧边栏 -->
     <button class="sideP__btn">呼出边栏</button>
+
+    <!-- 按钮4: debug -->
+    <button class="sideP__btn" on:click={debug}>debug</button>
   </div>
 </div>
 

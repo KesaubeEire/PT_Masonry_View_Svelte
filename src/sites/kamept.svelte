@@ -6,7 +6,7 @@
   /** 父传值: 种子信息*/
   export let torrentInfo;
   /** 父传值: 卡片宽度*/
-  export let cardWidth = 400;
+  export let cardWidth;
 
   // ------------------------------------------------
 </script>
@@ -55,7 +55,7 @@
   /* 卡片 */
   .card {
     /* width: ${CARD.CARD_WIDTH}px; */
-    width: 200px;
+    /* width: 200px; */
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 16px;
     /* background-color: ${themeColor}; */

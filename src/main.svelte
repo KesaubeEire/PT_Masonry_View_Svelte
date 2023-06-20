@@ -57,21 +57,8 @@
       props: {
         // 传递给组件的属性
         originTable: _ORIGIN_TL_Node,
+        waterfallNode,
       },
     });
-
-    // TODO: 将 Masonry 从这里迁移到 _index.svelte
-
-    masonry = new Masonry(waterfallNode, {
-      itemSelector: ".card",
-      columnWidth: 100,
-      // gutter: GET_CARD_GUTTER(waterfallNode, CARD.CARD_WIDTH),
-      gutter: 10,
-    });
-
-    $_Global_Masonry = masonry;
-    window.masonry = masonry;
-
-    masonry.layout();
   });
 </script>
