@@ -1,7 +1,7 @@
 <script>
   import { _current_domain, _Global_Masonry, _card_width } from "../stores";
   import { onMount } from "svelte";
-  import { sortMasonry } from "../utils";
+  import { sortMasonry, NEXUS_TOOLS } from "../utils";
   import "../utils/masonry.pkgd.Kesa";
 
   import { config } from "./kamept";
@@ -181,6 +181,9 @@
       if (masonry) masonry.layout();
       console.log("Masonry 已整理~");
     });
+
+    // Nexus Tools
+    NEXUS_TOOLS();
   });
 </script>
 

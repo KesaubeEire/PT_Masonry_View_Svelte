@@ -1,5 +1,13 @@
 <script>
   import { _show_originTable } from "../stores";
+  import { sortMasonry } from "../utils";
+
+  // ------------------------------------------------
+
+  /** 调用瀑布流整理*/
+  function sort_masonry() {
+    sortMasonry();
+  }
 
   // ------------------------------------------------
 
@@ -40,8 +48,10 @@
         <!-- NOTE: 加载图片这里换成了logo, 和 MT 一样了捏 -->
         <img
           class="card-image--img nexus-lazy-load_Kesa"
-          src={torrentInfo.picLink}
+          src="pic/misc/spinner.svg" 
+          data-src={torrentInfo.picLink}
           alt={torrentInfo.torrentName}
+          on:load={sort_masonry}
         />
         <div class="card-index">
           {torrentInfo.torrentIndex + 1}
