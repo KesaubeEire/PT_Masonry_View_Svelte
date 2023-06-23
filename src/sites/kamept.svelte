@@ -19,7 +19,10 @@
   // ------------------------------------------------
 </script>
 
-<div class="card" style="width: {cardWidth}px;">
+<div
+  class="card"
+  style="width: {cardWidth}px; z-index:{10000 - torrentInfo.torrentIndex}"
+>
   <div class="card-holder">
     <!-- 分区类别 -->
     <div class="card-category" href={torrentInfo.categoryLink}>
@@ -41,18 +44,19 @@
       </a>
     </div>
 
-    <!-- 卡片其他信息 -->
+    <!-- 其他信息 -->
     <div class="card-body">
       <div class="card-image">
-        <!-- <img class="card-image--img nexus-lazy-load_Kesa" src="pic/misc/spinner.svg" data-src="${picLink}"  alt="${torrentName}" /> -->
-        <!-- NOTE: 加载图片这里换成了logo, 和 MT 一样了捏 -->
+        <!-- 预览图 -->
         <img
           class="card-image--img nexus-lazy-load_Kesa"
-          src="pic/misc/spinner.svg" 
+          src="pic/logo2_100.png"
           data-src={torrentInfo.picLink}
           alt={torrentInfo.torrentName}
           on:load={sort_masonry}
         />
+
+        <!-- 索引标号 -->
         <div class="card-index">
           {torrentInfo.torrentIndex + 1}
         </div>
@@ -78,9 +82,13 @@
     cursor: pointer;
 
     box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 0px, rgba(0, 0, 0, 0.1) -1px -1px 0px;
+    transition: box-shadow 0.2s;
   }
 
+  /* 指针卡片悬浮效果 */
   .card:hover {
+    box-shadow: rgba(115, 0, 255, 0.3) 5px 5px 0px,
+      rgba(0, 0, 0, 0.1) -1px -1px 0px;
   }
 
   /* 卡片标题 */
@@ -96,7 +104,12 @@
       rgba(255, 255, 255, 0.4),
       rgba(255, 255, 255, 0)
     );
-    padding-bottom: 6px;
+    /* padding-bottom: 6px; */
+  }
+
+  /* 卡片分类 */
+  .card-category {
+    text-align: center;
   }
 
   /* 卡片行默认样式 */
@@ -158,7 +171,7 @@
   .card-image {
     height: 100%;
     position: relative;
-    margin-bottom: 2px;
+    /* margin-bottom: 2px; */
   }
 
   /* 卡片图像div -> img标签 */
