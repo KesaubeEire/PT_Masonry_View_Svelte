@@ -9,12 +9,37 @@
     sortMasonry();
   }
 
+  /**执行收藏动作并对制定卡片切换图标
+   * @param {string} jsCodeLink js的收藏代码
+   * @param {string} card_id 种子卡片id
+   */
+  function COLLET_AND_ICON_CHANGE(jsCodeLink, card_id) {
+    // console.log(jsCodeLink, card_id);
+    try {
+      // 收藏链接
+      window.location.href = jsCodeLink;
+
+      // 操作相应的收藏图片
+      const btn = document.querySelector(`div#${card_id}`);
+      const img = btn.children[0];
+      img.className =
+        img.className == "delbookmark" ? "bookmark" : "delbookmark";
+      // console.log(btn);
+      console.log(`执行脚本${jsCodeLink}成功, 已经收藏或者取消~`);
+    } catch (error) {
+      // GUI 通知一下捏
+      console.error(error);
+    }
+  }
+
   // ------------------------------------------------
 
   /** 父传值: 种子信息*/
   export let torrentInfo;
   /** 父传值: 卡片宽度*/
   export let cardWidth;
+  /** 父传值: 静态图片链接*/
+  export let ICON;
 
   // ------------------------------------------------
 </script>
@@ -25,7 +50,7 @@
 >
   <div class="card-holder">
     <!-- 分区类别 -->
-    <div class="card-category" href={torrentInfo.categoryLink}>
+    <div class="card-category" data-href={torrentInfo.categoryLink}>
       <!-- TODO: 颜色这里和龟龟商量怎么搞分类的颜色捏 -->
       <!-- style="background: ${CONFIG.CATEGORY[categoryNumber]};" -->
 
@@ -61,7 +86,93 @@
     </div>
 
     {#if $_CARD_SHOW.all}
-      <p>the quick brown fox jumps over the lazy dog.</p>
+      <!-- 置顶 && 免费类型&剩余时间 -->
+      {#if torrentInfo.free_type || torrentInfo.pattMsg}
+        <div class="card-alter">
+          <div class="top_and_free {torrentInfo.free_type}">
+            <!-- 置顶等级 -->
+            {#if torrentInfo.place_at_the_top.length != 0}
+              {@html Array.from(torrentInfo.place_at_the_top).map(
+                (e) => e.outerHTML
+              ) + "&nbsp;"}
+            {/if}
+
+            <!-- 免费类型 & 免费剩余时间 -->
+            {#if torrentInfo.freeTypeImg}
+              {@html torrentInfo.freeTypeImg.outerHTML}
+            {/if}
+            {#if torrentInfo.free_remaining_time}
+              &nbsp;<b> {torrentInfo.free_remaining_time} </b>
+            {/if}
+          </div>
+        </div>
+      {/if}
+
+      <!-- 副标题 -->
+      {#if torrentInfo.description}
+        <a class="card-description" href={torrentInfo.torrentLink}>
+          {torrentInfo.description}
+        </a>
+      {/if}
+
+      <!-- 标签 Tags -->
+      <div class="cl-tags">
+        {@html torrentInfo.tagsDOM
+          .map((el) => {
+            const _tag = document.createElement("div");
+            _tag.innerHTML = el.outerHTML;
+            // console.log(_tag);
+            return _tag.outerHTML;
+          })
+          .join("")}
+      </div>
+
+      <div class="card-details">
+        <div class="card-line">
+          <!-- 大小 -->
+          <div class="cl-center">
+            {@html ICON.SIZE}&nbsp;{torrentInfo.size}
+          </div>
+
+          <!-- 下载 -->
+          &nbsp;&nbsp;
+          <div class="cl-center">
+            {@html ICON.DOWNLOAD}&nbsp;
+            <b><a href={torrentInfo.downloadLink}>下载</a></b>
+          </div>
+
+          <!-- 收藏 -->
+          &nbsp;&nbsp;
+          <div class="cl-center">
+            <div
+              class="btnCollet cl-center"
+              id="tI_{torrentInfo.torrentIndex}"
+              on:click={COLLET_AND_ICON_CHANGE(
+                torrentInfo.collectLink,
+                "tI_" + torrentInfo.torrentIndex
+              )}
+            >
+              {@html torrentInfo.collectState == "Unbookmarked"
+                ? ICON.COLLET
+                : ICON.COLLETED}
+              &nbsp;<b>收藏</b>
+            </div>
+          </div>
+        </div>
+
+        <!-- 种子id, 默认不显示 -->
+        <!--<div class="card-line"><b>Torrent ID:</b> ${torrentId}</div> -->
+
+        <!-- 上传时间 -->
+        <div class="card-line"><b>上传时间:</b> {torrentInfo.upload_date}</div>
+
+        <div class="card-line">
+          {@html ICON.COMMENT}&nbsp;<b>{torrentInfo.comments}</b>&nbsp;&nbsp;
+          {@html ICON.SEEDERS}&nbsp;<b>{torrentInfo.seeders}</b>&nbsp;&nbsp;
+          {@html ICON.LEECHERS}&nbsp;<b>{torrentInfo.leechers}</b>&nbsp;&nbsp;
+          {@html ICON.SNATCHED}&nbsp;<b>{torrentInfo.snatched}</b>
+        </div>
+      </div>
     {/if}
   </div>
 </div>

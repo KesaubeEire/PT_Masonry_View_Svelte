@@ -119,8 +119,7 @@
     return Math.floor(gutter);
   }
 
-  /**调整卡片布局
-   */
+  /**调整卡片布局 */
   function CHANGE_CARD_LAYOUT() {
     console.log("card width changed.");
     masonry.options.gutter = GET_CARD_GUTTER(waterfallNode, $_card_width);
@@ -177,9 +176,12 @@
     masonry.layout("fast");
 
     // 给瀑布流节点放一个手动点击整理的功能
-    waterfallNode.addEventListener("click", () => {
-      if (masonry) masonry.layout();
-      console.log("Masonry 已整理~");
+    waterfallNode.addEventListener("click", (event) => {
+      // 模拟 self, 只有在点击本身而非子元素的时候时触发效果
+      if (event.target === event.currentTarget) {
+        if (masonry) masonry.layout();
+        console.log("Masonry 已整理~");
+      }
     });
 
     // Nexus Tools
@@ -189,7 +191,7 @@
 
 {#if $_current_domain == "kamept.com"}
   {#each infoList as info (info.torrentId)}
-    <Kamept torrentInfo={info} cardWidth={CARD.CARD_WIDTH} />
+    <Kamept torrentInfo={info} cardWidth={CARD.CARD_WIDTH} {ICON} />
   {/each}
 {:else}
   <div>else</div>
