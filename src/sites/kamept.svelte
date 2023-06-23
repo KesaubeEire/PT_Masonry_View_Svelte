@@ -1,5 +1,5 @@
 <script>
-  import { _show_originTable } from "../stores";
+  import { _CARD_SHOW } from "../stores";
   import { sortMasonry } from "../utils";
 
   // ------------------------------------------------
@@ -44,24 +44,25 @@
       </a>
     </div>
 
-    <!-- 其他信息 -->
-    <div class="card-body">
-      <div class="card-image">
-        <!-- 预览图 -->
-        <img
-          class="card-image--img nexus-lazy-load_Kesa"
-          src="pic/logo2_100.png"
-          data-src={torrentInfo.picLink}
-          alt={torrentInfo.torrentName}
-          on:load={sort_masonry}
-        />
+    <!-- 预览图 -->
+    <div class="card-image">
+      <img
+        class="card-image--img nexus-lazy-load_Kesa"
+        src="pic/logo2_100.png"
+        data-src={torrentInfo.picLink}
+        alt={torrentInfo.torrentName}
+        on:load={sort_masonry}
+      />
 
-        <!-- 索引标号 -->
-        <div class="card-index">
-          {torrentInfo.torrentIndex + 1}
-        </div>
+      <!-- 索引标号 -->
+      <div class="card-index">
+        {torrentInfo.torrentIndex + 1}
       </div>
     </div>
+
+    {#if $_CARD_SHOW.all}
+      <p>the quick brown fox jumps over the lazy dog.</p>
+    {/if}
   </div>
 </div>
 

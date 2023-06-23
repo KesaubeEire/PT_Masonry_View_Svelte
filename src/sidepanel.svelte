@@ -1,5 +1,12 @@
 <script>
-  import { _show_originTable, _Global_Masonry, _card_width } from "./stores";
+  import {
+    _show_originTable,
+    _Global_Masonry,
+    _card_width,
+    _CARD_SHOW,
+  } from "./stores";
+
+  import { sortMasonry } from "./utils";
 
   // ------------------------------------------------
 
@@ -22,10 +29,17 @@
     $_Global_Masonry.layout();
   }
 
-  /**按钮4函数: debug*/
-  function debug() {
+  /** debug01*/
+  function debug01() {
     $_card_width = $_card_width == 300 ? 200 : 300;
     console.log(`[debug]\$card_width: ${$_card_width}`);
+  }
+
+  /** debug02*/
+  function debug02() {
+    $_CARD_SHOW.all = !$_CARD_SHOW.all;
+    sortMasonry("fast");
+    sortMasonry("fast");
   }
 </script>
 
@@ -46,7 +60,10 @@
     <button class="sideP__btn">呼出边栏</button>
 
     <!-- 按钮4: debug -->
-    <button class="sideP__btn" on:click={debug}>debug</button>
+    <button class="sideP__btn" on:click={debug01}>[debug]切换宽度</button>
+
+    <!-- 按钮4: debug -->
+    <button class="sideP__btn" on:click={debug02}>[debug]显示详情</button>
   </div>
 </div>
 
@@ -64,6 +81,8 @@
 
     border-radius: 8px;
     overflow: hidden;
+
+    z-index: 10001;
 
     &:hover {
       opacity: 1;
