@@ -223,6 +223,6 @@
     font-size: 14px;
 
     position: absolute;
-    bottom: -14px;
+    bottom: 0px;
   }
 </style>
