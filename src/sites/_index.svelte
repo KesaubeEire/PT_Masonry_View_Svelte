@@ -1,5 +1,10 @@
 <script>
-  import { _current_domain, _Global_Masonry, _card_width } from "../stores";
+  import {
+    _current_domain,
+    _Global_Masonry,
+    _card_width,
+    _current_bgColor,
+  } from "../stores";
   import { onMount } from "svelte";
   import { sortMasonry, NEXUS_TOOLS } from "../utils";
   import "../utils/masonry.pkgd.Kesa";
@@ -131,9 +136,15 @@
   // ------------------------------------------------
   // FIXME: 瀑布流渲染流程------------------------------------------------
 
-  // 1. 获取当前域名 --------------------------------------------------------------------------------------
+  // 1. 获取当前域名 & 背景颜色 --------------------------------------------------------------------------------------
   $_current_domain = GET_CURRENT_PT_DOMAIN();
   console.log($_current_domain);
+
+  /** 获取主题背景色 */
+  const mainOuterDOM = document.querySelector("table.mainouter");
+  const themeColor = window.getComputedStyle(mainOuterDOM)["background-color"];
+  $_current_bgColor = themeColor;
+  console.log("背景颜色:", themeColor);
 
   // 2. 根据当前域名拿到对应的数据 --------------------------------------------------------------------------------------
   let infoList = [];
@@ -197,4 +208,21 @@
   <div>else</div>
 {/if}
 
-<style></style>
+<!-- 点击加载下一页的按钮 -->
+<div>
+  <button id="turnPage">点击加载下一页</button>
+</div>
+
+<style>
+  /* 卡片: 收藏按钮 */
+  #turnPage {
+    width: 100%;
+    height: 32px;
+    border-radius: 16px;
+    line-height: 20px;
+    font-size: 14px;
+
+    position: absolute;
+    bottom: -14px;
+  }
+</style>

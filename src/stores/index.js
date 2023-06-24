@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
 
+// ----------------------------------------------------------------
+
 /** 持久化 Stores -> 配置联动 localstorage*/
 function persistStore(key, startValue) {
   const savedValue = localStorage.getItem(key);
@@ -13,9 +15,7 @@ function persistStore(key, startValue) {
   return store;
 }
 
-// export const myStore = persistStore('myStore', {});
-
-
+// ----------------------------------------------------------------
 
 // 全局类变量 -------------------------------------
 /**全局Masonry */
@@ -25,6 +25,9 @@ export const _Global_Masonry = writable({});
 /**当前所在站点域名 */
 // export const _current_domain = writable("")
 export const _current_domain = persistStore('_domain', "");
+
+/**当前所在站点背景颜色 */
+export const _current_bgColor = persistStore('_bgColor', "");
 
 // 配置类变量 -------------------------------------
 /**是否显示原始种子列表 */

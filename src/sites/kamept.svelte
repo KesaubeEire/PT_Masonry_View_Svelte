@@ -1,5 +1,5 @@
 <script>
-  import { _CARD_SHOW } from "../stores";
+  import { _CARD_SHOW, _current_bgColor } from "../stores";
   import { sortMasonry } from "../utils";
 
   // ------------------------------------------------
@@ -46,7 +46,10 @@
 
 <div
   class="card"
-  style="width: {cardWidth}px; z-index:{10000 - torrentInfo.torrentIndex}"
+  style="
+    width: {cardWidth}px; 
+    z-index:{10000 - torrentInfo.torrentIndex}; 
+    background-color:{$_current_bgColor}"
 >
   <div class="card-holder">
     <!-- 分区类别 -->
@@ -359,15 +362,6 @@
   .btnCollet {
     padding: 1px 2px;
     cursor: pointer;
-  }
-
-  /* 卡片: 收藏按钮 */
-  #turnPage {
-    width: 100%;
-    height: 32px;
-    border-radius: 16px;
-    line-height: 20px;
-    font-size: 14px;
   }
 
   /* 上面是我自己脚本的css */
