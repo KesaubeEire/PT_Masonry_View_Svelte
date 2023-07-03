@@ -176,6 +176,7 @@
           <!-- 收藏 -->
           &nbsp;&nbsp;
           <div class="cl-center">
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div
               class="btnCollet cl-center"
               id="tI_{torrentInfo.torrentIndex}"

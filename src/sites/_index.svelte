@@ -224,7 +224,9 @@
     }
 
     // 将页数加 1，并设置为新的 "page" 参数的值
+    // @ts-ignore
     PAGE.PAGE_NEXT = parseInt(PAGE.PAGE_CURRENT) + 1;
+    // @ts-ignore
     urlSearchParams.set("page", PAGE.PAGE_NEXT);
 
     // 生成新的链接，包括原网页的域名、路径和新的查询参数
@@ -312,7 +314,7 @@
 
   /** 更新项目配置*/
   afterUpdate(() => {
-    console.log('updated--------------------');
+    console.log("updated--------------------");
     if (masonry) {
       masonry.reloadItems();
       NEXUS_TOOLS();
