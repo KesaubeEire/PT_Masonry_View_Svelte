@@ -194,10 +194,6 @@
     }
   }
 
-  // window.addEventListener("scroll", function () {
-  //   scan_and_launch();
-  // });
-
   // |-- 4.2 加载下一页
   debounceLoad = debounce(loadNextPage, PAGE.GAP);
 
@@ -304,6 +300,7 @@
       }
     });
 
+    // 滚动到底部检测
     window.addEventListener("scroll", function () {
       scan_and_launch();
     });
@@ -317,8 +314,11 @@
     console.log("updated--------------------");
     if (masonry) {
       masonry.reloadItems();
-      NEXUS_TOOLS();
       masonry.layout();
+
+      // NOTE: 修复了直接调用 Nexus 会导致懒加载失效的 bug
+      setTimeout(NEXUS_TOOLS, 500);
+      // NEXUS_TOOLS();
     }
   });
 </script>
