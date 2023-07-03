@@ -5,21 +5,23 @@
     _card_width,
     _current_bgColor,
   } from "../stores";
-  import { onMount } from "svelte";
-  import { sortMasonry, NEXUS_TOOLS } from "../utils";
+  import { onMount, afterUpdate } from "svelte";
+  import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
   import "../utils/masonry.pkgd.Kesa";
 
   import { config } from "./kamept";
   import Kamept from "./kamept.svelte";
 
-  // ------------------------------------------------
+  // 父子参数 ------------------------------------------------
 
   /** 父传值: 原有种子列表dom*/
   export let originTable;
   /** 父传值: 瀑布流dom*/
   export let waterfallNode;
 
-  // ------------------------------------------------
+  // 固定参数 ------------------------------------------------
+
+  // const cardDomList = {};
 
   /** 瀑布流卡片相关参数顶层对象 */
   const CARD = {
@@ -91,7 +93,7 @@
     COLLETED: '<img class="bookmark" src="pic/trans.gif" alt="Bookmarked">',
   };
 
-  // ------------------------------------------------
+  // 组件函数 ------------------------------------------------
 
   /**获得当前PT站的名字
    * @returns 当前PT站名
@@ -133,6 +135,13 @@
     sortMasonry("fast");
   }
 
+  /**翻页 */
+  function turnPage(event) {
+    // 防止默认行为的发生
+    event.preventDefault();
+    // console.log(event);
+  }
+
   // ------------------------------------------------
   // FIXME: 瀑布流渲染流程------------------------------------------------
 
@@ -149,7 +158,7 @@
   // 2. 根据当前域名拿到对应的数据 --------------------------------------------------------------------------------------
   let infoList = [];
   infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(originTable)];
-  console.log(infoList);
+  let _historyList = [...infoList];
 
   // 3. 开整瀑布流 --------------------------------------------------------------------------------------
 
@@ -158,13 +167,111 @@
     CARD.CARD_WIDTH = $_card_width;
     console.log(CARD.CARD_WIDTH);
 
-    // console.log("card width changed.");
-    // masonry.options.gutter = GET_CARD_GUTTER(waterfallNode, $_card_width);
-    // masonry.options.columnWidth = $_card_width;
-    // sortMasonry('fast');
-    // sortMasonry('fast');
-
     CHANGE_CARD_LAYOUT();
+  }
+
+  // FIXME:
+  // 4. 底部检测 & 加载下一页 --------------------------------------------------------------------------------------
+  // |-- 4.1 检测是否到了底部
+
+  /** 延迟加载事件 */
+  let debounceLoad;
+  function scan_and_launch() {
+    const scrollHeight = document.body.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop + clientHeight >= scrollHeight - PAGE.DISTANCE) {
+      debounceLoad();
+      // if (PAGE.SWITCH_MODE != "Button") debounceLoad();
+
+      // else {
+      //   console.log('按钮模式~');
+      // }
+
+      // 这里整理一下瀑布流, 往往这里会出一点格式问题
+      sortMasonry();
+    }
+  }
+
+  // window.addEventListener("scroll", function () {
+  //   scan_and_launch();
+  // });
+
+  // |-- 4.2 加载下一页
+  debounceLoad = debounce(loadNextPage, PAGE.GAP);
+
+  /**加载下一页的本体函数 */
+  function loadNextPage() {
+    console.log("到页面底部啦!!! Scrolled to bottom!");
+    // |--|-- 4.2.1 获取下一页的链接
+    // 使用 URLSearchParams 对象获取当前网页的查询参数
+    const urlSearchParams = new URLSearchParams(window.location.search);
+
+    // 获取名为 "page" 的参数的值 -> 初始为页面值, 更新为更新值
+    PAGE.PAGE_CURRENT = PAGE.IS_ORIGIN
+      ? Number(urlSearchParams.get("page"))
+      : PAGE.PAGE_CURRENT;
+
+    // 如果 "page" 参数不存在，则将页数设为 0，否则打印当前页数
+    if (!PAGE.PAGE_CURRENT) {
+      console.log(
+        `网页链接没有page参数, 无法跳转下一页, 生成PAGE.PAGE_CURRENT为0`
+      );
+      PAGE.PAGE_CURRENT = 0;
+    } else {
+      console.log("当前页数: " + PAGE.PAGE_CURRENT);
+    }
+
+    // 将页数加 1，并设置为新的 "page" 参数的值
+    PAGE.PAGE_NEXT = parseInt(PAGE.PAGE_CURRENT) + 1;
+    urlSearchParams.set("page", PAGE.PAGE_NEXT);
+
+    // 生成新的链接，包括原网页的域名、路径和新的查询参数
+    PAGE.NEXT_URL =
+      window.location.origin +
+      window.location.pathname +
+      "?" +
+      urlSearchParams.toString();
+
+    // 打印新的链接
+    console.log("New URL:", PAGE.NEXT_URL);
+
+    // TODO: 搞个 list 放入所有生成的新链接, 如果新链接存在就不 fetch 新数据
+
+    // |--|-- 4.2.2 加载下一页 html 获取 json 信息对象
+    fetch(PAGE.NEXT_URL)
+      .then((response) => response.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const table = doc.querySelector("table.torrents");
+        // console.log(table);
+
+        infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(table)];
+
+        // // |--|-- 4.2.3 渲染 下一页信息 并 加到 waterfallNode 里面来
+        // PUT_TORRENT_INTO_MASONRY(table, waterfallNode, false, masonry);
+        // // PUT_TORRENT_INTO_MASONRY(_ORIGIN_TL_Node, waterfallNode, false, masonry);
+
+        // // 生成新的时候再改一次图片宽度
+        // CHANGE_CARD_WIDTH(CARD.CARD_WIDTH, waterfallNode, masonry);
+
+        // FIXME: 这里没搞定捏
+
+        // 页数更新, 在上面几行更新会导致没有下一页的情况下仍然触发
+        PAGE.IS_ORIGIN = false;
+        PAGE.PAGE_CURRENT = PAGE.PAGE_NEXT;
+      })
+      .catch((error) => {
+        // console.error(error);
+        console.warn("获取不到下页信息, 可能到头了");
+        console.warn(error);
+      });
+
+    // button ui 文字变化
+    // btnTurnPageDOM.disabled = false;
+    // btnTurnPageDOM.textContent = "点击加载下一页";
   }
 
   /** 启动项目配置*/
@@ -195,8 +302,22 @@
       }
     });
 
+    window.addEventListener("scroll", function () {
+      scan_and_launch();
+    });
+
     // Nexus Tools
     NEXUS_TOOLS();
+  });
+
+  /** 更新项目配置*/
+  afterUpdate(() => {
+    console.log('updated--------------------');
+    if (masonry) {
+      masonry.reloadItems();
+      NEXUS_TOOLS();
+      masonry.layout();
+    }
   });
 </script>
 
@@ -210,7 +331,7 @@
 
 <!-- 点击加载下一页的按钮 -->
 <div>
-  <button id="turnPage">点击加载下一页</button>
+  <button id="turnPage" on:click={turnPage}>点击加载下一页</button>
 </div>
 
 <style>

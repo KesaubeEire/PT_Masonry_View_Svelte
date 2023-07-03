@@ -36,7 +36,7 @@
   // 将瀑布流节点放置在表格节点上面
   parentNode.insertBefore(waterfallNode, _ORIGIN_TL_Node.nextSibling);
 
-  console.log(waterfallNode);
+  // console.log(waterfallNode);
 
   // ------------------------------------------------
   let masonry;

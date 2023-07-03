@@ -1,6 +1,7 @@
 <script>
-  import { _CARD_SHOW, _current_bgColor } from "../stores";
+  import { _Global_Masonry, _CARD_SHOW, _current_bgColor } from "../stores";
   import { sortMasonry } from "../utils";
+  import { onMount } from "svelte";
 
   // ------------------------------------------------
 
@@ -42,6 +43,24 @@
   export let ICON;
 
   // ------------------------------------------------
+
+  /** 本地: 是否显示详情*/
+  let _hover = false;
+  function card_show_detail() {
+    _hover = !_hover;
+  }
+
+  // ------------------------------------------------
+
+  /** 本地: 本组件 dom*/
+  let _selfDom;
+
+  // onMount(() => {
+  //   if (Object.keys($_Global_Masonry).length !== 0) {
+  //     $_Global_Masonry.appended(_selfDom);
+  //   }
+  //   // console.log($_Global_Masonry);
+  // });
 </script>
 
 <div
@@ -50,10 +69,16 @@
     width: {cardWidth}px; 
     z-index:{10000 - torrentInfo.torrentIndex}; 
     background-color:{$_current_bgColor}"
+  bind:this={_selfDom}
 >
   <div class="card-holder">
     <!-- 分区类别 -->
-    <div class="card-category" data-href={torrentInfo.categoryLink}>
+    <div
+      class="card-category"
+      data-href={torrentInfo.categoryLink}
+      on:mouseenter={card_show_detail}
+      on:mouseleave={card_show_detail}
+    >
       <!-- TODO: 颜色这里和龟龟商量怎么搞分类的颜色捏 -->
       <!-- style="background: ${CONFIG.CATEGORY[categoryNumber]};" -->
 
@@ -63,7 +88,11 @@
     </div>
 
     <!-- 标题 & 跳转详情链接 -->
-    <div class="card-title">
+    <div
+      class="card-title"
+      on:mouseenter={card_show_detail}
+      on:mouseleave={card_show_detail}
+    >
       <a class="two-lines" href={torrentInfo.torrentLink} target="_blank">
         {torrentInfo.tempTagDom
           ? torrentInfo.tempTagDom.map((e) => e.outerHTML).join("&nbsp;")
@@ -88,7 +117,7 @@
       </div>
     </div>
 
-    {#if $_CARD_SHOW.all}
+    {#if $_CARD_SHOW.all || _hover}
       <!-- 置顶 && 免费类型&剩余时间 -->
       {#if torrentInfo.free_type || torrentInfo.pattMsg}
         <div class="card-alter">

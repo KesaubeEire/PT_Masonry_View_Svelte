@@ -33,6 +33,10 @@
   function debug01() {
     $_card_width = $_card_width == 300 ? 200 : 300;
     console.log(`[debug]\$card_width: ${$_card_width}`);
+
+    sortMasonry("fast");
+    sortMasonry("fast");
+    sortMasonry();
   }
 
   /** debug02*/
@@ -40,6 +44,7 @@
     $_CARD_SHOW.all = !$_CARD_SHOW.all;
     sortMasonry("fast");
     sortMasonry("fast");
+    sortMasonry();
   }
 </script>
 
