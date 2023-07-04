@@ -109,9 +109,12 @@
       on:mouseenter={card_show_detail}
       on:mouseleave={card_show_detail}
       style="
-        background-color: {config.CATEGORY[torrentInfo.categoryNumber]};
-        color:{getTextColor(config.CATEGORY[torrentInfo.categoryNumber])}
-      "
+        background-color: 
+          {config.CATEGORY[torrentInfo.categoryNumber] ?? 'transparent'};
+        color:
+          {config.CATEGORY[torrentInfo.categoryNumber]
+        ? getTextColor(config.CATEGORY[torrentInfo.categoryNumber])
+        : 'black'}"
     >
       <!-- TODO: 颜色这里和龟龟商量怎么搞分类的颜色捏 -->
       <!-- style="background: ${CONFIG.CATEGORY[categoryNumber]};" -->
