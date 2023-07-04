@@ -1,5 +1,11 @@
 <script>
-  import { _Global_Masonry, _CARD_SHOW, _current_bgColor } from "../stores";
+  import {
+    _Global_Masonry,
+    _CARD_SHOW,
+    _current_bgColor,
+    _iframe_switch,
+    _iframe_url,
+  } from "../stores";
   import { sortMasonry } from "../utils";
   import { config } from "./kamept";
 
@@ -50,6 +56,11 @@
 
     // 如果亮度低于阈值128，则返回白色；否则返回黑色
     return brightness < 128 ? "white" : "black";
+  }
+
+  function showDetailIframe() {
+    $_iframe_switch = 1;
+    $_iframe_url = torrentInfo.torrentLink + "#outer";
   }
 
   // ------------------------------------------------
@@ -126,12 +137,14 @@
 
     <!-- 预览图 -->
     <div class="card-image">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <img
         class="card-image--img nexus-lazy-load_Kesa"
         src="pic/logo2_100.png"
         data-src={torrentInfo.picLink}
         alt={torrentInfo.torrentName}
         on:load={sort_masonry}
+        on:click={showDetailIframe}
       />
 
       <!-- 索引标号 -->

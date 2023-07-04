@@ -5,6 +5,7 @@
     _card_width,
     _CARD_SHOW,
     _turnPage,
+    _iframe_switch,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -52,6 +53,10 @@
   function debug03() {
     $_turnPage = $_turnPage == 0 ? 1 : 0;
   }
+
+  function debug04() {
+    $_iframe_switch = $_iframe_switch == 0 ? 1 : 0;
+  }
 </script>
 
 <div class="sideP">
@@ -73,13 +78,15 @@
     <!-- 按钮4: debug -->
     <button class="sideP__btn" on:click={debug01}>[debug]切换宽度</button>
 
-    <!-- 按钮4: debug -->
+    <!-- 按钮5: debug -->
     <button class="sideP__btn" on:click={debug02}>[debug]显示详情</button>
 
-    <!-- 按钮4: debug -->
-    <button class="sideP__btn" on:click={debug03}
-      >[debug]加载下一页模式切换</button
-    >
+    <!-- 按钮6: debug -->
+    <button class="sideP__btn" on:click={debug03}>
+      [debug]加载下一页模式切换
+    </button>
+
+    <button class="sideP__btn" on:click={debug04}> 显示种子详情 </button>
   </div>
 </div>
 
@@ -98,7 +105,7 @@
     border-radius: 8px;
     overflow: hidden;
 
-    z-index: 10001;
+    z-index: 30001;
 
     &:hover {
       opacity: 1;

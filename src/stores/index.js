@@ -21,6 +21,12 @@ function persistStore(key, startValue) {
 /**全局Masonry */
 export const _Global_Masonry = writable({});
 
+// iframe变量 -------------------------------------
+/**iframe 开关 */
+export const _iframe_switch = writable(0)
+/**iframe 网址 */
+export const _iframe_url = writable('https://kamept.com/index.php')
+
 // 站点类变量 -------------------------------------
 /**当前所在站点域名 */
 // export const _current_domain = writable("")

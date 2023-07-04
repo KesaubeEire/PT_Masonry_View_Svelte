@@ -5,6 +5,8 @@
     _card_width,
     _current_bgColor,
     _turnPage,
+    _iframe_switch,
+    _iframe_url,
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
@@ -134,6 +136,11 @@
     masonry.options.columnWidth = $_card_width;
     sortMasonry("fast");
     sortMasonry("fast");
+  }
+
+  // iframe相关 ------------------------------------------------
+  function toggleIframe() {
+    $_iframe_switch = 0;
   }
 
   // 翻页相关 ------------------------------------------------
@@ -367,6 +374,13 @@
   </button>
 </div>
 
+{#if $_iframe_switch}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div id="_iframe" on:click={toggleIframe}>
+    <iframe src={$_iframe_url} frameborder="0" title="wow" />
+  </div>
+{/if}
+
 <style>
   /* 卡片: 收藏按钮 */
   #turnPage {
@@ -378,5 +392,24 @@
 
     position: absolute;
     bottom: 0px;
+  }
+
+  div#_iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 255, 255, 0.398);
+    z-index: 20000;
+
+    display: flex;
+  }
+
+  iframe {
+    width: 1246px;
+    height: 96%;
+
+    margin: auto;
   }
 </style>
