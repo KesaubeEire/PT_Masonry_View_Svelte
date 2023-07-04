@@ -136,6 +136,15 @@
     sortMasonry("fast");
   }
 
+  // 翻页相关 ------------------------------------------------
+
+  let isButtonDisabled = false;
+  /** 加载文字 */
+  const LOAD_TEXT = {
+    normal: "点击加载下一页",
+    suspend: `下一页加载CD: ${PAGE.GAP} ms`,
+    disable: "不可用",
+  };
   /**翻页 */
   function turnPage(event) {
     // 防止默认行为的发生
@@ -144,6 +153,14 @@
 
     // 加载下一页
     if ($_turnPage == 0) debounceLoad();
+
+    // 加载下一页3秒防抖
+    if (!isButtonDisabled) {
+      isButtonDisabled = true;
+      setTimeout(() => {
+        isButtonDisabled = false;
+      }, PAGE.GAP);
+    }
   }
 
   // ------------------------------------------------
@@ -335,7 +352,19 @@
 
 <!-- 点击加载下一页的按钮 -->
 <div>
-  <button id="turnPage" on:click={turnPage} disabled={$_turnPage}>点击加载下一页</button>
+  <button
+    id="turnPage"
+    on:click={turnPage}
+    disabled={$_turnPage || isButtonDisabled}
+  >
+    {#if $_turnPage}
+      {LOAD_TEXT.disable}
+    {:else if isButtonDisabled}
+      {LOAD_TEXT.suspend}
+    {:else}
+      {LOAD_TEXT.normal}
+    {/if}
+  </button>
 </div>
 
 <style>
