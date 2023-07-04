@@ -1,7 +1,7 @@
 <script>
   import { _Global_Masonry, _CARD_SHOW, _current_bgColor } from "../stores";
   import { sortMasonry } from "../utils";
-  import { onMount } from "svelte";
+  import { config } from "./kamept";
 
   // ------------------------------------------------
 
@@ -31,6 +31,25 @@
       // GUI 通知一下捏
       console.error(error);
     }
+  }
+
+  /** 根据背景颜色动态调整文字黑白
+   * @param background 背景颜色(带#)
+   */
+  function getTextColor(background) {
+    // 移除颜色字符串中的 '#'
+    const color = background.replace("#", "");
+
+    // 提取红、绿、蓝通道的值
+    const red = parseInt(color.substr(0, 2), 16);
+    const green = parseInt(color.substr(2, 2), 16);
+    const blue = parseInt(color.substr(4, 2), 16);
+
+    // 计算亮度
+    const brightness = (red * 299 + green * 587 + blue * 114) / 1000;
+
+    // 如果亮度低于阈值128，则返回白色；否则返回黑色
+    return brightness < 128 ? "white" : "black";
   }
 
   // ------------------------------------------------
@@ -78,6 +97,10 @@
       data-href={torrentInfo.categoryLink}
       on:mouseenter={card_show_detail}
       on:mouseleave={card_show_detail}
+      style="
+        background-color: {config.CATEGORY[torrentInfo.categoryNumber]};
+        color:{getTextColor(config.CATEGORY[torrentInfo.categoryNumber])}
+      "
     >
       <!-- TODO: 颜色这里和龟龟商量怎么搞分类的颜色捏 -->
       <!-- style="background: ${CONFIG.CATEGORY[categoryNumber]};" -->
@@ -255,6 +278,8 @@
   /* 卡片分类 */
   .card-category {
     text-align: center;
+    letter-spacing: 2px;
+    font-weight: 700;
   }
 
   /* 卡片行默认样式 */

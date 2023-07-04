@@ -6,31 +6,40 @@ const CONFIG = {
   RENDER_TORRENT_JSON_IN_MASONRY,
   /**如果站点有自定义的icon, 可以用自定义的 */
   ICON: {},
-  /**如果站点有必要设置自定义的css, 可以用自定义的 */
-  CSS: css,
   /**如果站点有必要设置分类颜色, 可以用自定义的 */
-  CATEGORY: {},
+  CATEGORY: {
+    // [粉色]AV: 同人AV 男娘 VR同人
+    410: '#FF66FF',
+    413: '#FF66FF',
+    414: '#FF66FF',
+    // [绿色]图: cos图 画师CG 游戏CG 单行本 同人志
+    417: '#59CD90',
+    433: '#59CD90',
+    434: '#59CD90',
+    424: '#59CD90',
+    435: '#59CD90',
+    // [黄色]动画: 里番 2D 3D
+    411: '#FAC05E',
+    419: '#FAC05E',
+    423: '#FAC05E',
+    // [紫色]音声: 外语 中文 视频
+    420: '#3FA7D6',
+    421: '#3FA7D6',
+    422: '#3FA7D6',
+    // [红色]游戏: 游戏 中文游戏
+    415: '#EE6352',
+    418: '#EE6352',
+
+  },
   /**索引 */
   INDEX: 0
 };
 
 /**
- * 站带自带的 css
- * @param {*} variable 外部注入的变量
- * @returns 
- */
-function css(variable) {
-
-  return ` 
-
-`
-}
-
-/**
  * 将 种子列表dom 的信息变为 json对象列表
- * @param {DOM} torrent_list_Dom 种子列表dom
+ * @param {*} torrent_list_Dom 种子列表dom
  * @param {*} CARD 卡片对象
- * @returns {list} 种子列表信息的 json对象列表
+ * @returns {[]} 种子列表信息的 json对象列表
  */
 function TORRENT_LIST_TO_JSON(torrent_list_Dom, CARD = null) {
   // 获取表格中的所有行
