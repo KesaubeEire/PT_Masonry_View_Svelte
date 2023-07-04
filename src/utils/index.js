@@ -16,13 +16,17 @@ const _SORT_COUNT = {
  * @param {number} delay 延迟
  * @returns
  */
+let timer = null;
 function debounce(func, delay) {
-  let timer;
   return function () {
-    clearTimeout(timer);
+    if (timer) {
+      console.warn('debounce dupe!!!!!!');
+      clearTimeout(timer);
+    }
     timer = setTimeout(function () {
       func.apply(this, arguments);
       // console.log('防抖: ', func.name);
+      timer = null;
     }, delay);
   };
 }

@@ -4,6 +4,7 @@
     _Global_Masonry,
     _card_width,
     _current_bgColor,
+    _turnPage,
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
@@ -45,7 +46,7 @@
   // @ts-ignore
   const PAGE = {
     /** 翻页: 底部检测时间间隔 */
-    GAP: 900,
+    GAP: 3000,
 
     /** 翻页: 底部检测视点与底部距离 */
     DISTANCE: 300,
@@ -140,6 +141,9 @@
     // 防止默认行为的发生
     event.preventDefault();
     // console.log(event);
+
+    // 加载下一页
+    if ($_turnPage == 0) debounceLoad();
   }
 
   // ------------------------------------------------
@@ -182,12 +186,10 @@
     const scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop;
     if (scrollTop + clientHeight >= scrollHeight - PAGE.DISTANCE) {
-      debounceLoad();
-      // if (PAGE.SWITCH_MODE != "Button") debounceLoad();
-
-      // else {
-      //   console.log('按钮模式~');
-      // }
+      if ($_turnPage === 1) debounceLoad();
+      else {
+        console.log("加载模式: 按钮");
+      }
 
       // 这里整理一下瀑布流, 往往这里会出一点格式问题
       sortMasonry();
@@ -333,7 +335,7 @@
 
 <!-- 点击加载下一页的按钮 -->
 <div>
-  <button id="turnPage" on:click={turnPage}>点击加载下一页</button>
+  <button id="turnPage" on:click={turnPage} disabled={$_turnPage}>点击加载下一页</button>
 </div>
 
 <style>

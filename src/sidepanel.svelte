@@ -4,6 +4,7 @@
     _Global_Masonry,
     _card_width,
     _CARD_SHOW,
+    _turnPage,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -45,6 +46,11 @@
     sortMasonry("fast");
     sortMasonry("fast");
     sortMasonry();
+    sortMasonry();
+  }
+
+  function debug03() {
+    $_turnPage = $_turnPage == 0 ? 1 : 0;
   }
 </script>
 
@@ -69,6 +75,11 @@
 
     <!-- 按钮4: debug -->
     <button class="sideP__btn" on:click={debug02}>[debug]显示详情</button>
+
+    <!-- 按钮4: debug -->
+    <button class="sideP__btn" on:click={debug03}
+      >[debug]加载下一页模式切换</button
+    >
   </div>
 </div>
 
