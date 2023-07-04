@@ -60,7 +60,7 @@
 
   function showDetailIframe() {
     $_iframe_switch = 1;
-    $_iframe_url = torrentInfo.torrentLink + "#outer";
+    $_iframe_url = torrentInfo.torrentLink + "#kdescr";
   }
 
   // ------------------------------------------------

@@ -91,7 +91,7 @@ function NEXUS_TOOLS() {
 
     /**
      * 获取图片位置
-     * @param {*} e 鼠标事件对象
+     * @param {*} event 鼠标事件对象
      * @param {*} imgEle 图片元素对象
      * @returns
      */
@@ -188,7 +188,7 @@ function NEXUS_TOOLS() {
 
     /**
      * 获取图片位置_Kesa版
-     * @param {*} e 鼠标事件对象
+     * @param {*} event 鼠标事件对象
      * @param {*} imgEle 图片元素对象
      * @returns
      */
@@ -324,7 +324,7 @@ function NEXUS_TOOLS() {
 
     /**
      * 获取展示位置
-     * @param {*} e
+     * @param {*} event
      * @param {*} position
      * @returns
      */
@@ -431,7 +431,7 @@ function NEXUS_TOOLS() {
         entries.forEach((entry) => {
           const el = entry.target;
           const intersectionRatio = entry.intersectionRatio;
-          el._entry = entry
+          // el._entry = entry
           // console.log(`el, ${el.getAttribute("data-src")}, intersectionRatio: ${intersectionRatio}`);
 
           // if (
