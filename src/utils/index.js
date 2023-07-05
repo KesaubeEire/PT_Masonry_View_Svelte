@@ -86,6 +86,7 @@ function sortMasonry(speed = 'normal') {
 // NOTE: 3. Nexus 工具(触摸预览 + 懒加载)-------------------------------/**NEXUS 预览工具箱, 提供图片预览和图片懒加载, 神器*/
 /**NEXUS 预览工具箱, 提供图片预览和图片懒加载, 神器*/
 function NEXUS_TOOLS() {
+  console.log('------------------------NEXUS TOOLS------------------------');
   jQuery(document).ready(function () {
     // console.log("----jQuery 加载完毕 | Kesa 改版 nexus 工具启动!---");
 

@@ -145,6 +145,7 @@
 
   // 翻页相关 ------------------------------------------------
 
+  /** 控制加载按钮是否激活 */
   let isButtonDisabled = false;
   /** 加载文字 */
   const LOAD_TEXT = {
@@ -152,7 +153,10 @@
     suspend: `下一页加载CD: ${PAGE.GAP} ms`,
     disable: "不可用",
   };
-  /**翻页 */
+
+  /**翻页
+   * @param event
+   */
   function turnPage(event) {
     // 防止默认行为的发生
     event.preventDefault();
@@ -343,7 +347,9 @@
       masonry.layout();
 
       // NOTE: 修复了直接调用 Nexus 会导致懒加载失效的 bug
-      setTimeout(NEXUS_TOOLS, 500);
+      masonry.on("layoutComplete", function () {
+        setTimeout(NEXUS_TOOLS, 500);
+      });
       // NEXUS_TOOLS();
     }
   });
