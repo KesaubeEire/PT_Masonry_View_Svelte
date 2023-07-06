@@ -12,7 +12,7 @@
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
   import "../utils/masonry.pkgd.Kesa";
 
-  import { config } from "./kamept";
+  import { config as config_Kame } from "./kamept";
   import Kamept from "./kamept.svelte";
   import { fade } from "svelte/transition";
 
@@ -25,7 +25,10 @@
 
   // 固定参数 ------------------------------------------------
 
-  // const cardDomList = {};
+  /** 站点参数相关参数顶层对象 */
+  const SITE = {
+    "kamept.com": config_Kame,
+  };
 
   /** 瀑布流卡片相关参数顶层对象 */
   const CARD = {
@@ -99,7 +102,7 @@
 
   // 组件函数 ------------------------------------------------
 
-  /**获得当前PT站的名字
+  /** 获得当前PT站的名字
    * @returns 当前PT站名
    */
   function GET_CURRENT_PT_DOMAIN() {
@@ -109,7 +112,7 @@
     return domainName;
   }
 
-  /**根据容器宽度和卡片宽度动态调整卡片间隔 gutter
+  /** 根据容器宽度和卡片宽度动态调整卡片间隔 gutter
    * @param {object} containerDom 容器dom
    * @param {number} card_width 卡片宽度
    */
@@ -130,7 +133,7 @@
     return Math.floor(gutter);
   }
 
-  /**调整卡片布局 */
+  /** 调整卡片布局 */
   function CHANGE_CARD_LAYOUT() {
     console.log("card width changed.");
     masonry.options.gutter = GET_CARD_GUTTER(waterfallNode, $_card_width);
@@ -157,7 +160,7 @@
     disable: "不可用",
   };
 
-  /**翻页
+  /** 翻页
    * @param event
    */
   function turnPage(event) {
@@ -196,6 +199,7 @@
   console.log("背景颜色:", themeColor);
 
   // 2. 根据当前域名拿到对应的数据 --------------------------------------------------------------------------------------
+  const config = SITE[$_current_domain];
   let infoList = [];
   infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(originTable)];
   let _historyList = [...infoList];
@@ -235,7 +239,7 @@
   // |-- 4.2 加载下一页
   debounceLoad = debounce(loadNextPage, PAGE.GAP);
 
-  /**加载下一页的本体函数 */
+  /** 加载下一页的本体函数 */
   function loadNextPage() {
     console.log("到页面底部啦!!! Scrolled to bottom!");
     // |--|-- 4.2.1 获取下一页的链接
@@ -402,7 +406,13 @@
 {#if $_iframe_switch}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div id="_iframe" on:click={toggleIframe} transition:fade={{ duration: 300 }}>
-    <iframe src={$_iframe_url} frameborder="0" title="wow" />
+    <iframe
+      src={$_iframe_url}
+      frameborder="0"
+      title="wow"
+      style="width:
+        {SITE[$_current_domain] ? SITE[$_current_domain].Iframe_Width : 1000}px"
+    />
   </div>
 {/if}
 
@@ -432,7 +442,7 @@
   }
 
   iframe {
-    width: 1246px;
+    /* width: 1246px; */
     height: 96%;
 
     margin: auto;

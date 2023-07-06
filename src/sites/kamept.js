@@ -4,9 +4,9 @@ const CONFIG = {
   torrentListTable: "table.torrents",
   TORRENT_LIST_TO_JSON,
   RENDER_TORRENT_JSON_IN_MASONRY,
-  /**如果站点有自定义的icon, 可以用自定义的 */
+  /** 如果站点有自定义的icon, 可以用自定义的 */
   ICON: {},
-  /**如果站点有必要设置分类颜色, 可以用自定义的 */
+  /** 如果站点有必要设置分类颜色, 可以用自定义的 */
   CATEGORY: {
     // [粉色]AV: 同人AV 男娘 VR同人
     410: '#FF66FF',
@@ -31,12 +31,13 @@ const CONFIG = {
     418: '#EE6352',
 
   },
-  /**索引 */
-  INDEX: 0
+  /** 索引 */
+  INDEX: 0,
+  /** iframe 宽度 */
+  Iframe_Width: 1246,
 };
 
-/**
- * 将 种子列表dom 的信息变为 json对象列表
+/** 将 种子列表dom 的信息变为 json对象列表
  * @param {*} torrent_list_Dom 种子列表dom
  * @param {*} CARD 卡片对象
  * @returns {[]} 种子列表信息的 json对象列表
@@ -210,8 +211,7 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom, CARD = null) {
   return data;
 }
 
-/**
- * 将种子列表信息渲染为卡片放入瀑布流
+/** 将种子列表信息渲染为卡片放入瀑布流
  * @param {DOM} waterfallNode 瀑布流容器dom
  * @param {list} torrent_json 种子列表信息的 json对象列表
  * @param {boolean} isFirst 是否是第一次渲染, 默认为是, 新增渲染要写 false
