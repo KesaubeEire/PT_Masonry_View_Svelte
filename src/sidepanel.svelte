@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
   import {
     _show_originTable,
     _Global_Masonry,
@@ -13,7 +14,6 @@
   import { sortMasonry } from "./utils";
 
   // 配置拖拽侧边栏 ------------------------------------------------
-
   let div;
   let isMouseDown = false;
   let offsetX = 0,
@@ -41,20 +41,13 @@
     isMouseDown = false;
   };
 
-  onMount(() => {
-    // 拖拽边栏监听
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-    };
-  });
-
   function resetPanelPos() {
     if ($_panelPos.x == 0 && $_panelPos.y == 0) alert("无需重置瀑布流边栏位置");
     $_panelPos = { x: 0, y: 0 };
   }
+
+  // 详细配置面板------------------------------------------------
+  let _show_configPanel = false;
 
   // ------------------------------------------------
 
@@ -63,7 +56,7 @@
 
   // ------------------------------------------------
 
-  /**按钮1函数: 显示原有列表*/
+  /** 按钮1函数: 显示原有列表*/
   function __show_originTable() {
     // console.log($_show_originTable);
 
@@ -71,13 +64,13 @@
     originTable.style.display = $_show_originTable === 1 ? "" : "none";
   }
 
-  /**按钮2函数: 手动整理瀑布流布局*/
+  /** 按钮2函数: 手动整理瀑布流布局*/
   function __sort_masonry() {
     // @ts-ignore
     $_Global_Masonry.layout();
   }
 
-  /** debug01*/
+  /** debug01 */
   function debug01() {
     $_card_width = $_card_width == 300 ? 200 : 300;
     console.log(`[debug]\$card_width: ${$_card_width}`);
@@ -87,7 +80,7 @@
     sortMasonry();
   }
 
-  /** debug02*/
+  /** debug02 */
   function debug02() {
     $_CARD_SHOW.all = !$_CARD_SHOW.all;
     sortMasonry("fast");
@@ -96,15 +89,31 @@
     sortMasonry();
   }
 
-  function debug03() {
+  /** 模式切换按钮标签 */
+  let label_switchMode = $_turnPage == 1 ? "滚动加载" : "按钮加载";
+  function config_switchMode() {
     $_turnPage = $_turnPage == 0 ? 1 : 0;
+    label_switchMode = $_turnPage == 1 ? "滚动加载" : "按钮加载";
   }
 
   function debug04() {
     $_iframe_switch = $_iframe_switch == 0 ? 1 : 0;
   }
+
+  // ------------------------------------------------
+
+  onMount(() => {
+    // 拖拽边栏监听
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+  });
 </script>
 
+<!-- 侧边栏 -->
 <div
   class="sideP"
   bind:this={div}
@@ -123,7 +132,12 @@
     <button class="sideP__btn" on:click={__sort_masonry}>整理布局</button>
 
     <!-- 按钮3: 呼出完整侧边栏 -->
-    <button class="sideP__btn">呼出边栏</button>
+    <button
+      class="sideP__btn"
+      on:click={() => {
+        _show_configPanel = !_show_configPanel;
+      }}>呼出边栏</button
+    >
 
     <!-- 按钮4: debug -->
     <button class="sideP__btn" on:click={debug01}>[d]切换宽度</button>
@@ -132,13 +146,24 @@
     <button class="sideP__btn" on:click={debug02}>[d]显示详情</button>
 
     <!-- 按钮6: debug -->
-    <button class="sideP__btn" on:click={debug03}> [d]切换加载模式 </button>
+    <button class="sideP__btn" on:click={config_switchMode}>
+      [d]{label_switchMode}
+    </button>
 
     <!-- 按钮6: debug -->
     <button class="sideP__btn" on:click={debug04}> [d]iframe </button>
   </div>
 </div>
 
+<!-- 详细配置面板 -->
+{#if _show_configPanel}
+  <div class="configP" transition:fade={{ duration: 500 }}>
+    <p>real man</p>
+    <button on:click={() => (_show_configPanel = false)}>Close</button>
+  </div>
+{/if}
+
+<!-- 按钮: 重置瀑布流配置边栏位置 -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div id="reset_panel_pos" on:click={resetPanelPos}>重置瀑布流配置边栏位置</div>
 
