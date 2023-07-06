@@ -14,6 +14,7 @@
 
   import { config } from "./kamept";
   import Kamept from "./kamept.svelte";
+  import { fade } from "svelte/transition";
 
   // 父子参数 ------------------------------------------------
 
@@ -147,6 +148,8 @@
 
   /** 控制加载按钮是否激活 */
   let isButtonDisabled = false;
+  /** 控制翻页 & onMount 响应 */
+  let onMountSignal = false;
   /** 加载文字 */
   const LOAD_TEXT = {
     normal: "点击加载下一页",
@@ -295,6 +298,12 @@
         // 页数更新, 在上面几行更新会导致没有下一页的情况下仍然触发
         PAGE.IS_ORIGIN = false;
         PAGE.PAGE_CURRENT = PAGE.PAGE_NEXT;
+
+        // NOTE: 配置 onMount 和 翻页的协同响应, 避免被其他 dom 刷新干扰重复调用
+        onMountSignal = true;
+        setTimeout(() => {
+          onMountSignal = false;
+        }, 1000);
       })
       .catch((error) => {
         // console.error(error);
@@ -343,7 +352,10 @@
   /** 更新项目配置*/
   afterUpdate(() => {
     console.log("afterUpdate-------------------->");
-    if (masonry) {
+
+    // 配置 onMount 和 翻页的协同响应, 避免被其他 dom 刷新干扰重复调用
+    if (masonry && onMountSignal) {
+      console.log("reload Items-------------------->");
       masonry.reloadItems();
       masonry.layout();
       // setTimeout(NEXUS_TOOLS, 500);
@@ -389,7 +401,7 @@
 <!-- iframe 详情 -->
 {#if $_iframe_switch}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div id="_iframe" on:click={toggleIframe}>
+  <div id="_iframe" on:click={toggleIframe} transition:fade={{ duration: 300 }}>
     <iframe src={$_iframe_url} frameborder="0" title="wow" />
   </div>
 {/if}
