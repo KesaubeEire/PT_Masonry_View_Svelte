@@ -174,6 +174,11 @@
     }
   }
 
+  /** 延迟调用 Nexus Tool */
+  function nexus_tool_delay() {
+    setTimeout(NEXUS_TOOLS, 500);
+  }
+
   // ------------------------------------------------
   // FIXME: 瀑布流渲染流程------------------------------------------------
 
@@ -296,10 +301,6 @@
         console.warn("获取不到下页信息, 可能到头了");
         console.warn(error);
       });
-
-    // button ui 文字变化
-    // btnTurnPageDOM.disabled = false;
-    // btnTurnPageDOM.textContent = "点击加载下一页";
   }
 
   /** 启动项目配置*/
@@ -341,15 +342,20 @@
 
   /** 更新项目配置*/
   afterUpdate(() => {
-    console.log("updated--------------------");
+    console.log("afterUpdate-------------------->");
     if (masonry) {
       masonry.reloadItems();
       masonry.layout();
+      // setTimeout(NEXUS_TOOLS, 500);
 
       // NOTE: 修复了直接调用 Nexus 会导致懒加载失效的 bug
-      masonry.on("layoutComplete", function () {
-        setTimeout(NEXUS_TOOLS, 500);
-      });
+      masonry.on("layoutComplete", nexus_tool_delay);
+      setTimeout(() => {
+        masonry.off("layoutComplete", nexus_tool_delay);
+      }, 1500);
+      // masonry.on("layoutComplete", function () {
+      //   setTimeout(NEXUS_TOOLS, 500);
+      // });
       // NEXUS_TOOLS();
     }
   });
@@ -380,6 +386,7 @@
   </button>
 </div>
 
+<!-- iframe 详情 -->
 {#if $_iframe_switch}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div id="_iframe" on:click={toggleIframe}>

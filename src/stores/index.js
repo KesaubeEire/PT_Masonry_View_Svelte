@@ -43,6 +43,9 @@ export const _show_originTable = writable(0)
 /**显示下一页: 点击0 滚动1 */
 export const _turnPage = persistStore('_turnPage', 0);
 
+/**面板位置: 点击0 滚动1 */
+export const _panelPos = persistStore('_panelPos', { x: 0, y: 0 })
+
 // 卡片类变量 -------------------------------------
 /**卡片宽度 */
 // export const _card_width = writable(200);
