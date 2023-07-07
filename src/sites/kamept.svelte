@@ -156,6 +156,7 @@
       </div>
     </div>
 
+    <!-- NOTE: 完整内部显示 -->
     {#if $_CARD_SHOW.all || _hover}
       <!-- 置顶 && 免费类型&剩余时间 -->
       {#if torrentInfo.free_type || torrentInfo.pattMsg}
@@ -199,6 +200,7 @@
       </div>
 
       <div class="card-details">
+        <!-- 各种功能: 大小/下载/收藏 -->
         <div class="card-line">
           <!-- 大小 -->
           <div class="cl-center">
@@ -238,12 +240,118 @@
         <!-- 上传时间 -->
         <div class="card-line"><b>上传时间:</b> {torrentInfo.upload_date}</div>
 
+        <!-- 各种数据: 评论/上传/下载/完成 -->
         <div class="card-line">
           {@html ICON.COMMENT}&nbsp;<b>{torrentInfo.comments}</b>&nbsp;&nbsp;
           {@html ICON.SEEDERS}&nbsp;<b>{torrentInfo.seeders}</b>&nbsp;&nbsp;
           {@html ICON.LEECHERS}&nbsp;<b>{torrentInfo.leechers}</b>&nbsp;&nbsp;
           {@html ICON.SNATCHED}&nbsp;<b>{torrentInfo.snatched}</b>
         </div>
+      </div>
+    {/if}
+
+    <!-- NOTE: 可选外部显示 -->
+    {#if !($_CARD_SHOW.all || _hover)}
+      <!-- 置顶 && 免费类型&剩余时间 -->
+      {#if $_CARD_SHOW.free && (torrentInfo.free_type || torrentInfo.pattMsg)}
+        <div class="card-alter">
+          <div class="top_and_free {torrentInfo.free_type}">
+            <!-- 置顶等级 -->
+            {#if torrentInfo.place_at_the_top.length != 0}
+              {@html Array.from(torrentInfo.place_at_the_top).map(
+                (e) => e.outerHTML
+              ) + "&nbsp;"}
+            {/if}
+
+            <!-- 免费类型 & 免费剩余时间 -->
+            {#if torrentInfo.freeTypeImg}
+              {@html torrentInfo.freeTypeImg.outerHTML}
+            {/if}
+            {#if torrentInfo.free_remaining_time}
+              &nbsp;<b> {torrentInfo.free_remaining_time} </b>
+            {/if}
+          </div>
+        </div>
+      {/if}
+
+      <!-- 副标题 -->
+      {#if $_CARD_SHOW.sub_title && torrentInfo.description}
+        <a class="card-description" href={torrentInfo.torrentLink}>
+          {torrentInfo.description}
+        </a>
+      {/if}
+
+      <!-- 标签 Tags -->
+      {#if $_CARD_SHOW.tags}
+        <div class="cl-tags">
+          {@html torrentInfo.tagsDOM
+            .map((el) => {
+              const _tag = document.createElement("div");
+              _tag.innerHTML = el.outerHTML;
+              // console.log(_tag);
+              return _tag.outerHTML;
+            })
+            .join("")}
+        </div>
+      {/if}
+
+      <div class="card-details">
+        <!-- 各种功能: 大小/下载/收藏 -->
+        {#if $_CARD_SHOW.size_download_collect}
+          <div class="card-line">
+            <!-- 大小 -->
+            <div class="cl-center">
+              {@html ICON.SIZE}&nbsp;{torrentInfo.size}
+            </div>
+
+            <!-- 下载 -->
+            &nbsp;&nbsp;
+            <div class="cl-center">
+              {@html ICON.DOWNLOAD}&nbsp;
+              <b><a href={torrentInfo.downloadLink}>下载</a></b>
+            </div>
+
+            <!-- 收藏 -->
+            &nbsp;&nbsp;
+            <div class="cl-center">
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <div
+                class="btnCollet cl-center"
+                id="tI_{torrentInfo.torrentIndex}"
+                on:click={COLLET_AND_ICON_CHANGE(
+                  torrentInfo.collectLink,
+                  "tI_" + torrentInfo.torrentIndex
+                )}
+              >
+                {@html torrentInfo.collectState == "Unbookmarked"
+                  ? ICON.COLLET
+                  : ICON.COLLETED}
+                &nbsp;<b>收藏</b>
+              </div>
+            </div>
+          </div>
+        {/if}
+
+        <!-- 种子id, 默认不显示 -->
+        <!--<div class="card-line"><b>Torrent ID:</b> ${torrentId}</div> -->
+
+        <!-- 上传时间 -->
+        {#if $_CARD_SHOW.upload_time}
+          <div class="card-line">
+            <b>上传时间:</b>
+            {torrentInfo.upload_date}
+          </div>
+        {/if}
+
+        <!-- 各种数据: 评论/上传/下载/完成 -->
+        {#if $_CARD_SHOW.statistics}
+          <div class="card-line">
+            {@html ICON.COMMENT}&nbsp;<b>{torrentInfo.comments}</b>&nbsp;&nbsp;
+            {@html ICON.SEEDERS}&nbsp;<b>{torrentInfo.seeders}</b>&nbsp;&nbsp;
+            {@html ICON.LEECHERS}&nbsp;<b>{torrentInfo.leechers}</b>&nbsp;&nbsp;
+            {@html ICON.SNATCHED}&nbsp;<b>{torrentInfo.snatched}</b>
+          </div>
+        {/if}
       </div>
     {/if}
   </div>
@@ -300,6 +408,7 @@
 
   /* 卡片行默认样式 */
   .card-line {
+    margin-top: 1px;
     margin-bottom: 1px;
 
     display: flex;
@@ -341,6 +450,13 @@
     gap: 2px;
 
     transform: translateX(4px);
+
+    /* padding-top: 2px; */
+    /* padding-bottom: 2px; */
+  }
+
+  .cl-tags:has(span) {
+    padding-top: 2px;
   }
 
   /* 卡片简介总容器 */
@@ -350,7 +466,7 @@
     align-items: center;
     flex-direction: column;
 
-    padding-top: 2px;
+    /* padding-top: 2px; */
   }
 
   /* 卡片图像div */

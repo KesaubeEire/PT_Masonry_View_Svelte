@@ -47,6 +47,7 @@
   }
 
   // 详细配置面板------------------------------------------------
+
   let _show_configPanel = false;
 
   // ------------------------------------------------
@@ -70,8 +71,8 @@
     $_Global_Masonry.layout();
   }
 
-  /** debug01 */
-  function debug01() {
+  /** 切换宽度 */
+  function config_changeWidth() {
     $_card_width = $_card_width == 300 ? 200 : 300;
     console.log(`[debug]\$card_width: ${$_card_width}`);
 
@@ -80,8 +81,8 @@
     sortMasonry();
   }
 
-  /** debug02 */
-  function debug02() {
+  /** 显示所有详情界面 */
+  function config_showAllDetails() {
     $_CARD_SHOW.all = !$_CARD_SHOW.all;
     sortMasonry("fast");
     sortMasonry("fast");
@@ -96,7 +97,8 @@
     label_switchMode = $_turnPage == 1 ? "滚动加载" : "按钮加载";
   }
 
-  function debug04() {
+  /** 切换下一页加载模式 */
+  function config_changeLoadMode() {
     $_iframe_switch = $_iframe_switch == 0 ? 1 : 0;
   }
 
@@ -136,14 +138,20 @@
       class="sideP__btn"
       on:click={() => {
         _show_configPanel = !_show_configPanel;
-      }}>呼出边栏</button
+      }}
     >
+      呼出边栏
+    </button>
 
     <!-- 按钮4: debug -->
-    <button class="sideP__btn" on:click={debug01}>[d]切换宽度</button>
+    <button class="sideP__btn" on:click={config_changeWidth}>
+      [d]切换宽度
+    </button>
 
     <!-- 按钮5: debug -->
-    <button class="sideP__btn" on:click={debug02}>[d]显示详情</button>
+    <button class="sideP__btn" on:click={config_showAllDetails}>
+      [d]显示详情
+    </button>
 
     <!-- 按钮6: debug -->
     <button class="sideP__btn" on:click={config_switchMode}>
@@ -151,15 +159,131 @@
     </button>
 
     <!-- 按钮6: debug -->
-    <button class="sideP__btn" on:click={debug04}> [d]iframe </button>
+    <button class="sideP__btn" on:click={config_changeLoadMode}>
+      [d]iframe
+    </button>
   </div>
 </div>
 
 <!-- 详细配置面板 -->
 {#if _show_configPanel}
-  <div class="configP" transition:fade={{ duration: 500 }}>
-    <p>real man</p>
-    <button on:click={() => (_show_configPanel = false)}>Close</button>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div
+    class="configP"
+    transition:fade={{ duration: 100 }}
+    on:click|self={() => (_show_configPanel = false)}
+  >
+    <div class="configP_holder">
+      <!-- ---------------- 常用配置 ---------------- -->
+      <div class="section">
+        <h1 class="s_title">常用配置</h1>
+        <div class="s_panel">
+          <!-- 按钮: 切换宽度 -->
+          <button class="sideP__btn" on:click={config_changeWidth}
+            >切换宽度</button
+          >
+
+          <!-- 按钮: 切换下一页加载模式 -->
+          <button class="sideP__btn" on:click={config_switchMode}>
+            {label_switchMode}
+          </button>
+        </div>
+      </div>
+
+      <!-- ---------------- 卡片信息 ---------------- -->
+      <div class="section">
+        <h1 class="s_title">卡片信息</h1>
+        <div class="s_panel">
+          <!-- 按钮: 显示详情 -->
+          <button class="sideP__btn" on:click={config_showAllDetails}>
+            显示所有详情界面
+          </button>
+        </div>
+
+        <!-- 子面板: 配置常驻卡片信息 -->
+        <div class="section">
+          <h3 class="s_title">配置常驻卡片信息</h3>
+          <div class="s_panel">
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
+                bind:checked={$_CARD_SHOW.free}
+                on:change={() => {
+                  console.log($_CARD_SHOW.free);
+                  sortMasonry();
+                }}
+              />
+              显示置顶和免费
+            </span>
+
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
+                bind:checked={$_CARD_SHOW.sub_title}
+                on:change={() => {
+                  console.log($_CARD_SHOW.sub_title);
+                  sortMasonry();
+                }}
+              />
+              显示副标题
+            </span>
+
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
+                bind:checked={$_CARD_SHOW.tags}
+                on:change={() => {
+                  console.log($_CARD_SHOW.tags);
+                  sortMasonry();
+                }}
+              />
+              显示标签
+            </span>
+
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
+                bind:checked={$_CARD_SHOW.size_download_collect}
+                on:change={() => {
+                  console.log($_CARD_SHOW.size_download_collect);
+                  sortMasonry();
+                }}
+              />
+              显示大小&下载&收藏
+            </span>
+
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
+                bind:checked={$_CARD_SHOW.upload_time}
+                on:change={() => {
+                  console.log($_CARD_SHOW.upload_time);
+                  sortMasonry();
+                }}
+              />
+              显示上传时间
+            </span>
+
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
+                bind:checked={$_CARD_SHOW.statistics}
+                on:change={() => {
+                  console.log($_CARD_SHOW.statistics);
+                  sortMasonry();
+                }}
+              />
+              显示评论/上传/下载/完成
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------------- 返回按钮 ---------------- -->
+      <button class="_btn_close" on:click={() => (_show_configPanel = false)}>
+        关闭
+      </button>
+    </div>
   </div>
 {/if}
 
@@ -222,6 +346,79 @@
         background-color: black;
       }
     }
+  }
+  .configP {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+    padding: 0;
+    margin: 0;
+
+    z-index: 40000;
+
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .configP_holder {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+    /* overflow: hidden; */
+
+    overflow-y: scroll;
+
+    width: 400px;
+    /* height: 100vh; */
+
+    padding: 0;
+    margin: 0;
+
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+
+    background-color: rgb(62, 146, 255);
+  }
+
+  .section {
+    margin: 24px;
+
+    & button {
+      border-radius: 10px;
+      margin: 4px;
+      padding: 12px 16px;
+    }
+
+    & .s_title {
+      text-align: center;
+    }
+
+    & .s_panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    & .s_checkbox {
+      padding: 12px;
+      margin: 4px;
+      border-radius: 10px;
+      border: 1px solid black;
+
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  ._btn_close {
+    width: 100%;
+    border: none;
   }
 
   #reset_panel_pos {

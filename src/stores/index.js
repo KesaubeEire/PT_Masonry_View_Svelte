@@ -52,6 +52,22 @@ export const _panelPos = persistStore('_panelPos', { x: 0, y: 0 })
 export const _card_width = persistStore('_card_width', 200);
 
 /** 卡片显示_细节总开关 */
-const show_switch = { all: false }
+const show_switch = {
+  // 全局总开关
+  all: false,
+
+  // 显示置顶和免费
+  free: false,
+  // 显示副标题
+  sub_title: false,
+  // 显示标签
+  tags: false,
+  // 显示大小&下载&收藏
+  size_download_collect: false,
+  // 显示上传时间
+  upload_time: false,
+  // 显示评论/上传/下载/完成
+  statistics: false,
+}
 // export const _CARD_SHOW = writable(show_switch);
 export const _CARD_SHOW = persistStore('_card_show', show_switch);
