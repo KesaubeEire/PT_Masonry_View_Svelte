@@ -9,6 +9,7 @@
     _turnPage,
     _iframe_switch,
     _panelPos,
+    _show_debug_btn,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -143,25 +144,27 @@
       呼出边栏
     </button>
 
-    <!-- 按钮4: debug -->
-    <button class="sideP__btn" on:click={config_changeWidth}>
-      [d]切换宽度
-    </button>
+    {#if $_show_debug_btn}
+      <!-- 按钮4: debug -->
+      <button class="sideP__btn" on:click={config_changeWidth}>
+        [d]切换宽度
+      </button>
 
-    <!-- 按钮5: debug -->
-    <button class="sideP__btn" on:click={config_showAllDetails}>
-      [d]显示详情
-    </button>
+      <!-- 按钮5: debug -->
+      <button class="sideP__btn" on:click={config_showAllDetails}>
+        [d]显示详情
+      </button>
 
-    <!-- 按钮6: debug -->
-    <button class="sideP__btn" on:click={config_switchMode}>
-      [d]{label_switchMode}
-    </button>
+      <!-- 按钮6: debug -->
+      <button class="sideP__btn" on:click={config_switchMode}>
+        [d]{label_switchMode}
+      </button>
 
-    <!-- 按钮6: debug -->
-    <button class="sideP__btn" on:click={config_changeLoadMode}>
-      [d]iframe
-    </button>
+      <!-- 按钮6: debug -->
+      <button class="sideP__btn" on:click={config_changeLoadMode}>
+        [d]iframe
+      </button>
+    {/if}
   </div>
 </div>
 
@@ -186,6 +189,16 @@
           <!-- 按钮: 切换下一页加载模式 -->
           <button class="sideP__btn" on:click={config_switchMode}>
             {label_switchMode}
+          </button>
+
+          <!-- 按钮: 显示侧边栏 debug 按钮 -->
+          <button
+            class="sideP__btn"
+            on:click={() => {
+              $_show_debug_btn = !$_show_debug_btn;
+            }}
+          >
+            显示侧边栏 debug 按钮
           </button>
         </div>
       </div>

@@ -46,6 +46,10 @@ export const _turnPage = persistStore('_turnPage', 0);
 /** 外面板位置: x->left y->top */
 export const _panelPos = persistStore('_panelPos', { x: 0, y: 0 })
 
+/** 显示侧边栏 debug 按钮 */
+export const _show_debug_btn = persistStore('_show_debug_btn', 0);
+
+
 // 卡片类变量 -------------------------------------
 /** 卡片宽度 */
 // export const _card_width = writable(200);
