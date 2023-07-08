@@ -401,13 +401,13 @@ function NEXUS_TOOLS() {
     let buffer = null;
     jQuery("body")
       .on("mouseover", selector, function (e) {
+        imgEle = jQuery(this);
         // NOTE: 加一个延迟, 让突然划过去的指针不被大图干扰
         buffer = setTimeout(() => {
 
           // NOTE: 这里加了个判断是否开启触摸显示大图的 boolean
           if (get(_show_nexus_pic)) {
-            imgEle = jQuery(this);
-            // previewEle = jQuery('<img style="display: none;position:absolute;">').appendTo(imgEle.parent())
+
             imgPosition = getImgPosition(e, imgEle);
             let position = getPosition(e, imgPosition);
             let src = imgEle.attr("src");
