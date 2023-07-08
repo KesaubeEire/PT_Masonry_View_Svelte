@@ -49,6 +49,8 @@ export const _panelPos = persistStore('_panelPos', { x: 0, y: 0 })
 /** 是否显示侧边栏 debug 按钮 */
 export const _show_debug_btn = persistStore('_show_debug_btn', 0);
 
+/** 是否显示鼠标悬浮预览大图 */
+export const _show_nexus_pic = persistStore('_show_nexus_pic', 1);
 
 // 卡片类变量 -------------------------------------
 /** 卡片宽度 */

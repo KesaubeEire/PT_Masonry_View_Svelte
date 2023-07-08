@@ -10,6 +10,7 @@
     _iframe_switch,
     _panelPos,
     _show_debug_btn,
+    _show_nexus_pic,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -217,8 +218,21 @@
               <span style="color: red;">否</span>(默认)
             {/if}
           </button>
+
+          <!-- 按钮: 显示鼠标悬浮预览大图 -->
+          <button
+            class="sideP__btn"
+            on:click={() => {
+              $_show_nexus_pic = !$_show_nexus_pic;
+            }}
+            style="background-color:{$_show_nexus_pic ? '#59CD90' : '#FBC4AB'}"
           >
-            显示侧边栏 debug 按钮
+            是否显示鼠标悬浮预览大图:
+            {#if $_show_nexus_pic}
+              <span style="color: green;">是</span>(默认)
+            {:else}
+              <span style="color: red;">否</span>
+            {/if}
           </button>
         </div>
       </div>

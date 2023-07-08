@@ -2,6 +2,9 @@
  * 全局工具类函数~
  */
 
+import { get } from 'svelte/store'
+import { _show_nexus_pic } from '../stores'
+
 export { debounce, throttle, sortMasonry, NEXUS_TOOLS }
 /**瀑布流执行次数 */
 const _SORT_COUNT = {
@@ -396,19 +399,22 @@ function NEXUS_TOOLS() {
 
     jQuery("body")
       .on("mouseover", selector, function (e) {
-        imgEle = jQuery(this);
-        // previewEle = jQuery('<img style="display: none;position:absolute;">').appendTo(imgEle.parent())
-        imgPosition = getImgPosition(e, imgEle);
-        let position = getPosition(e, imgPosition);
-        let src = imgEle.attr("src");
-        if (src) {
-          // FIXME: 2选1未设置
-          // previewEle.attr("src", src).css(position).fadeIn("fast");
-          if (kesa_preview) kesa_preview.find('.kp_img').attr('src', src)
-        }
+        // NOTE: 这里加了个判断是否开启触摸显示大图的 boolean
+        if (get(_show_nexus_pic)) {
+          imgEle = jQuery(this);
+          // previewEle = jQuery('<img style="display: none;position:absolute;">').appendTo(imgEle.parent())
+          imgPosition = getImgPosition(e, imgEle);
+          let position = getPosition(e, imgPosition);
+          let src = imgEle.attr("src");
+          if (src) {
+            // FIXME: 2选1未设置
+            // previewEle.attr("src", src).css(position).fadeIn("fast");
+            if (kesa_preview) kesa_preview.find('.kp_img').attr('src', src)
+          }
 
-        // kesa_preview.css(previewPosition_Kesa(e, imgEle)).fadeIn('fast')
-        kesa_preview.css(previewPosition_Kesa(e, imgEle)).show()
+          // kesa_preview.css(previewPosition_Kesa(e, imgEle)).fadeIn('fast')
+          kesa_preview.css(previewPosition_Kesa(e, imgEle)).show()
+        }
       })
       .on("mouseout", selector, function (e) {
         // FIXME: 2选1未设置
