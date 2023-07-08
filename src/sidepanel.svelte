@@ -386,7 +386,7 @@
     overflow-y: scroll;
 
     width: 400px;
-    /* height: 100vh; */
+    height: 100vh;
 
     padding: 0;
     margin: 0;
@@ -430,8 +430,14 @@
   }
 
   ._btn_close {
-    width: 100%;
+    height: 48px;
+    width: 48px;
+    position: fixed;
+    right: 400;
+    top: 0;
     border: none;
+    border-radius: 99px;
+    background-color: rgb(255, 117, 117);
   }
 
   #reset_panel_pos {
