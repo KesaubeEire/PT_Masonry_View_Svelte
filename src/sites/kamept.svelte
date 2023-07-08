@@ -77,7 +77,10 @@
   /** 本地: 是否显示详情*/
   let _hover = false;
   function card_show_detail() {
-    _hover = !_hover;
+    _hover = true;
+  }
+  function card_hide_detail() {
+    _hover = false;
   }
 
   // ------------------------------------------------
@@ -101,13 +104,15 @@
     background-color:{$_current_bgColor}"
   bind:this={_selfDom}
 >
-  <div class="card-holder">
+  <div
+    class="card-holder"
+    on:mouseenter={card_show_detail}
+    on:mouseleave={card_hide_detail}
+  >
     <!-- 分区类别 -->
     <div
       class="card-category"
       data-href={torrentInfo.categoryLink}
-      on:mouseenter={card_show_detail}
-      on:mouseleave={card_show_detail}
       style="
         background-color: 
           {config.CATEGORY[torrentInfo.categoryNumber] ?? 'transparent'};
