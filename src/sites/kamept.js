@@ -34,7 +34,7 @@ const CONFIG = {
   /** 索引 */
   INDEX: 0,
   /** iframe 宽度 */
-  Iframe_Width: 1246,
+  Iframe_Width: 1260,
 };
 
 /** 将 种子列表dom 的信息变为 json对象列表
