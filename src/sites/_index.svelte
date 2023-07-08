@@ -11,6 +11,7 @@
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
+  import { GET_CURRENT_PT_DOMAIN } from "./index";
   import "../utils/masonry.pkgd.Kesa";
 
   import { config as config_Kame } from "./kamept";
@@ -103,16 +104,6 @@
 
   // 组件函数 ------------------------------------------------
 
-  /** 获得当前PT站的名字
-   * @returns 当前PT站名
-   */
-  function GET_CURRENT_PT_DOMAIN() {
-    const domainName = window.location.hostname;
-    // 输出当前链接的域名
-    console.log("当前站点: ", domainName);
-    return domainName;
-  }
-
   /** 根据容器宽度和卡片宽度动态调整卡片间隔 gutter
    * @param {object} containerDom 容器dom
    * @param {number} card_width 卡片宽度
@@ -136,7 +127,7 @@
 
   /** 调整卡片布局 */
   function CHANGE_CARD_LAYOUT() {
-    console.log("card width changed.");
+    // console.log("card width changed.");
     masonry.options.gutter = GET_CARD_GUTTER(waterfallNode, $_card_width);
     masonry.options.columnWidth = $_card_width;
     sortMasonry("fast");
@@ -201,7 +192,7 @@
 
   // 1. 获取当前域名 & 背景颜色 --------------------------------------------------------------------------------------
   $_current_domain = GET_CURRENT_PT_DOMAIN();
-  console.log($_current_domain);
+  // console.log($_current_domain);
 
   /** 获取主题背景色 */
   const mainOuterDOM = document.querySelector("table.mainouter");

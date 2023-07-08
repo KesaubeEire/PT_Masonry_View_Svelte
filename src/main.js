@@ -1,15 +1,21 @@
 import App from './main.svelte';
+import { IS_EXIST_SEED_LIST } from './sites/index.js';
+// -------------------------------------------------------------
+
 export { _ORIGIN_TL_Node };
 
 // -------------------------------------------------------------
-console.log("________PT-TorrentList-Masonry 已启动!________");
-// -------------------------------------------------------------
-/**原种子列表DOM */
-// @ts-ignore
-const _ORIGIN_TL_Node = jQuery('table.torrents');
 
-// 没有种子列表就不进行整个程序
-if (_ORIGIN_TL_Node.length > 0) {
+console.log("________PT-TorrentList-Masonry________");
+
+// -------------------------------------------------------------
+/** 相应站点的种子列表 selector */
+const list_selector = IS_EXIST_SEED_LIST();
+/**原种子列表DOM */
+const _ORIGIN_TL_Node = document.querySelector(list_selector);
+
+// 没有相应站点的种子列表 selector 或 种子列表 dom 不存在 就不进行整个程序
+if (list_selector || !!_ORIGIN_TL_Node) {
   const app = new App({
     target: (() => {
       const app = document.createElement('div');
