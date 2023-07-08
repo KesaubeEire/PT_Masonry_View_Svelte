@@ -40,11 +40,14 @@ export const _current_bgColor = persistStore('_bgColor', "");
 export const _show_originTable = writable(0)
 // export const _show_originTable = persistStore('_show_ori_table', 0);
 
+/** 是否显示侧边栏 */
+export const _show_configPanel = writable(false)
+
+/** 侧边栏位置: x->left y->top */
+export const _panelPos = persistStore('_panelPos', { x: 0, y: 0 })
+
 /** 加载下一页方式: 点击0 滚动1 */
 export const _turnPage = persistStore('_turnPage', 0);
-
-/** 外面板位置: x->left y->top */
-export const _panelPos = persistStore('_panelPos', { x: 0, y: 0 })
 
 /** 是否显示侧边栏 debug 按钮 */
 export const _show_debug_btn = persistStore('_show_debug_btn', 0);

@@ -12,6 +12,7 @@
     _show_debug_btn,
     _show_nexus_pic,
     _delay_nexus_pic,
+    _show_configPanel,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -48,10 +49,6 @@
     if ($_panelPos.x == 0 && $_panelPos.y == 0) alert("无需重置瀑布流边栏位置");
     $_panelPos = { x: 0, y: 0 };
   }
-
-  // 详细配置面板------------------------------------------------
-
-  let _show_configPanel = false;
 
   // ------------------------------------------------
 
@@ -140,7 +137,7 @@
     <button
       class="sideP__btn"
       on:click={() => {
-        _show_configPanel = !_show_configPanel;
+        $_show_configPanel = !$_show_configPanel;
       }}
     >
       呼出边栏
@@ -171,12 +168,12 @@
 </div>
 
 <!-- 详细配置面板 -->
-{#if _show_configPanel}
+{#if $_show_configPanel}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
     class="configP"
     transition:fade={{ duration: 100 }}
-    on:click|self={() => (_show_configPanel = false)}
+    on:click|self={() => ($_show_configPanel = false)}
   >
     <div class="configP_holder">
       <!-- ---------------- 常用配置 ---------------- -->
@@ -344,7 +341,7 @@
       </div>
 
       <!-- ---------------- 返回按钮 ---------------- -->
-      <button class="_btn_close" on:click={() => (_show_configPanel = false)}>
+      <button class="_btn_close" on:click={() => ($_show_configPanel = false)}>
         关闭
       </button>
     </div>

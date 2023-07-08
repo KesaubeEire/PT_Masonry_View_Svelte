@@ -7,6 +7,7 @@
     _turnPage,
     _iframe_switch,
     _iframe_url,
+    _show_configPanel,
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
@@ -142,9 +143,19 @@
     sortMasonry("fast");
   }
 
-  // iframe相关 ------------------------------------------------
+  // 面板相关 ------------------------------------------------
+  /** 关闭 iframe */
   function toggleIframe() {
     $_iframe_switch = 0;
+  }
+
+  /** esc 控制关闭所有面板 */
+  function key_closePanels(event) {
+    console.log(event);
+    if (event.key === "Escape") {
+      $_iframe_switch = 0;
+      $_show_configPanel = false;
+    }
   }
 
   // 翻页相关 ------------------------------------------------
@@ -415,6 +426,9 @@
     />
   </div>
 {/if}
+
+<!-- NOTE: svelte 绑定 window -> 按 escape 退出各种子面板 -->
+<svelte:window on:keydown|capture={key_closePanels} />
 
 <style>
   /* 卡片: 收藏按钮 */
