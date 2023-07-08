@@ -131,7 +131,8 @@
       on:mouseleave={card_show_detail}
     >
       <a class="two-lines" href={torrentInfo.torrentLink} target="_blank">
-        {torrentInfo.tempTagDom
+        <!-- FIXME: 不知道这里的标签没有显示是否修复 -->
+        {@html torrentInfo.tempTagDom
           ? torrentInfo.tempTagDom.map((e) => e.outerHTML).join("&nbsp;")
           : ""}
         <b>{torrentInfo.torrent_name}</b>
