@@ -68,6 +68,8 @@ const show_switch = {
   // 全局总开关
   all: false,
 
+  // 显示标题
+  title: true,
   // 显示置顶和免费
   free: false,
   // 显示副标题

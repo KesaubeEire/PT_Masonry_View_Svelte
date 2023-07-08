@@ -125,19 +125,17 @@
     </div>
 
     <!-- 标题 & 跳转详情链接 -->
-    <div
-      class="card-title"
-      on:mouseenter={card_show_detail}
-      on:mouseleave={card_show_detail}
-    >
-      <a class="two-lines" href={torrentInfo.torrentLink} target="_blank">
-        <!-- FIXME: 不知道这里的标签没有显示是否修复 -->
-        {@html torrentInfo.tempTagDom
-          ? torrentInfo.tempTagDom.map((e) => e.outerHTML).join("&nbsp;")
-          : ""}
-        <b>{torrentInfo.torrent_name}</b>
-      </a>
-    </div>
+    {#if $_CARD_SHOW.title || _hover}
+      <div class="card-title">
+        <a class="two-lines" href={torrentInfo.torrentLink} target="_blank">
+          <!-- FIXME: 不知道这里的标签没有显示是否修复 -->
+          {@html torrentInfo.tempTagDom
+            ? torrentInfo.tempTagDom.map((e) => e.outerHTML).join("&nbsp;")
+            : ""}
+          <b>{torrentInfo.torrent_name}</b>
+        </a>
+      </div>
+    {/if}
 
     <!-- 预览图 -->
     <div class="card-image">

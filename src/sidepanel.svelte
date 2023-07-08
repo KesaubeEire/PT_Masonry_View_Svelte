@@ -269,6 +269,18 @@
             <span class="s_checkbox">
               <input
                 type="checkbox"
+                bind:checked={$_CARD_SHOW.title}
+                on:change={() => {
+                  // console.log($_CARD_SHOW.title);
+                  sortMasonry();
+                }}
+              />
+              显示种子名称
+            </span>
+
+            <span class="s_checkbox">
+              <input
+                type="checkbox"
                 bind:checked={$_CARD_SHOW.free}
                 on:change={() => {
                   // console.log($_CARD_SHOW.free);
