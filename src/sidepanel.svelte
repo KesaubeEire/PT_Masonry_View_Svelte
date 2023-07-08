@@ -182,9 +182,9 @@
         <h1 class="s_title">常用配置</h1>
         <div class="s_panel">
           <!-- 按钮: 切换宽度 -->
-          <button class="sideP__btn" on:click={config_changeWidth}
-            >切换宽度</button
-          >
+          <button class="sideP__btn" on:click={config_changeWidth}>
+            切换宽度
+          </button>
 
           <!-- 按钮: 切换下一页加载模式 -->
           <button class="sideP__btn" on:click={config_switchMode}>
