@@ -11,6 +11,7 @@
     _panelPos,
     _show_debug_btn,
     _show_nexus_pic,
+    _delay_nexus_pic,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -232,6 +233,22 @@
               <span style="color: green;">是</span>(默认)
             {:else}
               <span style="color: red;">否</span>
+            {/if}
+          </button>
+
+          <!-- 按钮: 悬浮预览延迟 -->
+          <button
+            class="sideP__btn"
+            on:click={() => {
+              $_delay_nexus_pic = $_delay_nexus_pic == 0 ? 600 : 0;
+            }}
+            style="background-color:{$_delay_nexus_pic ? '#59CD90' : '#FBC4AB'}"
+          >
+            是否延迟悬浮预览:
+            {#if $_delay_nexus_pic != 0}
+              <span style="color: green;">延迟{$_delay_nexus_pic}ms</span>(默认)
+            {:else}
+              <span style="color: red;">不延迟</span>
             {/if}
           </button>
         </div>
