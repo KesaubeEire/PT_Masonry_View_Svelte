@@ -222,7 +222,7 @@
                 type="checkbox"
                 bind:checked={$_CARD_SHOW.free}
                 on:change={() => {
-                  console.log($_CARD_SHOW.free);
+                  // console.log($_CARD_SHOW.free);
                   sortMasonry();
                 }}
               />
@@ -234,7 +234,7 @@
                 type="checkbox"
                 bind:checked={$_CARD_SHOW.sub_title}
                 on:change={() => {
-                  console.log($_CARD_SHOW.sub_title);
+                  // console.log($_CARD_SHOW.sub_title);
                   sortMasonry();
                 }}
               />
@@ -246,7 +246,7 @@
                 type="checkbox"
                 bind:checked={$_CARD_SHOW.tags}
                 on:change={() => {
-                  console.log($_CARD_SHOW.tags);
+                  // console.log($_CARD_SHOW.tags);
                   sortMasonry();
                 }}
               />
@@ -258,7 +258,7 @@
                 type="checkbox"
                 bind:checked={$_CARD_SHOW.size_download_collect}
                 on:change={() => {
-                  console.log($_CARD_SHOW.size_download_collect);
+                  // console.log($_CARD_SHOW.size_download_collect);
                   sortMasonry();
                 }}
               />
@@ -270,7 +270,7 @@
                 type="checkbox"
                 bind:checked={$_CARD_SHOW.upload_time}
                 on:change={() => {
-                  console.log($_CARD_SHOW.upload_time);
+                  // console.log($_CARD_SHOW.upload_time);
                   sortMasonry();
                 }}
               />
@@ -282,7 +282,7 @@
                 type="checkbox"
                 bind:checked={$_CARD_SHOW.statistics}
                 on:change={() => {
-                  console.log($_CARD_SHOW.statistics);
+                  // console.log('statistics:\t'+$_CARD_SHOW.statistics);
                   sortMasonry();
                 }}
               />
