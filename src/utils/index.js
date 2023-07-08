@@ -412,7 +412,7 @@ function NEXUS_TOOLS() {
             let position = getPosition(e, imgPosition);
             let src = imgEle.attr("src");
             if (src) {
-              // FIXME: 2选1未设置
+              // FIXME: 2选1: 渐变 or 直接出现消失
               // previewEle.attr("src", src).css(position).fadeIn("fast");
               if (kesa_preview) kesa_preview.find('.kp_img').attr('src', src)
             }
@@ -423,7 +423,7 @@ function NEXUS_TOOLS() {
         }, get(_delay_nexus_pic));
       })
       .on("mouseout", selector, function (e) {
-        // FIXME: 2选1未设置
+        // FIXME: 2选1: 渐变 or 直接出现消失
         // previewEle.hide();// previewEle.fadeOut();
         kesa_preview.hide();// kesa_preview.fadeOut()
 
@@ -433,7 +433,7 @@ function NEXUS_TOOLS() {
         imgPosition = getImgPosition(e, imgEle);
         let position = getPosition(e, imgPosition);
 
-        // FIXME: 2选1未设置
+        // FIXME: 2选1: 渐变 or 直接出现消失
         // previewEle.css(position);
         kesa_preview.css(previewPosition_Kesa(e, imgEle))
       });
