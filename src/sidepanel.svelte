@@ -187,8 +187,19 @@
           </button>
 
           <!-- 按钮: 切换下一页加载模式 -->
-          <button class="sideP__btn" on:click={config_switchMode}>
-            {label_switchMode}
+          <button
+            class="sideP__btn"
+            on:click={config_switchMode}
+            style="background-color:{!$_turnPage ? '#59CD90' : '#FBC4AB'}"
+          >
+            加载下一页: {label_switchMode}
+            {#if $_turnPage}
+              <span style="color: red;" title="MT等网站频繁使用可能会导致 120">
+                (谨慎使用!)
+              </span>
+            {:else}
+              (默认)
+            {/if}
           </button>
 
           <!-- 按钮: 显示侧边栏 debug 按钮 -->
@@ -197,6 +208,15 @@
             on:click={() => {
               $_show_debug_btn = !$_show_debug_btn;
             }}
+            style="background-color:{$_show_debug_btn ? '#59CD90' : '#FBC4AB'}"
+          >
+            显示侧边栏 debug 按钮:
+            {#if $_show_debug_btn}
+              <span style="color: green;">是</span>
+            {:else}
+              <span style="color: red;">否</span>(默认)
+            {/if}
+          </button>
           >
             显示侧边栏 debug 按钮
           </button>
