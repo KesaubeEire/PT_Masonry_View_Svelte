@@ -71,6 +71,11 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
       - [ ] 卡片宽度 & 间距宽度 调整
       - [ ] 简洁模式 & 详细模式 切换
       - [ ] 跟随预览 & 中间预览 切换(from tg by 天 胖)
+    - [ ] 加个 ESC 按钮退出 iframe 显示(from tg by LNN)
+    - [ ] Nexus 触摸显示大图放个半秒再显示？避免划过显示一堆不想看的？(from tg by LNN & 龟龟)
+
+- 样式类
+    - [ ] iframe 两侧颜色降低亮度(from tg by LNN)
 
 - 说明类
   - [ ] github & 油猴介绍 数据脱敏 (from tg by 天 胖)
@@ -83,7 +88,7 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
 ---
 
 <details>
-<summary>历史 TODO LIST</summary>
+<summary>旧版历史 TODO LIST</summary>
 
 - 其他事务
   - [x] 将 油猴脚本从成人区撤离, 改为正常
