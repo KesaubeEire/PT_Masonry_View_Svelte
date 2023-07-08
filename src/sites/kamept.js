@@ -1,9 +1,12 @@
 import { sortMasonry } from '../utils'
 export { CONFIG as config };
 const CONFIG = {
+  /** 默认的种子表格 dom selector */
   torrentListTable: "table.torrents",
+
+  /** 将 种子列表dom 的信息变为 json对象列表 */
   TORRENT_LIST_TO_JSON,
-  RENDER_TORRENT_JSON_IN_MASONRY,
+
   /** 如果站点有自定义的icon, 可以用自定义的 */
   ICON: {},
   /** 如果站点有必要设置分类颜色, 可以用自定义的 */
@@ -211,6 +214,7 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom, CARD = null) {
   return data;
 }
 
+// FIXME: 该函数废弃中, 只有参考作用, 不用理会
 /** 将种子列表信息渲染为卡片放入瀑布流
  * @param {DOM} waterfallNode 瀑布流容器dom
  * @param {list} torrent_json 种子列表信息的 json对象列表
