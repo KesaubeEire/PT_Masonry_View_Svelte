@@ -450,7 +450,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 38, 38, 0.607);
-    z-index: 20000;
+    z-index: 30000;
 
     display: flex;
   }

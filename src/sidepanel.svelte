@@ -370,7 +370,7 @@
     border-radius: 8px;
     overflow: hidden;
 
-    z-index: 30001;
+    z-index: 40000;
 
     &:hover {
       opacity: 1;
@@ -419,7 +419,7 @@
     padding: 0;
     margin: 0;
 
-    z-index: 40000;
+    z-index: 50000;
 
     background-color: rgba(0, 0, 0, 0.2);
   }

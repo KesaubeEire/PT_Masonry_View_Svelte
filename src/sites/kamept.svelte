@@ -555,15 +555,6 @@
   /* --------------------------------------- */
   /* 下面是改进原有的css */
 
-  /* 卡片索引 */
-  #nexus-preview {
-    z-index: 20000;
-    position: absolute;
-    display: none;
-
-    pointer-events: none;
-  }
-
   /* 临时标签_热门 */
   .hot {
     padding: 0 2px;
