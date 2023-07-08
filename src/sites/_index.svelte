@@ -204,7 +204,10 @@
   const config = SITE[$_current_domain];
   let infoList = [];
   infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(originTable)];
-  let _historyList = [...infoList];
+  // let _historyList = [...infoList];
+
+  // NOTE: 如果站点有特殊操作, 这里执行
+  SITE[$_current_domain]?.special();
 
   // 3. 开整瀑布流 --------------------------------------------------------------------------------------
 
