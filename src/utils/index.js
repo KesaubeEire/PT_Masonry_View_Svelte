@@ -3,7 +3,7 @@
  */
 
 import { get } from 'svelte/store'
-import { _show_nexus_pic } from '../stores'
+import { _show_nexus_pic, _delay_nexus_pic } from '../stores'
 
 export { debounce, throttle, sortMasonry, NEXUS_TOOLS }
 /**瀑布流执行次数 */
@@ -397,29 +397,37 @@ function NEXUS_TOOLS() {
     const kesa_preview = (jQuery('#kp_container').length > 0) ? jQuery('#kp_container') : createKesaPreview('')
     jQuery("body").append(kesa_preview)
 
+    /** timer 用来搞延迟加载图片的 */
+    let buffer = null;
     jQuery("body")
       .on("mouseover", selector, function (e) {
-        // NOTE: 这里加了个判断是否开启触摸显示大图的 boolean
-        if (get(_show_nexus_pic)) {
-          imgEle = jQuery(this);
-          // previewEle = jQuery('<img style="display: none;position:absolute;">').appendTo(imgEle.parent())
-          imgPosition = getImgPosition(e, imgEle);
-          let position = getPosition(e, imgPosition);
-          let src = imgEle.attr("src");
-          if (src) {
-            // FIXME: 2选1未设置
-            // previewEle.attr("src", src).css(position).fadeIn("fast");
-            if (kesa_preview) kesa_preview.find('.kp_img').attr('src', src)
-          }
+        // NOTE: 加一个延迟, 让突然划过去的指针不被大图干扰
+        buffer = setTimeout(() => {
 
-          // kesa_preview.css(previewPosition_Kesa(e, imgEle)).fadeIn('fast')
-          kesa_preview.css(previewPosition_Kesa(e, imgEle)).show()
-        }
+          // NOTE: 这里加了个判断是否开启触摸显示大图的 boolean
+          if (get(_show_nexus_pic)) {
+            imgEle = jQuery(this);
+            // previewEle = jQuery('<img style="display: none;position:absolute;">').appendTo(imgEle.parent())
+            imgPosition = getImgPosition(e, imgEle);
+            let position = getPosition(e, imgPosition);
+            let src = imgEle.attr("src");
+            if (src) {
+              // FIXME: 2选1未设置
+              // previewEle.attr("src", src).css(position).fadeIn("fast");
+              if (kesa_preview) kesa_preview.find('.kp_img').attr('src', src)
+            }
+
+            // kesa_preview.css(previewPosition_Kesa(e, imgEle)).fadeIn('fast')
+            kesa_preview.css(previewPosition_Kesa(e, imgEle)).show()
+          }
+        }, get(_delay_nexus_pic));
       })
       .on("mouseout", selector, function (e) {
         // FIXME: 2选1未设置
         // previewEle.hide();// previewEle.fadeOut();
         kesa_preview.hide();// kesa_preview.fadeOut()
+
+        if (buffer) clearTimeout(buffer)
       })
       .on("mousemove", selector, function (e) {
         imgPosition = getImgPosition(e, imgEle);

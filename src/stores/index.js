@@ -52,6 +52,9 @@ export const _show_debug_btn = persistStore('_show_debug_btn', 0);
 /** 是否显示鼠标悬浮预览大图 */
 export const _show_nexus_pic = persistStore('_show_nexus_pic', 1);
 
+/** 是否延迟显示悬浮预览大图 */
+export const _delay_nexus_pic = persistStore('_delay_nexus_pic', 600);
+
 // 卡片类变量 -------------------------------------
 /** 卡片宽度 */
 // export const _card_width = writable(200);
