@@ -240,6 +240,7 @@
               $_delay_nexus_pic = $_delay_nexus_pic == 0 ? 600 : 0;
             }}
             style="background-color:{$_delay_nexus_pic ? '#59CD90' : '#FBC4AB'}"
+            disabled={!$_show_nexus_pic}
           >
             是否延迟悬浮预览:
             {#if $_delay_nexus_pic != 0}
