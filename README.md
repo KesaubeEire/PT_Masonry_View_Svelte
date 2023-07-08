@@ -73,7 +73,7 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
       - [ ] 跟随预览 & 中间预览 切换(from tg by 天 胖)
     - [x] 加个 ESC 按钮退出 iframe 显示(from tg by LNN)
     - [x] Nexus 触摸显示大图放个半秒再显示？避免划过显示一堆不想看的？(from tg by LNN & 龟龟)
-    - [ ] 配置一下标题的隐藏(from tg by LNN)
+    - [x] 配置一下标题的隐藏(from tg by LNN)
 
 - 样式类
     - [x] iframe 两侧颜色降低亮度(from tg by LNN)
