@@ -16,6 +16,7 @@
   } from "./stores";
 
   import { sortMasonry } from "./utils";
+  import Switch from "./component/switch.svelte";
 
   // 配置拖拽侧边栏 ------------------------------------------------
   let div;
@@ -181,12 +182,26 @@
         <p>详细配置面板</p>
         <!-- ---------------- 返回按钮 ---------------- -->
         <button on:click={() => ($_show_configPanel = false)}>
-          <svg height="28" width="28" viewBox="0 0 48 48">
+          <!-- <svg height="28" width="28" viewBox="0 0 48 48">
             <path
               d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"
               fill="red"
             />
             <path d="M0 0h48v48h-48z" fill="none" />
+          </svg> -->
+          <svg
+            class="feather feather-x"
+            fill="none"
+            height="28"
+            width="28"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <line x1="20" x2="6" y1="6" y2="20" />
+            <line x1="6" x2="20" y1="6" y2="20" />
           </svg>
         </button>
       </div>
@@ -196,6 +211,15 @@
       <div class="section">
         <h1 class="s_title">常用配置</h1>
         <div class="s_panel">
+          <Switch
+            title_fixed="按钮加载方式"
+            title_green="按钮"
+            title_red="滚轮"
+          />
+          <Switch title_fixed={"显示侧边栏debug按钮"} />
+          <Switch title_fixed={"显示鼠标悬浮预览大图"} />
+          <Switch title_fixed={"延迟悬浮预览"} />
+
           <!-- 按钮: 切换宽度 -->
           <button class="sideP__btn" on:click={config_changeWidth}>
             切换宽度
@@ -454,7 +478,7 @@
     top: 20px;
     overflow-y: scroll;
 
-    width: 400px;
+    width: 320px;
     height: calc(100vh - 40px);
     padding: 0;
     margin: 0;
@@ -464,7 +488,7 @@
     border-radius: 24px;
     border: 2px solid black;
 
-    background-color: rgb(62, 146, 255);
+    background-color: rgb(212, 231, 255);
 
     &::-webkit-scrollbar {
       display: none;
@@ -488,7 +512,7 @@
     border-top-right-radius: 24px;
     border-bottom: 2px solid black;
 
-    background-color: rgb(62, 146, 255);
+    background-color: rgb(154, 198, 255);
 
     & p {
       font-size: 18px;
@@ -518,7 +542,8 @@
 
     & .s_panel {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      /* flex-wrap: wrap; */
       justify-content: space-evenly;
       align-items: center;
     }
