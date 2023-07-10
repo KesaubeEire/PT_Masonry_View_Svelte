@@ -2,6 +2,9 @@
   import "../stores";
   import { onMount } from "svelte";
 
+  /** switch 类型: 默认是 switch, 可变为 range */
+  export let type = "switch";
+
   /** 固定条目名称 */
   export let title_fixed = "";
   /** 活动条目名称: 肯定 */
@@ -19,6 +22,11 @@
   export let checked = false;
   /** 绿色是 true 还是 false */
   export let green_state = true;
+
+  // range ----------------------------
+
+  /** range 模式默认值 */
+  // export let value = 0;
 </script>
 
 <div class="switch">
@@ -80,17 +88,24 @@
   </div>
 
   <!-- toggle Switch -->
-  <div class="s_switch">
-    <input
-      type="checkbox"
-      id="_t{id}"
-      bind:checked
-      on:change={() => {
-        console.log(title_fixed, checked);
-      }}
-    />
-    <label for="_t{id}" />
-  </div>
+  {#if type == "switch"}
+    <div class="s_switch">
+      <input
+        type="checkbox"
+        id="_t{id}"
+        bind:checked
+        on:change={() => {
+          console.log(title_fixed, checked);
+        }}
+      />
+      <label for="_t{id}" />
+    </div>
+  {/if}
+
+  <!-- range 这里目前需要用插槽解决问题 -->
+  {#if type == "range"}
+    <slot />
+  {/if}
 </div>
 
 <style scoped>

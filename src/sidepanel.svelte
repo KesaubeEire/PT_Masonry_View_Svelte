@@ -232,7 +232,25 @@
             title_red="核心功能->确定不用再关"
             bind:checked={$_show_nexus_pic}
           />
-          <Switch title_fixed={"延迟悬浮预览"} />
+          {#if $_show_nexus_pic}
+            <Switch
+              title_fixed={`悬浮预览延迟${
+                $_delay_nexus_pic ? ":" + $_delay_nexus_pic + "ms" : ""
+              }`}
+              title_red={`${$_delay_nexus_pic ? "" : "无延迟"}`}
+              label="防止无意滑动时大图打开妨碍预览"
+              type="range"
+            >
+              <input
+                type="range"
+                bind:value={$_delay_nexus_pic}
+                min="0"
+                max="1500"
+                step="100"
+                list="values"
+              />
+            </Switch>
+          {/if}
 
           <!-- 按钮: 切换宽度 -->
           <button class="sideP__btn" on:click={config_changeWidth}>
@@ -295,24 +313,27 @@
                 <span style="color: red;">否</span>
               {/if}
             </button>
-          {/if}
 
-          <!-- 按钮: 悬浮预览延迟 -->
-          <button
-            class="sideP__btn"
-            on:click={() => {
-              $_delay_nexus_pic = $_delay_nexus_pic == 0 ? 600 : 0;
-            }}
-            style="background-color:{$_delay_nexus_pic ? '#59CD90' : '#FBC4AB'}"
-            disabled={!$_show_nexus_pic}
-          >
-            是否延迟悬浮预览:
-            {#if $_delay_nexus_pic != 0}
-              <span style="color: green;">延迟{$_delay_nexus_pic}ms</span>(默认)
-            {:else}
-              <span style="color: red;">不延迟</span>
-            {/if}
-          </button>
+            <!-- 按钮: 悬浮预览延迟 -->
+            <button
+              class="sideP__btn"
+              on:click={() => {
+                $_delay_nexus_pic = $_delay_nexus_pic == 0 ? 600 : 0;
+              }}
+              style="background-color:{$_delay_nexus_pic
+                ? '#59CD90'
+                : '#FBC4AB'}"
+              disabled={!$_show_nexus_pic}
+            >
+              是否延迟悬浮预览:
+              {#if $_delay_nexus_pic != 0}
+                <span style="color: green;">延迟{$_delay_nexus_pic}ms</span
+                >(默认)
+              {:else}
+                <span style="color: red;">不延迟</span>
+              {/if}
+            </button>
+          {/if}
         </div>
       </div>
 
