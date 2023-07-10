@@ -212,12 +212,26 @@
         <h1 class="s_title">常用配置</h1>
         <div class="s_panel">
           <Switch
-            title_fixed="按钮加载方式"
-            title_green="按钮"
-            title_red="滚轮"
+            title_fixed={"按钮加载方式"}
+            title_green="按钮(默认)"
+            title_red="滚动(谨慎使用)"
+            label="MT等网站频繁使用可能会导致 120"
+            bind:checked={$_turnPage}
+            green_state={false}
           />
-          <Switch title_fixed={"显示侧边栏debug按钮"} />
-          <Switch title_fixed={"显示鼠标悬浮预览大图"} />
+          <Switch
+            title_fixed={"显示侧边栏debug按钮"}
+            title_green="隐藏(默认)"
+            title_red="显示(开发用)"
+            bind:checked={$_show_debug_btn}
+            green_state={false}
+          />
+          <Switch
+            title_fixed={"显示鼠标悬浮预览大图"}
+            title_green="默认开启"
+            title_red="真不用再关"
+            bind:checked={$_show_nexus_pic}
+          />
           <Switch title_fixed={"延迟悬浮预览"} />
 
           <!-- 按钮: 切换宽度 -->
@@ -478,7 +492,7 @@
     top: 20px;
     overflow-y: scroll;
 
-    width: 320px;
+    width: 360px;
     height: calc(100vh - 40px);
     padding: 0;
     margin: 0;
