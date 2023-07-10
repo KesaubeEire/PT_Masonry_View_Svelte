@@ -1,4 +1,5 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
+import { sortMasonry } from "../utils";
 
 // ----------------------------------------------------------------
 
@@ -85,3 +86,19 @@ const show_switch = {
 }
 // export const _CARD_SHOW = writable(show_switch);
 export const _CARD_SHOW = persistStore('_card_show', show_switch);
+let mark = false;
+_CARD_SHOW.subscribe(value => {
+  console.log(get(_CARD_SHOW));
+
+  // 初始化时不寻找 masonry
+  if (!mark) {
+    mark = true;
+  }
+  else {
+    sortMasonry('fast');
+    sortMasonry('fast');
+    sortMasonry();
+  }
+});
+
+

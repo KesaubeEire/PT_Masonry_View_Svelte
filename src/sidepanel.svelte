@@ -220,16 +220,16 @@
             green_state={false}
           />
           <Switch
-            title_fixed={"显示侧边栏debug按钮"}
+            title_fixed={"侧边栏debug按钮"}
             title_green="隐藏(默认)"
             title_red="显示(开发用)"
             bind:checked={$_show_debug_btn}
             green_state={false}
           />
           <Switch
-            title_fixed={"显示鼠标悬浮预览大图"}
+            title_fixed={"悬浮预览大图"}
             title_green="默认开启"
-            title_red="真不用再关"
+            title_red="核心功能->确定不用再关"
             bind:checked={$_show_nexus_pic}
           />
           <Switch title_fixed={"延迟悬浮预览"} />
@@ -239,53 +239,63 @@
             切换宽度
           </button>
 
-          <!-- 按钮: 切换下一页加载模式 -->
-          <button
-            class="sideP__btn"
-            on:click={config_switchMode}
-            style="background-color:{!$_turnPage ? '#59CD90' : '#FBC4AB'}"
-          >
-            加载下一页: {label_switchMode}
-            {#if $_turnPage}
-              <span style="color: red;" title="MT等网站频繁使用可能会导致 120">
-                (谨慎使用!)
-              </span>
-            {:else}
-              (默认)
-            {/if}
-          </button>
+          <!-- NOTE: 废弃的旧型样式 -->
+          {#if false}
+            <!-- 按钮: 切换下一页加载模式 -->
+            <button
+              class="sideP__btn"
+              on:click={config_switchMode}
+              style="background-color:{!$_turnPage ? '#59CD90' : '#FBC4AB'}"
+            >
+              加载下一页: {label_switchMode}
+              {#if $_turnPage}
+                <span
+                  style="color: red;"
+                  title="MT等网站频繁使用可能会导致 120"
+                >
+                  (谨慎使用!)
+                </span>
+              {:else}
+                (默认)
+              {/if}
+            </button>
 
-          <!-- 按钮: 显示侧边栏 debug 按钮 -->
-          <button
-            class="sideP__btn"
-            on:click={() => {
-              $_show_debug_btn = !$_show_debug_btn;
-            }}
-            style="background-color:{$_show_debug_btn ? '#59CD90' : '#FBC4AB'}"
-          >
-            显示侧边栏 debug 按钮:
-            {#if $_show_debug_btn}
-              <span style="color: green;">是</span>
-            {:else}
-              <span style="color: red;">否</span>(默认)
-            {/if}
-          </button>
+            <!-- 按钮: 显示侧边栏 debug 按钮 -->
+            <button
+              class="sideP__btn"
+              on:click={() => {
+                $_show_debug_btn = !$_show_debug_btn;
+              }}
+              style="background-color:{$_show_debug_btn
+                ? '#59CD90'
+                : '#FBC4AB'}"
+            >
+              显示侧边栏 debug 按钮:
+              {#if $_show_debug_btn}
+                <span style="color: green;">是</span>
+              {:else}
+                <span style="color: red;">否</span>(默认)
+              {/if}
+            </button>
 
-          <!-- 按钮: 显示鼠标悬浮预览大图 -->
-          <button
-            class="sideP__btn"
-            on:click={() => {
-              $_show_nexus_pic = !$_show_nexus_pic;
-            }}
-            style="background-color:{$_show_nexus_pic ? '#59CD90' : '#FBC4AB'}"
-          >
-            是否显示鼠标悬浮预览大图:
-            {#if $_show_nexus_pic}
-              <span style="color: green;">是</span>(默认)
-            {:else}
-              <span style="color: red;">否</span>
-            {/if}
-          </button>
+            <!-- 按钮: 显示鼠标悬浮预览大图 -->
+            <button
+              class="sideP__btn"
+              on:click={() => {
+                $_show_nexus_pic = !$_show_nexus_pic;
+              }}
+              style="background-color:{$_show_nexus_pic
+                ? '#59CD90'
+                : '#FBC4AB'}"
+            >
+              是否显示鼠标悬浮预览大图:
+              {#if $_show_nexus_pic}
+                <span style="color: green;">是</span>(默认)
+              {:else}
+                <span style="color: red;">否</span>
+              {/if}
+            </button>
+          {/if}
 
           <!-- 按钮: 悬浮预览延迟 -->
           <button
@@ -320,89 +330,118 @@
         <div class="section">
           <h3 class="s_title">配置常驻卡片信息</h3>
           <div class="s_panel">
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.title}
-                on:change={() => {
-                  // console.log($_CARD_SHOW.title);
-                  sortMasonry();
-                }}
-              />
-              显示种子名称
-            </span>
+            <Switch
+              title_fixed="显示种子名称"
+              bind:checked={$_CARD_SHOW.title}
+            />
+            <Switch
+              title_fixed="显示置顶和免费"
+              bind:checked={$_CARD_SHOW.free}
+            />
+            <Switch
+              title_fixed="显示副标题"
+              bind:checked={$_CARD_SHOW.sub_title}
+            />
+            <Switch title_fixed="显示标签" bind:checked={$_CARD_SHOW.tags} />
+            <Switch
+              title_fixed="显示大小&下载&收藏"
+              bind:checked={$_CARD_SHOW.size_download_collect}
+            />
+            <Switch
+              title_fixed="显示上传时间"
+              bind:checked={$_CARD_SHOW.upload_time}
+            />
+            <Switch
+              title_fixed="显示评论/上传/下载/完成"
+              bind:checked={$_CARD_SHOW.statistics}
+            />
 
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.free}
-                on:change={() => {
-                  // console.log($_CARD_SHOW.free);
-                  sortMasonry();
-                }}
-              />
-              显示置顶和免费
-            </span>
+            <!-- NOTE: 废弃的旧型样式 -->
+            {#if false}
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.title}
+                  on:change={() => {
+                    // console.log($_CARD_SHOW.title);
+                    sortMasonry();
+                  }}
+                />
+                显示种子名称
+              </span>
 
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.sub_title}
-                on:change={() => {
-                  // console.log($_CARD_SHOW.sub_title);
-                  sortMasonry();
-                }}
-              />
-              显示副标题
-            </span>
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.free}
+                  on:change={() => {
+                    // console.log($_CARD_SHOW.free);
+                    sortMasonry();
+                  }}
+                />
+                显示置顶和免费
+              </span>
 
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.tags}
-                on:change={() => {
-                  // console.log($_CARD_SHOW.tags);
-                  sortMasonry();
-                }}
-              />
-              显示标签
-            </span>
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.sub_title}
+                  on:change={() => {
+                    // console.log($_CARD_SHOW.sub_title);
+                    sortMasonry();
+                  }}
+                />
+                显示副标题
+              </span>
 
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.size_download_collect}
-                on:change={() => {
-                  // console.log($_CARD_SHOW.size_download_collect);
-                  sortMasonry();
-                }}
-              />
-              显示大小&下载&收藏
-            </span>
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.tags}
+                  on:change={() => {
+                    // console.log($_CARD_SHOW.tags);
+                    sortMasonry();
+                  }}
+                />
+                显示标签
+              </span>
 
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.upload_time}
-                on:change={() => {
-                  // console.log($_CARD_SHOW.upload_time);
-                  sortMasonry();
-                }}
-              />
-              显示上传时间
-            </span>
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.size_download_collect}
+                  on:change={() => {
+                    // console.log($_CARD_SHOW.size_download_collect);
+                    sortMasonry();
+                  }}
+                />
+                显示大小&下载&收藏
+              </span>
 
-            <span class="s_checkbox">
-              <input
-                type="checkbox"
-                bind:checked={$_CARD_SHOW.statistics}
-                on:change={() => {
-                  // console.log('statistics:\t'+$_CARD_SHOW.statistics);
-                  sortMasonry();
-                }}
-              />
-              显示评论/上传/下载/完成
-            </span>
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.upload_time}
+                  on:change={() => {
+                    // console.log($_CARD_SHOW.upload_time);
+                    sortMasonry();
+                  }}
+                />
+                显示上传时间
+              </span>
+
+              <span class="s_checkbox">
+                <input
+                  type="checkbox"
+                  bind:checked={$_CARD_SHOW.statistics}
+                  on:change={() => {
+                    // console.log('statistics:\t'+$_CARD_SHOW.statistics);
+                    sortMasonry();
+                  }}
+                />
+                显示评论/上传/下载/完成
+              </span>
+            {/if}
           </div>
         </div>
       </div>
@@ -493,7 +532,7 @@
     overflow-y: scroll;
 
     width: 360px;
-    height: calc(100vh - 40px);
+    max-height: calc(100vh - 40px);
     padding: 0;
     margin: 0;
 
@@ -527,6 +566,8 @@
     border-bottom: 2px solid black;
 
     background-color: rgb(154, 198, 255);
+
+    z-index: 1;
 
     & p {
       font-size: 18px;
