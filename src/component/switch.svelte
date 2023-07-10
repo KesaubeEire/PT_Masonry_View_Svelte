@@ -56,6 +56,7 @@
           stroke-width="4"
         />
       </svg>
+      <div class="_hint">{label}</div>
     {/if}
 
     <!-- 固定条目名称 -->
@@ -107,11 +108,8 @@
     align-items: center;
 
     font-size: 14px;
-  }
 
-  .s_btn {
-    padding: 0px;
-    margin: 0px;
+    position: relative;
   }
 
   .title_green {
@@ -125,8 +123,25 @@
 
   /* -------------------- */
 
-  .s_title:has(.hint):hover {
-    visibility: hidden;
+  /* 用了比较复杂的方式实现了纯 css 的 hint */
+  .s_title:has(.hint):hover ._hint {
+    display: block;
+  }
+
+  ._hint {
+    display: none;
+
+    position: absolute;
+    bottom: 28px;
+    left: 0;
+    width: max-content;
+    height: auto;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 4px 8px;
+    box-sizing: content-box;
+    z-index: 1;
   }
 
   /* -------------------- */

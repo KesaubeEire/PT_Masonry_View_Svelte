@@ -215,7 +215,7 @@
             title_fixed={"按钮加载方式"}
             title_green="按钮(默认)"
             title_red="滚动(谨慎使用)"
-            label="MT等网站频繁使用可能会导致 120"
+            label="滚动模式下 MT 等网站频繁使用可能会导致 120"
             bind:checked={$_turnPage}
             green_state={false}
           />
@@ -567,7 +567,7 @@
 
     background-color: rgb(154, 198, 255);
 
-    z-index: 1;
+    z-index: 2;
 
     & p {
       font-size: 18px;
