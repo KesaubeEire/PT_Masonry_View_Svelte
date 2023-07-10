@@ -41,7 +41,8 @@ const CONFIG = {
   /** NOTE: 站点特殊操作 */
   special: function () {
     // 给龟站的搜索箱默认设置为"不扩展", 否则平常占地方(from tg by LNN)
-    $('ksearchboxmain').style.display = 'none'
+    // $('ksearchboxmain').style.display = 'none'
+    $('ksearchboxmain') ? $('ksearchboxmain').style.display = 'none' : null;
 
     // "点此查看即将断种资源" 文字设置为黑色(from tg by LNN)
     const link = document.querySelector('a[href="?sort=7&type=asc"]');
