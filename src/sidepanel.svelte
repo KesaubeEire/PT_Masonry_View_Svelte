@@ -176,6 +176,22 @@
     on:click|self={() => ($_show_configPanel = false)}
   >
     <div class="configP_holder">
+      <!-- 标题区 -->
+      <div class="configP_title">
+        <p>详细配置面板</p>
+        <!-- ---------------- 返回按钮 ---------------- -->
+        <button on:click={() => ($_show_configPanel = false)}>
+          <svg height="28" width="28" viewBox="0 0 48 48">
+            <path
+              d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"
+              fill="red"
+            />
+            <path d="M0 0h48v48h-48z" fill="none" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- 配置区 -->
       <!-- ---------------- 常用配置 ---------------- -->
       <div class="section">
         <h1 class="s_title">常用配置</h1>
@@ -352,11 +368,6 @@
           </div>
         </div>
       </div>
-
-      <!-- ---------------- 返回按钮 ---------------- -->
-      <button class="_btn_close" on:click={() => ($_show_configPanel = false)}>
-        关闭
-      </button>
     </div>
   </div>
 {/if}
@@ -439,27 +450,61 @@
 
   .configP_holder {
     position: absolute;
-
-    right: 0;
-    top: 0;
-    /* overflow: hidden; */
-
+    right: 20px;
+    top: 20px;
     overflow-y: scroll;
 
     width: 400px;
-    height: 100vh;
-
+    height: calc(100vh - 40px);
     padding: 0;
     margin: 0;
 
-    border-top-left-radius: 24px;
-    border-bottom-left-radius: 24px;
+    /* border-top-left-radius: 24px; */
+    /* border-bottom-left-radius: 24px; */
+    border-radius: 24px;
+    border: 2px solid black;
 
     background-color: rgb(62, 146, 255);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .configP_title {
+    position: fixed;
+
+    box-sizing: border-box;
+    width: inherit;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 40px;
+    padding: 0 10px;
+
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom: 2px solid black;
+
+    background-color: rgb(62, 146, 255);
+
+    & p {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    & button {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+    }
   }
 
   .section {
-    margin: 24px;
+    margin: 16px 18px;
 
     & button {
       border-radius: 10px;
@@ -490,15 +535,8 @@
     }
   }
 
-  ._btn_close {
-    height: 48px;
-    width: 48px;
-    position: fixed;
-    right: 400;
-    top: 0;
-    border: none;
-    border-radius: 99px;
-    background-color: rgb(255, 117, 117);
+  .configP_holder .section:nth-child(2) {
+    margin-top: 48px;
   }
 
   #reset_panel_pos {
