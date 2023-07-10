@@ -13,8 +13,10 @@ function GET_CURRENT_PT_DOMAIN() {
   return domain;
 }
 
-/** 判断该页面是否存在种子列表 */
-function IS_EXIST_SEED_LIST() {
+/** 判断该页面是否存在种子列表
+ * @returns selector
+ */
+function GET_TORRENT_LIST_SELECTOR() {
   const domain = GET_CURRENT_PT_DOMAIN();
   console.log("|-> 当前站点: ", domain);
   console.log('|-> 当前页面: ', window.location.pathname);
@@ -27,5 +29,5 @@ function IS_EXIST_SEED_LIST() {
 export {
   GET_CURRENT_PT_DOMAIN,
   SITE as GLOBAL_SITE,
-  IS_EXIST_SEED_LIST,
+  GET_TORRENT_LIST_SELECTOR,
 }

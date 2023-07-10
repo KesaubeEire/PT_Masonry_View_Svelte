@@ -5,6 +5,7 @@
   import Sidepanel from "./sidepanel.svelte";
   import Waterfall from "./sites/_index.svelte";
   import { _Global_Masonry } from "./stores";
+  import { GET_TORRENT_LIST_SELECTOR } from "./sites";
 
   // ------------------------------------------------
 
@@ -13,7 +14,7 @@
   );
 
   // 1. 隐藏原种子列表并进行前置操作 --------------------------------------------------------------------------------------
-  const _ORIGIN_TL_Node = document.querySelector("table.torrents");
+  const _ORIGIN_TL_Node = document.querySelector(GET_TORRENT_LIST_SELECTOR());
   // 隐藏原有视图
   // @ts-ignore
   _ORIGIN_TL_Node.style.display = "none";

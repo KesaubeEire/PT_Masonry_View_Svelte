@@ -11,7 +11,7 @@
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
-  import { GET_CURRENT_PT_DOMAIN } from "./index";
+  import { GET_CURRENT_PT_DOMAIN, GET_TORRENT_LIST_SELECTOR } from "./index";
   import "../utils/masonry.pkgd.Kesa";
 
   import { config as config_Kame } from "./kamept";
@@ -290,7 +290,7 @@
       .then((html) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
-        const table = doc.querySelector("table.torrents");
+        const table = doc.querySelector(GET_TORRENT_LIST_SELECTOR());
         // console.log(table);
 
         infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(table)];
