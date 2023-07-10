@@ -92,10 +92,10 @@
   }
 
   /** 模式切换按钮标签 */
-  let label_switchMode = $_turnPage == 1 ? "滚动加载" : "按钮加载";
+  let label_switchMode = $_turnPage ? "滚动加载" : "按钮加载";
   function config_switchMode() {
-    $_turnPage = $_turnPage == 0 ? 1 : 0;
-    label_switchMode = $_turnPage == 1 ? "滚动加载" : "按钮加载";
+    $_turnPage = !$_turnPage;
+    label_switchMode = $_turnPage ? "滚动加载" : "按钮加载";
   }
 
   /** 切换下一页加载模式 */

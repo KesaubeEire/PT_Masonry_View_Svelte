@@ -171,7 +171,7 @@
     // console.log(event);
 
     // 加载下一页
-    if ($_turnPage == 0) debounceLoad();
+    if (!$_turnPage) debounceLoad();
 
     // 加载下一页3秒防抖
     if (!isButtonDisabled) {
@@ -231,7 +231,7 @@
     const scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop;
     if (scrollTop + clientHeight >= scrollHeight - PAGE.DISTANCE) {
-      if ($_turnPage === 1) debounceLoad();
+      if ($_turnPage) debounceLoad();
       else {
         console.log("加载模式: 按钮");
       }
