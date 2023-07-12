@@ -80,8 +80,10 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
 
 - 样式类
     - [x] iframe 两侧颜色降低亮度(from tg by LNN)
-    - [ ] TODO: 边栏整体向 bilibili-evolve 看齐(from tg by LNN)
+    - [x] TODO: 边栏整体向 bilibili-evolve 看齐(from tg by LNN)
     - [ ] TODO: 将 'new' 'hot' 和 index 一样放在图片上下左右
+    - [ ] TODO: 改改阴影, 学习 [如何用 CSS 中写出超级美丽的阴影效果](https://juejin.cn/post/7034323356459466760)(from tg by Kyaru)
+
 
 - 站点指定修改类
     - [x] 给龟站的搜索箱默认设置为"不扩展", 否则平常占地方(from tg by LNN)
