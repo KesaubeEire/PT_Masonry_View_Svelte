@@ -121,8 +121,11 @@
       <div class="card-title">
         <a class="two-lines" href={torrentInfo.torrentLink} target="_blank">
           <!-- FIXME: 不知道这里的标签没有显示是否修复 -->
-          <!-- {@html torrentInfo.tempTagDom ? ""} -->
-          <!-- {torrentInfo.tempTagDom.map(e=>e.outerHTML)} -->
+          {#if torrentInfo.tempTagDom.length != 0}
+            <span class="tempTags">
+              {@html Array.from(torrentInfo.tempTagDom).map((e) => e.outerHTML)}
+            </span>
+          {/if}
           <b>{torrentInfo.torrent_name}</b>
         </a>
       </div>
@@ -161,7 +164,7 @@
 
             <!-- 免费类型 & 免费剩余时间 -->
             {#if torrentInfo.freeTypeImg}
-              <!-- {@html torrentInfo.freeTypeImg.outerHTML} -->
+              {@html torrentInfo.freeTypeImg.outerHTML}
             {/if}
             {#if torrentInfo.free_remaining_time}
               &nbsp;<b> {torrentInfo.free_remaining_time} </b>
@@ -566,6 +569,14 @@
   .btnCollet {
     padding: 1px 2px;
     cursor: pointer;
+  }
+
+  .tempTags {
+    background-color: #ffffff;
+    margin-left: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 4px;
   }
 
   /* 上面是我自己脚本的css */
