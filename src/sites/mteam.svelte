@@ -108,11 +108,9 @@
         ? getTextColor(config.CATEGORY[torrentInfo.categoryNumber])
         : 'black'}"
     >
-      <!-- TODO: 颜色这里和龟龟商量怎么搞分类的颜色捏 -->
-      <!-- style="background: ${CONFIG.CATEGORY[categoryNumber]};" -->
-
-      <!-- TODO: 图片这里先注释了, 和龟龟商量捏 -->
-      <!-- ${_categoryImg.outerHTML} -->
+      <!-- 分类图标 -->
+      <img class="card_category-img" src={torrentInfo._categoryImg} alt="" />
+      <!-- 分类名称 -->
       {torrentInfo.category}
     </div>
 
@@ -275,7 +273,7 @@
       {/if}
 
       <!-- 标签 Tags -->
-      {#if $_CARD_SHOW.tags}
+      {#if $_CARD_SHOW.tags && torrentInfo.tagsDOM.length != 0}
         <div class="cl-tags">
           {@html torrentInfo.tagsDOM
             .map((el) => {
@@ -351,7 +349,7 @@
 </div>
 
 <style>
-  /* 卡片种类tag */
+  /* 卡片分类 */
   .card-category {
     height: 24px;
     padding: 0 6px;
@@ -368,12 +366,15 @@
   }
 
   /* 卡片种类tag预览图 */
-  .card-category-img {
-    height: 18px;
+  .card_category-img {
+    /* height: 18px; */
+    height: 32px;
 
     background-size: 100% 141%;
     background-position: center top;
-    padding-left: 5%;
+
+    /* padding-left: 5%; */
+    padding-top: 6px;
   }
 
   /* ---------------------------- */
@@ -419,13 +420,6 @@
     /* padding-bottom: 6px; */
   }
 
-  /* 卡片分类 */
-  .card-category {
-    text-align: center;
-    letter-spacing: 2px;
-    font-weight: 700;
-  }
-
   /* 卡片行默认样式 */
   .card-line {
     margin-top: 1px;
@@ -463,16 +457,14 @@
   /* 卡片信息行: 标签行 */
   .cl-tags {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 
     gap: 2px;
 
-    transform: translateX(4px);
-
-    /* padding-top: 2px; */
-    /* padding-bottom: 2px; */
+    padding-top: 4px;
+    padding-bottom: 2px;
   }
 
   .cl-tags:has(span) {

@@ -8,7 +8,7 @@ const CONFIG = {
   TORRENT_LIST_TO_JSON,
 
   /** 加载图片等待时的默认图片 */
-  LOADING_PIC:"logo.png",
+  LOADING_PIC: "logo.png",
 
   /**如果站点有自定义的icon, 可以用自定义的 */
   ICON: {},
@@ -95,8 +95,13 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
     const categoryLinkDOM = categoryImg.parentNode;
     const categoryLink = categoryLinkDOM.href;
     const categoryNumber = categoryLink.slice(-3);
-    const _categoryImg = categoryImg.cloneNode(true)
-    _categoryImg.className = "card-category-img"
+    // const _categoryImg = categoryImg.cloneNode(true)
+    // _categoryImg.className = "card-category-img"
+    const str = categoryImg.style.backgroundImage
+    const regex = /url\("(.*)"\)/; // 匹配包含在双引号中的内容
+    const result = str.match(regex); // 使用正则表达式匹配结果
+    const _categoryImg = (result && result.length > 1) ? result[1] : null;
+
     // console.log(categoryLinkDOM);
     // console.log(categoryLink, categoryNumber);
 
