@@ -7,7 +7,7 @@
     _iframe_url,
   } from "../stores";
   import { sortMasonry } from "../utils";
-  import { config } from "./kamept";
+  import { config } from "./mteam";
 
   // ------------------------------------------------
 
@@ -121,9 +121,8 @@
       <div class="card-title">
         <a class="two-lines" href={torrentInfo.torrentLink} target="_blank">
           <!-- FIXME: 不知道这里的标签没有显示是否修复 -->
-          {@html torrentInfo.tempTagDom
-            ? torrentInfo.tempTagDom.map((e) => e.outerHTML).join("&nbsp;")
-            : ""}
+          <!-- {@html torrentInfo.tempTagDom ? ""} -->
+          <!-- {torrentInfo.tempTagDom.map(e=>e.outerHTML)} -->
           <b>{torrentInfo.torrent_name}</b>
         </a>
       </div>
@@ -162,7 +161,7 @@
 
             <!-- 免费类型 & 免费剩余时间 -->
             {#if torrentInfo.freeTypeImg}
-              {@html torrentInfo.freeTypeImg.outerHTML}
+              <!-- {@html torrentInfo.freeTypeImg.outerHTML} -->
             {/if}
             {#if torrentInfo.free_remaining_time}
               &nbsp;<b> {torrentInfo.free_remaining_time} </b>
@@ -349,6 +348,33 @@
 </div>
 
 <style>
+  /* 卡片种类tag */
+  .card-category {
+    height: 24px;
+    padding: 0 6px;
+    border: 1px;
+    background: black;
+    color: white;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    display: flex;
+    align-items: center;
+  }
+
+  /* 卡片种类tag预览图 */
+  .card-category-img {
+    height: 18px;
+
+    background-size: 100% 141%;
+    background-position: center top;
+    padding-left: 5%;
+  }
+
+  /* ---------------------------- */
+
   /* 卡片 */
   .card {
     /* width: ${CARD.CARD_WIDTH}px; */
@@ -545,19 +571,4 @@
   /* 上面是我自己脚本的css */
   /* --------------------------------------- */
   /* 下面是改进原有的css */
-
-  /* 临时标签_热门 */
-  .hot {
-    padding: 0 2px;
-    border-radius: 8px;
-    background: white;
-    margin: 2px;
-  }
-  /* 临时标签_新 */
-  .new {
-    padding: 0 2px;
-    border-radius: 8px;
-    background: white;
-    margin: 2px;
-  }
 </style>

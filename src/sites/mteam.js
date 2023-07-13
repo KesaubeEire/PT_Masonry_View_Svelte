@@ -6,38 +6,56 @@ const CONFIG = {
 
   /** 将 种子列表dom 的信息变为 json对象列表 */
   TORRENT_LIST_TO_JSON,
-  
-  /** 加载图片等待时的默认图片 */
-  LOADING_PIC:"pic/logo2_100.png",
 
-  /** 如果站点有自定义的icon, 可以用自定义的 */
+  /** 加载图片等待时的默认图片 */
+  LOADING_PIC:"logo.png",
+
+  /**如果站点有自定义的icon, 可以用自定义的 */
   ICON: {},
 
-  /** 如果站点有必要设置分类颜色, 可以用自定义的 */
+  /**如果站点有必要设置分类颜色, 可以用自定义的 */
   CATEGORY: {
-    // [粉色]AV: 同人AV 男娘 VR同人
-    410: '#FF66FF',
-    413: '#FF66FF',
-    414: '#FF66FF',
-    // [绿色]图: cos图 画师CG 游戏CG 单行本 同人志
-    417: '#59CD90',
-    433: '#59CD90',
-    434: '#59CD90',
-    424: '#59CD90',
-    435: '#59CD90',
-    // [黄色]动画: 里番 2D 3D
-    411: '#FAC05E',
-    419: '#FAC05E',
-    423: '#FAC05E',
-    // [紫色]音声: 外语 中文 视频
-    420: '#3FA7D6',
-    421: '#3FA7D6',
-    422: '#3FA7D6',
-    // [红色]游戏: 游戏 中文游戏
-    415: '#EE6352',
-    418: '#EE6352',
+    // 成人分类
+    410: '#f52bcb', // 有码 HD
+    429: '#f52bcb', // 无码 HD
+    424: '#db55a9', // 有码 Xvid
+    430: '#db55a9', // 无码 Xvid
+    437: '#f77afa', // 有码 DVD
+    426: '#f77afa', // 无码 DVD
+    431: '#19a7ec', // 有码 BluRay
+    432: '#19a7ec', // 无码 BluRay
+    440: '#f52bcb', // GAY
+    436: '#bb1e9a', // 0 day
+    425: '#bb1e9a', // 写真 video
+    433: '#bb1e9a', // 写真 pic
+    411: '#f49800', // H-Game
+    412: '#f49800', // H-Anime
+    413: '#f49800', // H-Comic
 
+    // 综合分类
+    401: '#c74854', // Movie SD
+    419: '#c01a20', // Movie HD
+    420: '#c74854', // Movie DVD    
+    421: '#00a0e9', // Movie BluRay
+    439: '#1b2a51', // Movie Remux
+    403: '#c74854', // TV SD
+    402: '#276fb8', // TV HD
+    435: '#4dbebd ', // TV DVD
+    438: '#1897d6', // TV BluRay
+    404: '#23ac38', // 纪录教育
+    405: '#996c34', // Anime
+    407: '#23ac38', // Sport
+    422: '#f39800', // Software
+    423: '#f39800', // Game
+    427: '#f39800', // EBook
+    409: '#996c34', // Other
+
+    // 音乐分类
+    406: '#8a57a1', // MV
+    408: '#8a57a1', // Music AAC/ALAC
+    434: '#8a57a1', // Music 无损
   },
+
   /** 索引 */
   INDEX: 0,
 
@@ -46,20 +64,15 @@ const CONFIG = {
 
   /** NOTE: 站点特殊操作 */
   special: function () {
-    // 给龟站的搜索箱默认设置为"不扩展", 否则平常占地方(from tg by LNN)
-    // $('ksearchboxmain').style.display = 'none'
-    $('ksearchboxmain') ? $('ksearchboxmain').style.display = 'none' : null;
-
-    // "点此查看即将断种资源" 文字设置为黑色(from tg by LNN)
-    const link = document.querySelector('a[href="?sort=7&type=asc"]');
-    link.childNodes[0].style.color = 'black'
+    console.log('23333333333333333333');
   }
 };
 
-/** 将 种子列表dom 的信息变为 json对象列表
- * @param {*} torrent_list_Dom 种子列表dom
+/**
+ * 将 种子列表dom 的信息变为 json对象列表
+ * @param {DOM} torrent_list_Dom 种子列表dom
  * @param {*} CARD 卡片对象
- * @returns {[]} 种子列表信息的 json对象列表
+ * @returns {list} 种子列表信息的 json对象列表
  */
 function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
   // 获取表格中的所有行
@@ -74,7 +87,7 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
   rows.forEach((row) => {
     // 获取种子分类
     const categoryImg = row.querySelector("td:nth-child(1) > a > img");
-    const category = categoryImg ? categoryImg.alt : "";
+    const category = categoryImg ? categoryImg.title : "";
     // 若没有分类则退出
     if (!category) return;
 
@@ -88,12 +101,11 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
     // console.log(categoryLink, categoryNumber);
 
     // 加index
-    // const torrentIndex = CARD.CARD_INDEX++;
     const torrentIndex = CONFIG.INDEX++;
 
     // 获取种子名称
     const torrentNameLink = row.querySelector(".torrentname a");
-    const torrentName = torrentNameLink ? torrentNameLink.textContent.trim() : "";
+    const torrentName = torrentNameLink ? torrentNameLink.title.trim() : "";
 
     // 获取种子详情链接
     const torrentLink = torrentNameLink.href;
@@ -104,8 +116,15 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
     const match = torrentLink.match(pattern);
     const torrentId = match ? parseInt(match[1]) : null;
 
+    // 获取 mouse_over 和 mouse_out
+    const imgDom = row.querySelector(".torrentname img");
+    const _mouseOver = imgDom.getAttribute("onmouseover");
+    // const _mouseOut = imgDom.getAttribute("onmouseout");
+    // console.log(_mouseOver);
+
     // 获取预览图片链接
-    const picLink = row.querySelector(".torrentname img").getAttribute("data-src");
+    const raw1 = _mouseOver ? _mouseOver.split(',')[2].toString() : '';
+    const picLink = raw1 ? raw1.slice(raw1.indexOf("'") + 1, raw1.lastIndexOf("'")) : '/pic/nopic.jpg'
 
     // 获取描述
     const desCell = row.querySelector(".torrentname td:nth-child(2)");
@@ -118,40 +137,29 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
     const pattMsg = place_at_the_top[0] ? place_at_the_top[0].title : "";
 
     // 获取临时标签: 新 / 热门 等
-    const tempTagDom = Array.from(row.querySelectorAll('.torrentname font'));
+    const tempTagDom = row.querySelectorAll('.torrentname font');
     // console.log(tempTagDom);
 
     // 获取免费折扣类型
     const freeTypeImg = row.querySelector('img[class^="pro_"]');
     // console.log(freeTypeImg);
-    // console.log(freeTypeImg.alt);
+    // if (freeTypeImg) { console.log(freeTypeImg.alt); }
     const freeType = freeTypeImg
       ? "_" + freeTypeImg.alt.replace(/\s+/g, "")
       : "";
 
     // 获取免费剩余时间
-    // const freeRemainingTimeSpan = row.querySelector("font");
-    const freeRemainingTimeSpan = freeType ? tempTagDom.pop() : "";
+    const freeRemainingTimeSpan = row.querySelector(".torrentname td:nth-child(2) span");
     const freeRemainingTime = freeRemainingTimeSpan
       ? freeRemainingTimeSpan.innerText
       : "";
 
     // 获取标签
-    const tagSpans = row.querySelectorAll(".torrentname span");
+    const tagSpans = row.querySelectorAll(".torrentname img[class^='label_']");
     // const raw_tags = row.querySelector(".torrentname");
     const tagsDOM = Array.from(tagSpans);
-    let tags = tagSpans ? tagsDOM.map((span) => span.textContent.trim()) : [];
-
-    // console.log(index);
-    // console.log(torrentName);
-    // console.log(tags);
-
-    if (freeRemainingTime != "") {
-      // console.log(tags[0]);
-      tags.shift();
-      tagsDOM.shift();
-    }
-    const raw_tags = tagsDOM.map((el) => el.outerHTML).join("");
+    let tags = tagSpans ? tagsDOM.map((el) => el.title.trim()) : [];
+    const raw_tags = tagsDOM.map((el) => el.outerHTML).join("&nbsp;");
     // console.log(raw_tags);
 
     // 获取下载链接
@@ -213,8 +221,8 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
       tagsDOM,
       tags,
       description,
-      upload_date: uploadDate,
       comments,
+      upload_date: uploadDate,
       size,
       seeders,
       leechers,
@@ -227,8 +235,8 @@ function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
   return data;
 }
 
-// FIXME: 该函数废弃中, 只有参考作用, 不用理会
-/** 将种子列表信息渲染为卡片放入瀑布流
+/**
+ * 将种子列表信息渲染为卡片放入瀑布流
  * @param {DOM} waterfallNode 瀑布流容器dom
  * @param {list} torrent_json 种子列表信息的 json对象列表
  * @param {boolean} isFirst 是否是第一次渲染, 默认为是, 新增渲染要写 false
@@ -268,8 +276,8 @@ function RENDER_TORRENT_JSON_IN_MASONRY(
       tagsDOM,
       tags,
       description,
-      upload_date: uploadDate,
       comments,
+      upload_date: uploadDate,
       size,
       seeders,
       leechers,
@@ -277,23 +285,22 @@ function RENDER_TORRENT_JSON_IN_MASONRY(
     } = data;
 
     return `
+
 <div class="card-holder">
   <!-- 分区类别 -->
   <div
     class="card-category"
     href="${categoryLink}"
-    <!-- TODO: 颜色这里和龟龟商量怎么搞分类的颜色捏 -->    
-    <!-- style="background: ${CONFIG.CATEGORY[categoryNumber]};" -->
+    style="background: ${CONFIG.CATEGORY[categoryNumber]};"
     >
-    <!-- TODO: 图片这里先注释了, 和龟龟商量捏 -->    
-    <!-- ${_categoryImg.outerHTML} -->
+    ${_categoryImg.outerHTML}
     ${category}    
   </div>
 
   <!-- 标题 & 跳转详情链接 -->    
   <div class="card-title">
     <a class="two-lines" src="${torrentLink}" href="${torrentLink}" target="_blank">
-      ${tempTagDom ? tempTagDom.map(e => e.outerHTML).join('&nbsp;') : ""}
+      ${tempTagDom ? Array.from(tempTagDom).map(e => e.outerHTML).join('&nbsp;') : ""}
       <b>${torrentName}</b>
     </a>
   </div>
@@ -301,9 +308,7 @@ function RENDER_TORRENT_JSON_IN_MASONRY(
   <!-- 卡片其他信息 -->    
   <div class="card-body">
     <div class="card-image" onclick="window.open('${torrentLink}')">
-      <!-- <img class="card-image--img nexus-lazy-load_Kesa" src="pic/misc/spinner.svg" data-src="${picLink}"  alt="${torrentName}" /> -->
-      <!-- NOTE: 加载图片这里换成了logo, 和 MT 一样了捏 -->    
-      <img class="card-image--img nexus-lazy-load_Kesa" src="pic/logo2_100.png" data-src="${picLink}"  alt="${torrentName}" />
+      <img  class="card-image--img nexus-lazy-load_Kesa" src="logo.png" data-src="${picLink}" alt="${torrentName}"/>
       <div class="card-index">
         ${torrentIndex + 1}
       </div>  
@@ -318,7 +323,7 @@ function RENDER_TORRENT_JSON_IN_MASONRY(
           ${place_at_the_top.length != 0 ? Array.from(place_at_the_top).map(e => e.outerHTML) + '&nbsp;' : ''}
 
           <!-- 免费类型 & 免费剩余时间 -->
-          ${freeTypeImg ? freeTypeImg.outerHTML : ""}${freeRemainingTime ? '&nbsp;<b>' + freeRemainingTime + '</b>' : ''}
+          ${freeTypeImg ? freeTypeImg.outerHTML : ""}  <b>${freeRemainingTime ? freeRemainingTime : ''}</b>
         </div>
       </div>
           `
@@ -329,18 +334,19 @@ function RENDER_TORRENT_JSON_IN_MASONRY(
     <!--${pattMsg ? `<div><b>置顶等级:</b> ${pattMsg}</div>` : ""}-->
 
     <!-- 副标题 -->
-    ${description ? `<a class="card-description" href='${torrentLink}'> ${description}</a>` : ""}
+    ${description ? `<div class="card-description"><a href='${torrentLink}'> ${description}</a></div>` : ""}
     
 
     <!-- 标签 Tags -->
     <div class="cl-tags">
+      <!-- ${tempTagDom ? Array.from(tempTagDom).map(e => e.outerHTML + '&nbsp;') : ""} -->
       ${(tagsDOM.map(el => {
         const _tag = document.createElement('div')
         _tag.innerHTML = el.outerHTML;
         // console.log(_tag);
         return _tag.outerHTML
       })).join('')}
-      <!-- <b>Tags:</b> ${tags.join(", ")} -->
+      <!-- <b>Tags:</b> ${tags.join("&nbsp;")} -->
     </div>
 
 
@@ -443,6 +449,4 @@ function RENDER_TORRENT_JSON_IN_MASONRY(
     }
     // console.log(masonry);
   }
-
 }
-
