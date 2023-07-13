@@ -10,13 +10,19 @@
     _show_configPanel,
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
+  import { fade } from "svelte/transition";
+
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
-  import { GET_CURRENT_PT_DOMAIN, GET_TORRENT_LIST_SELECTOR } from "./index";
+  import {
+    GLOBAL_SITE,
+    GET_CURRENT_PT_DOMAIN,
+    GET_TORRENT_LIST_SELECTOR,
+  } from "./index";
   import "../utils/masonry.pkgd.Kesa";
 
-  import { config as config_Kame } from "./kamept";
+  // import { config as config_Kame } from "./kamept";
   import Kamept from "./kamept.svelte";
-  import { fade } from "svelte/transition";
+  import Mteam from "./mteam.svelte";
 
   // 父子参数 ------------------------------------------------
 
@@ -28,9 +34,9 @@
   // 固定参数 ------------------------------------------------
 
   /** 站点参数相关参数顶层对象 */
-  const SITE = {
-    "kamept.com": config_Kame,
-  };
+  // const GLOBAL_SITE = {
+  //   "kamept.com": config_Kame,
+  // };
 
   /** 瀑布流卡片相关参数顶层对象 */
   const CARD = {
@@ -201,13 +207,13 @@
   console.log("背景颜色:", themeColor);
 
   // 2. 根据当前域名拿到对应的数据 --------------------------------------------------------------------------------------
-  const config = SITE[$_current_domain];
+  const config = GLOBAL_SITE[$_current_domain];
   let infoList = [];
   infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(originTable)];
-  // let _historyList = [...infoList];
+  console.log(infoList);
 
   // NOTE: 如果站点有特殊操作, 这里执行
-  SITE[$_current_domain]?.special();
+  GLOBAL_SITE[$_current_domain]?.special();
 
   // 3. 开整瀑布流 --------------------------------------------------------------------------------------
 
@@ -386,6 +392,10 @@
   {#each infoList as info (info.torrentId)}
     <Kamept torrentInfo={info} cardWidth={CARD.CARD_WIDTH} {ICON} />
   {/each}
+{:else if $_current_domain == "kp.m-team.cc"}
+  {#each infoList as info (info.torrentId)}
+    <Mteam torrentInfo={info} cardWidth={CARD.CARD_WIDTH} {ICON} />
+  {/each}
 {:else}
   <div>else</div>
 {/if}
@@ -416,7 +426,9 @@
       frameborder="0"
       title="wow"
       style="width:
-        {SITE[$_current_domain] ? SITE[$_current_domain].Iframe_Width : 1000}px"
+        {GLOBAL_SITE[$_current_domain]
+        ? GLOBAL_SITE[$_current_domain].Iframe_Width
+        : 1000}px"
     />
   </div>
 {/if}

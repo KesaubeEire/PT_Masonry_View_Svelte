@@ -1,8 +1,10 @@
 import { config as config_Kame } from "./kamept";
+import { config as config_Mteam } from "./mteam";
 
 /** 站点参数相关参数顶层对象 */
 const SITE = {
   "kamept.com": config_Kame,
+  "kp.m-team.cc": config_Mteam,
 };
 
 /** 获得当前PT站的名字 @returns 当前PT站名 */
