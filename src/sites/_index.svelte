@@ -148,8 +148,9 @@
 
   /** esc 控制关闭所有面板 */
   function key_closePanels(event) {
-    console.log(event);
+    // console.log(event);
     if (event.key === "Escape") {
+      console.log(event);
       $_iframe_switch = 0;
       $_show_configPanel = false;
     }
@@ -363,8 +364,9 @@
     // Nexus Tools
     NEXUS_TOOLS();
 
+    // NOTE: 这里不能注释掉, 必须留着, 不然 MT 可能不加载 NEXUS_TOOLS
     // @ts-ignore
-    // window.NEXUS_TOOLS = NEXUS_TOOLS;
+    window.NEXUS_TOOLS = NEXUS_TOOLS;
   });
 
   /** 更新项目配置*/
@@ -379,10 +381,13 @@
       // setTimeout(NEXUS_TOOLS, 500);
 
       // NOTE: 修复了直接调用 Nexus 会导致懒加载失效的 bug
-      masonry.on("layoutComplete", nexus_tool_delay);
-      setTimeout(() => {
-        masonry.off("layoutComplete", nexus_tool_delay);
-      }, 1500);
+      setTimeout(NEXUS_TOOLS, 600);
+
+      // masonry.on("layoutComplete", nexus_tool_delay);
+      // setTimeout(() => {
+      //   masonry.off("layoutComplete", nexus_tool_delay);
+      // }, 1500);
+
       // masonry.on("layoutComplete", function () {
       //   setTimeout(NEXUS_TOOLS, 500);
       // });
