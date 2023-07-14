@@ -362,6 +362,9 @@
 
     // Nexus Tools
     NEXUS_TOOLS();
+
+    // @ts-ignore
+    // window.NEXUS_TOOLS = NEXUS_TOOLS;
   });
 
   /** 更新项目配置*/

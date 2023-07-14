@@ -1,6 +1,5 @@
 <script>
   import "../stores";
-  import { onMount } from "svelte";
 
   /** switch 类型: 默认是 switch, 可变为 range */
   export let type = "switch";
