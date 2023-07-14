@@ -11,11 +11,10 @@ https://user-images.githubusercontent.com/20382002/236703818-427840b9-aaee-4133-
 <!-- https://raw.githubusercontent.com/KesaubeEire/PT_TorrentList_Masonry/main/preview/_input.mov -->
 <!-- https://github.com/KesaubeEire/PT_TorrentList_Masonry/blob/main/preview/_input.mov?raw=true -->
 
-<!-- TODO: 没有修改过链接, 记得改掉 -->
 | 新版 | 旧版 |
 |-----|-----|
-| [github 项目地址~](https://github.com/KesaubeEire/PT_TorrentList_Masonry) | [旧版 github 项目地址~](https://github.com/KesaubeEire/PT_TorrentList_Masonry) |
-| [油猴 项目地址~](https://github.com/KesaubeEire/PT_TorrentList_Masonry) | [旧版 油猴 项目地址~](https://github.com/KesaubeEire/PT_TorrentList_Masonry) |
+| [github 项目地址~](https://github.com/KesaubeEire/PT_Masonry_View_Svelte) | [旧版 github 项目地址~](https://github.com/KesaubeEire/PT_TorrentList_Masonry) |
+| [油猴 项目地址~](https://greasyfork.org/zh-CN/scripts/470821) | [旧版 油猴 项目地址~](https://greasyfork.org/zh-CN/scripts/465249-pt种子列表无限下拉瀑布流视图) |
 
 
 ---
@@ -23,8 +22,7 @@ https://user-images.githubusercontent.com/20382002/236703818-427840b9-aaee-4133-
 ## 简介
 
 RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种子超市!
-<!-- TODO: 这里 issue 页面没有改为新地址 -->
-欢迎为项目提 [issue](https://github.com/KesaubeEire/PT_TorrentList_Masonry/issues) 以及留言配置您想适配的站点~
+欢迎为项目提 [issue](https://github.com/KesaubeEire/PT_Masonry_View_Svelte/issues) 以及留言配置您想适配的站点~
 
 相关事宜如果您在 tg 能找到我也可以直接联系我~
 
