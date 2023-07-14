@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "sh ./build.sh",
     "build:normal": "vite build --minify false",
     "build:minify": "vite build",
     "preview": "vite preview"
