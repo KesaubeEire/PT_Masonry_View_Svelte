@@ -82,6 +82,7 @@ _SITE_SETTING.subscribe(value => {
     sortMasonry('fast');
     sortMasonry('fast');
     sortMasonry();
+    sortMasonry();
   }
 })
 
@@ -118,6 +119,7 @@ _CARD_SHOW.subscribe(value => {
   else {
     sortMasonry('fast');
     sortMasonry('fast');
+    sortMasonry();
     sortMasonry();
   }
 });
