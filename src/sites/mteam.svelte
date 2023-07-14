@@ -2,6 +2,7 @@
   import {
     _Global_Masonry,
     _CARD_SHOW,
+    _SITE_SETTING,
     _current_bgColor,
     _iframe_switch,
     _iframe_url,
@@ -87,6 +88,9 @@
 <div
   class="card"
   style="
+    display:{torrentInfo.categoryNumber == '440' && $_SITE_SETTING.mt.hide_gay
+    ? 'none'
+    : 'block'};
     width: {cardWidth}px; 
     z-index:{10000 - torrentInfo.torrentIndex}; 
     background-color:{$_current_bgColor}"
@@ -229,7 +233,10 @@
         <!--<div class="card-line"><b>Torrent ID:</b> ${torrentId}</div> -->
 
         <!-- 上传时间 -->
-        <div class="card-line"><b>上传时间:</b> {torrentInfo.upload_date}</div>
+        <div class="card-line">
+          <b>上传时间:</b>
+          {torrentInfo.upload_date}
+        </div>
 
         <!-- 各种数据: 评论/上传/下载/完成 -->
         <div class="card-line">
@@ -352,7 +359,7 @@
   /* 卡片分类 */
   .card-category {
     height: 24px;
-    padding: 0 6px;
+    padding: 0 2px;
     border: 1px;
     background: black;
     color: white;

@@ -6,6 +6,7 @@
     _Global_Masonry,
     _card_width,
     _CARD_SHOW,
+    _SITE_SETTING,
     _turnPage,
     _iframe_switch,
     _panelPos,
@@ -13,6 +14,7 @@
     _show_nexus_pic,
     _delay_nexus_pic,
     _show_configPanel,
+    _current_domain,
   } from "./stores";
 
   import { sortMasonry } from "./utils";
@@ -116,7 +118,7 @@
   });
 </script>
 
-<!-- 侧边栏 -->
+<!-- --------------------------------NOTE:侧边栏-------------------------------- -->
 <div
   class="sideP"
   bind:this={div}
@@ -206,7 +208,25 @@
         </button>
       </div>
 
-      <!-- 配置区 -->
+      <!-- --------------------------------NOTE:配置区-------------------------------- -->
+
+      <!-- ---------------- 站点专业配置 ---------------- -->
+
+      <!-- MT 专用配置 -->
+      {#if $_current_domain == "kp.m-team.cc"}
+        <div class="section">
+          <h1 class="s_title">MT专用配置</h1>
+          <div class="s_panel">
+            <Switch
+              title_fixed="隐藏Gay分区卡片"
+              title_green="隐藏(默认)"
+              title_red="显示(狠人)"
+              bind:checked={$_SITE_SETTING.mt.hide_gay}
+            />
+          </div>
+        </div>
+      {/if}
+
       <!-- ---------------- 常用配置 ---------------- -->
       <div class="section">
         <h1 class="s_title">常用配置</h1>
