@@ -392,11 +392,11 @@
 </script>
 
 {#if $_current_domain == "kamept.com"}
-  {#each infoList as info (info.torrentId)}
+  {#each infoList as info (info.torrentIndex)}
     <Kamept torrentInfo={info} cardWidth={CARD.CARD_WIDTH} {ICON} />
   {/each}
 {:else if $_current_domain == "kp.m-team.cc"}
-  {#each infoList as info (info.torrentId)}
+  {#each infoList as info (info.torrentIndex)}
     <Mteam torrentInfo={info} cardWidth={CARD.CARD_WIDTH} {ICON} />
   {/each}
 {:else}
