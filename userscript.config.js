@@ -4,7 +4,7 @@ export const config = {
     en: "PT_Masonry_View_Svelte",
   },
   icon: "https://avatars.githubusercontent.com/u/23617963",
-  namespace: "https://github.com/KesaubeEire/PT_TorrentList_Masonry",
+  namespace: "https://github.com/KesaubeEire/PT_Masonry_View_Svelte",
   description: {
     "": "PT种子列表无限下拉瀑布流视图(Svelte重构)",
     en: "PT Masonry View by Svelte.",
