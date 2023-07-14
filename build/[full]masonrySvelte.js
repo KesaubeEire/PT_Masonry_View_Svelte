@@ -2,7 +2,7 @@
 // @name            PT种子列表瀑布流视图(Svelte重构)
 // @name:en         PT_Masonry_View_Svelte
 // @namespace       https://github.com/KesaubeEire/PT_TorrentList_Masonry
-// @version         1.0.0
+// @version         1.0.1
 // @author          Kesa
 // @description     PT种子列表无限下拉瀑布流视图(Svelte重构)
 // @description:en  PT Masonry View by Svelte.
@@ -8915,7 +8915,7 @@
     );
     const get_key = (ctx2) => (
       /*info*/
-      ctx2[30].torrentId
+      ctx2[30].torrentIndex
     );
     for (let i = 0; i < each_value_1.length; i += 1) {
       let child_ctx = get_each_context_1(ctx, each_value_1, i);
@@ -8982,7 +8982,7 @@
     );
     const get_key = (ctx2) => (
       /*info*/
-      ctx2[30].torrentId
+      ctx2[30].torrentIndex
     );
     for (let i = 0; i < each_value.length; i += 1) {
       let child_ctx = get_each_context(ctx, each_value, i);
@@ -9583,8 +9583,8 @@
       set_store_value(_iframe_switch, $_iframe_switch = 0, $_iframe_switch);
     }
     function key_closePanels(event) {
-      console.log(event);
       if (event.key === "Escape") {
+        console.log(event);
         set_store_value(_iframe_switch, $_iframe_switch = 0, $_iframe_switch);
         set_store_value(_show_configPanel, $_show_configPanel = false, $_show_configPanel);
       }
@@ -9609,9 +9609,6 @@
           PAGE.GAP
         );
       }
-    }
-    function nexus_tool_delay() {
-      setTimeout(NEXUS_TOOLS, 500);
     }
     set_store_value(_current_domain, $_current_domain = GET_CURRENT_PT_DOMAIN(), $_current_domain);
     const mainOuterDOM = document.querySelector("table.mainouter");
@@ -9696,6 +9693,7 @@
         scan_and_launch();
       });
       NEXUS_TOOLS();
+      window.NEXUS_TOOLS = NEXUS_TOOLS;
     });
     afterUpdate(() => {
       console.log("afterUpdate-------------------->");
@@ -9703,13 +9701,7 @@
         console.log("reload Items-------------------->");
         masonry2.reloadItems();
         masonry2.layout();
-        masonry2.on("layoutComplete", nexus_tool_delay);
-        setTimeout(
-          () => {
-            masonry2.off("layoutComplete", nexus_tool_delay);
-          },
-          1500
-        );
+        setTimeout(NEXUS_TOOLS, 600);
       }
     });
     $$self.$$set = ($$props2) => {
