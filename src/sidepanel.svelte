@@ -21,10 +21,14 @@
   import Switch from "./component/switch.svelte";
 
   // 配置拖拽侧边栏 ------------------------------------------------
+  /** 侧边栏的 dom 对象 */
   let div;
+  /** 是否触发移动 trigger */
   let isMouseDown = false;
-  let offsetX = 0,
-    offsetY = 0;
+  /** 侧边栏横坐标 */
+  let offsetX = 0;
+  /** 侧边栏纵坐标 */
+  let offsetY = 0;
 
   const onMouseDown = (e) => {
     e.preventDefault();
@@ -34,23 +38,44 @@
   };
 
   const onMouseMove = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!isMouseDown) return;
     // NOTE: 进行拖拽限位, 不是很完全, 后期需要继续调整
-    const res_L = e.clientX - offsetX > 0 ? e.clientX - offsetX : 0;
-    const res_R = e.clientY - offsetY > 0 ? e.clientY - offsetY : 0;
-    $_panelPos = { x: res_L, y: res_R };
-    // div.style.left = `${res_L}px`;
-    // div.style.top = `${res_R}px`;
+    const res_X = posRangeIn(
+      e.clientX - offsetX,
+      0,
+      window.innerWidth - (div.getBoundingClientRect().width + 5)
+    );
+    const res_Y = posRangeIn(
+      e.clientY - offsetY,
+      0,
+      window.innerHeight - (div.getBoundingClientRect().height + 5)
+    );
+
+    // console.log(div.getBoundingClientRect().width);
+
+    $_panelPos = { x: res_X, y: res_Y };
   };
 
   const onMouseUp = () => {
     isMouseDown = false;
   };
 
+  /** 重置瀑布流边栏位置 */
   function resetPanelPos() {
     if ($_panelPos.x == 0 && $_panelPos.y == 0) alert("无需重置瀑布流边栏位置");
     $_panelPos = { x: 0, y: 0 };
+  }
+
+  /** 给指定变量设置上下范围
+   * @param target 指定变量
+   * @param min 下边界值
+   * @param max 上边界值
+   */
+  function posRangeIn(target, min, max) {
+    if (target <= min) target = min;
+    if (target >= max) target = max;
+    return target;
   }
 
   // ------------------------------------------------
