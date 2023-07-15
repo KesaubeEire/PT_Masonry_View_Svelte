@@ -38,9 +38,10 @@
   };
 
   const onMouseMove = (e) => {
+    // NOTE: 这里还是别取消这个, 会指针指在别的地方的
     // e.preventDefault();
+
     if (!isMouseDown) return;
-    // NOTE: 进行拖拽限位, 不是很完全, 后期需要继续调整
     const res_X = posRangeIn(
       e.clientX - offsetX,
       0,
