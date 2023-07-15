@@ -206,7 +206,7 @@
     <!-- 按钮2: 手动整理布局 -->
     <!-- <button class="sideP__btn" on:click={__sort_masonry}>整理布局</button> -->
 
-    <!-- 按钮3: 呼出完整侧边栏 -->
+    <!-- 按钮3: 呼出详细配置栏 -->
     <button
       class="sideP__btn"
       on:click={() => {
@@ -246,7 +246,7 @@
           </g>
         </svg>
       </div>
-      <div>呼出边栏</div>
+      <div>详细配置</div>
     </button>
 
     {#if $_show_debug_btn}
@@ -626,8 +626,11 @@
 
     z-index: 40000;
 
+    border: 2px solid transparent;
+
     &:hover {
       opacity: 1;
+      border: 2px solid yellow;
     }
   }
 
@@ -659,9 +662,10 @@
     cursor: pointer;
 
     border: none;
-  }
-  .sideP__btn:hover {
-    background-color: rgb(101, 49, 255);
+
+    &:hover {
+      background-color: rgb(101, 49, 255);
+    }
   }
 
   .configP {
