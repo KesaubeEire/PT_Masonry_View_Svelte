@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name            PT种子列表瀑布流视图(Svelte重构)
 // @name:en         PT_Masonry_View_Svelte
-// @namespace       https://github.com/KesaubeEire/PT_TorrentList_Masonry
-// @version         1.0.1
+// @namespace       https://github.com/KesaubeEire/PT_Masonry_View_Svelte
+// @version         1.0.2
 // @author          Kesa
 // @description     PT种子列表无限下拉瀑布流视图(Svelte重构)
 // @description:en  PT Masonry View by Svelte.
@@ -19,7 +19,7 @@
 // @grant           none
 // ==/UserScript==
 
-(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' div.waterfall{width:100%;padding-top:20px;padding-bottom:60px;border-radius:20px;height:100%;margin:20px auto;transition:height .3s}button.debug{position:fixed;top:10px;right:10px;padding:4px;background-color:#333;color:#fff;border:none;border-radius:5px;cursor:pointer}button#toggle_oldTable{top:10px}button#btnReLayout{top:40px}button#btnSwitchMode{top:70px}button#sort_masonry{top:100px}.switch.svelte-2vaqag.svelte-2vaqag{width:100%;height:30px;display:flex;align-items:center;justify-content:space-between}.s_title.svelte-2vaqag.svelte-2vaqag{display:flex;align-items:center;font-size:14px;position:relative}.title_green.svelte-2vaqag.svelte-2vaqag{color:green;font-weight:800}.title_red.svelte-2vaqag.svelte-2vaqag{color:red;font-weight:800}.s_title.svelte-2vaqag:has(.hint):hover ._hint.svelte-2vaqag{display:block}._hint.svelte-2vaqag.svelte-2vaqag{display:none;position:absolute;bottom:28px;left:0;width:max-content;height:auto;background-color:#fff;border:1px solid black;border-radius:8px;padding:4px 8px;box-sizing:content-box;z-index:1}input[type=checkbox].svelte-2vaqag.svelte-2vaqag{width:0px;height:0px;display:none;visibility:hidden}label.svelte-2vaqag.svelte-2vaqag{width:48px;height:12px;display:inline-block;position:relative;background-color:#777;border:2px solid #555;border-radius:30px;transition:all .2s}label.svelte-2vaqag.svelte-2vaqag:after{content:"";display:block;width:24px;height:24px;background-color:#555;position:absolute;border-radius:50%;left:-2px;top:-6px;transition:transform .2s}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag{background-color:#00a0fc;border-color:#006dc9}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag:after{background-color:#0054b0;transform:translate(28px)}.sideP.svelte-693cwj.svelte-693cwj{position:fixed;opacity:.4;margin:4px 2px;background-color:#0ff;border-radius:8px;overflow:hidden;z-index:40000}.sideP.svelte-693cwj.svelte-693cwj:hover{opacity:1}.sideP__title.svelte-693cwj.svelte-693cwj{width:100%;height:8px;background-color:#ff0}.sideP__title.svelte-693cwj.svelte-693cwj:hover{cursor:move}.sideP__out.svelte-693cwj.svelte-693cwj{display:flex;flex-direction:column}.sideP__out.svelte-693cwj.svelte-693cwj button{background-color:gray;color:#fff;padding:4px 2px;margin:4px;border-radius:8px;cursor:pointer}.sideP__out.svelte-693cwj.svelte-693cwj button:hover{background-color:#000}.configP.svelte-693cwj.svelte-693cwj{position:fixed;left:0;top:0;width:100vw;height:100vh;padding:0;margin:0;z-index:50000;background-color:#0003}.configP_holder.svelte-693cwj.svelte-693cwj{position:absolute;right:20px;top:20px;overflow-y:scroll;width:360px;max-height:calc(100vh - 40px);padding:0;margin:0;border-radius:24px;border:2px solid black;background-color:#d4e7ff}.configP_holder.svelte-693cwj.svelte-693cwj::-webkit-scrollbar{display:none}.configP_title.svelte-693cwj.svelte-693cwj{position:fixed;box-sizing:border-box;width:inherit;display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 10px;border-top-left-radius:24px;border-top-right-radius:24px;border-bottom:2px solid black;background-color:#9ac6ff;z-index:2}.configP_title.svelte-693cwj.svelte-693cwj p{font-size:18px;font-weight:500}.configP_title.svelte-693cwj.svelte-693cwj button{border:none;padding:0;margin:0;background-color:transparent}.section.svelte-693cwj.svelte-693cwj{margin:16px 18px}.section.svelte-693cwj.svelte-693cwj button{border-radius:10px;margin:4px;padding:12px 16px}.section.svelte-693cwj.svelte-693cwj .s_title{text-align:center}.section.svelte-693cwj.svelte-693cwj .s_panel{display:flex;flex-direction:column;justify-content:space-evenly;align-items:center}.section.svelte-693cwj.svelte-693cwj .s_checkbox{padding:12px;margin:4px;border-radius:10px;border:1px solid black;font-size:14px;display:flex;align-items:center}.configP_holder.svelte-693cwj .section.svelte-693cwj:nth-child(2){margin-top:48px}#reset_panel_pos.svelte-693cwj.svelte-693cwj{width:100%;text-align:center;border:1px solid black;border-radius:16px}.card.svelte-vdh3h6.svelte-vdh3h6{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-vdh3h6.svelte-vdh3h6:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-vdh3h6.svelte-vdh3h6{padding:2px 0}.card-holder.svelte-vdh3h6.svelte-vdh3h6{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-category.svelte-vdh3h6.svelte-vdh3h6{text-align:center;letter-spacing:2px;font-weight:700}.card-line.svelte-vdh3h6.svelte-vdh3h6{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-vdh3h6.svelte-vdh3h6{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-vdh3h6.svelte-vdh3h6:hover{-webkit-line-clamp:100}.cl-center.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:left;align-items:center;flex-wrap:wrap;gap:2px;transform:translate(4px)}.cl-tags.svelte-vdh3h6.svelte-vdh3h6:has(span){padding-top:2px}.card-details.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-vdh3h6.svelte-vdh3h6{height:100%;position:relative}.card-image.svelte-vdh3h6 img.svelte-vdh3h6{width:100%;object-fit:cover}.card-alter.svelte-vdh3h6.svelte-vdh3h6{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-vdh3h6.svelte-vdh3h6{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-vdh3h6.svelte-vdh3h6{color:#00f}._2XFree.svelte-vdh3h6.svelte-vdh3h6{color:green}.card-description.svelte-vdh3h6.svelte-vdh3h6{padding-left:4px;padding-right:4px}.card-index.svelte-vdh3h6.svelte-vdh3h6{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-vdh3h6.svelte-vdh3h6{padding:1px 2px;cursor:pointer}.hot.svelte-vdh3h6.svelte-vdh3h6,.new.svelte-vdh3h6.svelte-vdh3h6{padding:0 2px;border-radius:8px;background:white;margin:2px}.card-category.svelte-1rfbgrc.svelte-1rfbgrc{height:24px;padding:0 2px;border:1px;background:black;color:#fff;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:flex;align-items:center}.card_category-img.svelte-1rfbgrc.svelte-1rfbgrc{height:32px;background-size:100% 141%;background-position:center top;padding-top:6px}.card.svelte-1rfbgrc.svelte-1rfbgrc{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-1rfbgrc.svelte-1rfbgrc:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-1rfbgrc.svelte-1rfbgrc{padding:2px 0}.card-holder.svelte-1rfbgrc.svelte-1rfbgrc{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-line.svelte-1rfbgrc.svelte-1rfbgrc{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-1rfbgrc.svelte-1rfbgrc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-1rfbgrc.svelte-1rfbgrc:hover{-webkit-line-clamp:100}.cl-center.svelte-1rfbgrc.svelte-1rfbgrc{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-1rfbgrc.svelte-1rfbgrc{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2px;padding-top:4px;padding-bottom:2px}.cl-tags.svelte-1rfbgrc.svelte-1rfbgrc:has(span){padding-top:2px}.card-details.svelte-1rfbgrc.svelte-1rfbgrc{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-1rfbgrc.svelte-1rfbgrc{height:100%;position:relative}.card-image.svelte-1rfbgrc img.svelte-1rfbgrc{width:100%;object-fit:cover}.card-alter.svelte-1rfbgrc.svelte-1rfbgrc{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-1rfbgrc.svelte-1rfbgrc{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-1rfbgrc.svelte-1rfbgrc{color:#00f}._2XFree.svelte-1rfbgrc.svelte-1rfbgrc{color:green}.card-description.svelte-1rfbgrc.svelte-1rfbgrc{padding-left:4px;padding-right:4px}.card-index.svelte-1rfbgrc.svelte-1rfbgrc{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-1rfbgrc.svelte-1rfbgrc{padding:1px 2px;cursor:pointer}.tempTags.svelte-1rfbgrc.svelte-1rfbgrc{background-color:#fff;margin-left:2px;padding-left:2px;padding-right:2px;border-radius:4px}#turnPage.svelte-tr7wwl{width:100%;height:32px;border-radius:16px;line-height:20px;font-size:14px;position:absolute;bottom:0px}div#_iframe.svelte-tr7wwl{position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#0026269b;z-index:30000;display:flex}iframe.svelte-tr7wwl{height:96%;margin:auto} ');
+(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' div.waterfall{width:100%;padding-top:20px;padding-bottom:60px;border-radius:20px;height:100%;margin:20px auto;transition:height .3s}button.debug{position:fixed;top:10px;right:10px;padding:4px;background-color:#333;color:#fff;border:none;border-radius:5px;cursor:pointer}button#toggle_oldTable{top:10px}button#btnReLayout{top:40px}button#btnSwitchMode{top:70px}button#sort_masonry{top:100px}.switch.svelte-2vaqag.svelte-2vaqag{width:100%;height:30px;display:flex;align-items:center;justify-content:space-between}.s_title.svelte-2vaqag.svelte-2vaqag{display:flex;align-items:center;font-size:14px;position:relative}.title_green.svelte-2vaqag.svelte-2vaqag{color:green;font-weight:800}.title_red.svelte-2vaqag.svelte-2vaqag{color:red;font-weight:800}.s_title.svelte-2vaqag:has(.hint):hover ._hint.svelte-2vaqag{display:block}._hint.svelte-2vaqag.svelte-2vaqag{display:none;position:absolute;bottom:28px;left:0;width:max-content;height:auto;background-color:#fff;border:1px solid black;border-radius:8px;padding:4px 8px;box-sizing:content-box;z-index:1}input[type=checkbox].svelte-2vaqag.svelte-2vaqag{width:0px;height:0px;display:none;visibility:hidden}label.svelte-2vaqag.svelte-2vaqag{width:48px;height:12px;display:inline-block;position:relative;background-color:#777;border:2px solid #555;border-radius:30px;transition:all .2s}label.svelte-2vaqag.svelte-2vaqag:after{content:"";display:block;width:24px;height:24px;background-color:#555;position:absolute;border-radius:50%;left:-2px;top:-6px;transition:transform .2s}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag{background-color:#00a0fc;border-color:#006dc9}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag:after{background-color:#0054b0;transform:translate(28px)}.sideP.svelte-mdsgbd.svelte-mdsgbd{position:fixed;opacity:.4;margin:4px 2px;border-radius:8px;overflow:hidden;z-index:40000;border:2px solid transparent}.sideP.svelte-mdsgbd.svelte-mdsgbd:hover{opacity:1;border:2px solid yellow}.sideP__title.svelte-mdsgbd.svelte-mdsgbd{width:100%;height:8px;background-color:#ff0}.sideP__title.svelte-mdsgbd.svelte-mdsgbd:hover{cursor:move}.sideP__out.svelte-mdsgbd.svelte-mdsgbd{display:flex;flex-direction:column}.sideP__btn.svelte-mdsgbd.svelte-mdsgbd{background-color:gray;color:#fff;padding:4px 8px;margin:4px;border-radius:8px;cursor:pointer;border:none}.sideP__btn.svelte-mdsgbd.svelte-mdsgbd:hover{background-color:#6531ff}.configP.svelte-mdsgbd.svelte-mdsgbd{position:fixed;left:0;top:0;width:100vw;height:100vh;padding:0;margin:0;z-index:50000;background-color:#0003}.configP_holder.svelte-mdsgbd.svelte-mdsgbd{position:absolute;right:20px;top:20px;overflow-y:scroll;width:360px;max-height:calc(100vh - 40px);padding:0;margin:0;border-radius:24px;border:2px solid black;background-color:#d4e7ff}.configP_holder.svelte-mdsgbd.svelte-mdsgbd::-webkit-scrollbar{display:none}.configP_title.svelte-mdsgbd.svelte-mdsgbd{position:fixed;box-sizing:border-box;width:inherit;display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 10px;border-top-left-radius:24px;border-top-right-radius:24px;border-bottom:2px solid black;background-color:#9ac6ff;z-index:2}.configP_title.svelte-mdsgbd.svelte-mdsgbd p{font-size:18px;font-weight:500}.configP_title.svelte-mdsgbd.svelte-mdsgbd button{border:none;padding:0;margin:0;background-color:transparent}.section.svelte-mdsgbd.svelte-mdsgbd{margin:16px 18px}.section.svelte-mdsgbd.svelte-mdsgbd button{border-radius:10px;margin:4px;padding:12px 16px}.section.svelte-mdsgbd.svelte-mdsgbd .s_title{text-align:center}.section.svelte-mdsgbd.svelte-mdsgbd .s_panel{display:flex;flex-direction:column;justify-content:space-evenly;align-items:center}.section.svelte-mdsgbd.svelte-mdsgbd .s_checkbox{padding:12px;margin:4px;border-radius:10px;border:1px solid black;font-size:14px;display:flex;align-items:center}.configP_holder.svelte-mdsgbd .section.svelte-mdsgbd:nth-child(2){margin-top:48px}#reset_panel_pos.svelte-mdsgbd.svelte-mdsgbd{width:100%;text-align:center;border:1px solid black;border-radius:16px}.card.svelte-vdh3h6.svelte-vdh3h6{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-vdh3h6.svelte-vdh3h6:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-vdh3h6.svelte-vdh3h6{padding:2px 0}.card-holder.svelte-vdh3h6.svelte-vdh3h6{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-category.svelte-vdh3h6.svelte-vdh3h6{text-align:center;letter-spacing:2px;font-weight:700}.card-line.svelte-vdh3h6.svelte-vdh3h6{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-vdh3h6.svelte-vdh3h6{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-vdh3h6.svelte-vdh3h6:hover{-webkit-line-clamp:100}.cl-center.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:left;align-items:center;flex-wrap:wrap;gap:2px;transform:translate(4px)}.cl-tags.svelte-vdh3h6.svelte-vdh3h6:has(span){padding-top:2px}.card-details.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-vdh3h6.svelte-vdh3h6{height:100%;position:relative}.card-image.svelte-vdh3h6 img.svelte-vdh3h6{width:100%;object-fit:cover}.card-alter.svelte-vdh3h6.svelte-vdh3h6{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-vdh3h6.svelte-vdh3h6{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-vdh3h6.svelte-vdh3h6{color:#00f}._2XFree.svelte-vdh3h6.svelte-vdh3h6{color:green}.card-description.svelte-vdh3h6.svelte-vdh3h6{padding-left:4px;padding-right:4px}.card-index.svelte-vdh3h6.svelte-vdh3h6{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-vdh3h6.svelte-vdh3h6{padding:1px 2px;cursor:pointer}.hot.svelte-vdh3h6.svelte-vdh3h6,.new.svelte-vdh3h6.svelte-vdh3h6{padding:0 2px;border-radius:8px;background:white;margin:2px}.card-category.svelte-1fw75v2.svelte-1fw75v2{height:24px;padding:0 2px;border:1px;background:black;color:#fff;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:flex;align-items:center;justify-content:center}.card_category-img.svelte-1fw75v2.svelte-1fw75v2{height:32px;background-size:100% 141%;background-position:center top;padding-top:6px}.card.svelte-1fw75v2.svelte-1fw75v2{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-1fw75v2.svelte-1fw75v2:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-1fw75v2.svelte-1fw75v2{padding:2px 0}.card-holder.svelte-1fw75v2.svelte-1fw75v2{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-line.svelte-1fw75v2.svelte-1fw75v2{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-1fw75v2.svelte-1fw75v2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-1fw75v2.svelte-1fw75v2:hover{-webkit-line-clamp:100}.cl-center.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2px;padding-top:4px;padding-bottom:2px}.cl-tags.svelte-1fw75v2.svelte-1fw75v2:has(span){padding-top:2px}.card-details.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-1fw75v2.svelte-1fw75v2{height:100%;position:relative}.card-image.svelte-1fw75v2 img.svelte-1fw75v2{width:100%;object-fit:cover}.card-alter.svelte-1fw75v2.svelte-1fw75v2{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-1fw75v2.svelte-1fw75v2{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-1fw75v2.svelte-1fw75v2{color:#00f}._2XFree.svelte-1fw75v2.svelte-1fw75v2{color:green}.card-description.svelte-1fw75v2.svelte-1fw75v2{padding-left:4px;padding-right:4px}.card-index.svelte-1fw75v2.svelte-1fw75v2{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-1fw75v2.svelte-1fw75v2{padding:1px 2px;cursor:pointer}.tempTags.svelte-1fw75v2.svelte-1fw75v2{background-color:#fff;margin-left:2px;padding-left:2px;padding-right:2px;border-radius:4px}#turnPage.svelte-tr7wwl{width:100%;height:32px;border-radius:16px;line-height:20px;font-size:14px;position:absolute;bottom:0px}div#_iframe.svelte-tr7wwl{position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#0026269b;z-index:30000;display:flex}iframe.svelte-tr7wwl{height:96%;margin:auto} ');
 
 (function () {
   'use strict';
@@ -3344,10 +3344,10 @@
         t6 = space();
         button3 = element("button");
         button3.textContent = "[d]iframe";
-        attr(button0, "class", "sideP__btn");
-        attr(button1, "class", "sideP__btn");
-        attr(button2, "class", "sideP__btn");
-        attr(button3, "class", "sideP__btn");
+        attr(button0, "class", "sideP__btn svelte-mdsgbd");
+        attr(button1, "class", "sideP__btn svelte-mdsgbd");
+        attr(button2, "class", "sideP__btn svelte-mdsgbd");
+        attr(button3, "class", "sideP__btn svelte-mdsgbd");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -3448,46 +3448,47 @@
     let h11;
     let t14;
     let div3;
-    let button2;
-    let t16;
-    let div5;
-    let h3;
-    let t18;
-    let div4;
     let switch3;
     let updating_checked_3;
-    let t19;
+    let t15;
+    let div5;
+    let h3;
+    let t17;
+    let div4;
     let switch4;
     let updating_checked_4;
-    let t20;
+    let t18;
     let switch5;
     let updating_checked_5;
-    let t21;
+    let t19;
     let switch6;
     let updating_checked_6;
-    let t22;
+    let t20;
     let switch7;
     let updating_checked_7;
-    let t23;
+    let t21;
     let switch8;
     let updating_checked_8;
-    let t24;
+    let t22;
     let switch9;
     let updating_checked_9;
-    let t25;
+    let t23;
+    let switch10;
+    let updating_checked_10;
+    let t24;
     let div8_transition;
     let current;
     let mounted;
     let dispose;
     let if_block0 = (
       /*$_current_domain*/
-      ctx[7] == "kp.m-team.cc" && create_if_block_8$2(ctx)
+      ctx[8] == "kp.m-team.cc" && create_if_block_8$2(ctx)
     );
     function switch0_checked_binding(value) {
-      ctx[24](value);
+      ctx[25](value);
     }
     let switch0_props = {
-      title_fixed: "按钮加载方式",
+      title_fixed: "加载下一页方式",
       title_green: "按钮(默认)",
       title_red: "滚动(谨慎使用)",
       label: "滚动模式下 MT 等网站频繁使用可能会导致 120",
@@ -3503,7 +3504,7 @@
     switch0 = new Switch({ props: switch0_props });
     binding_callbacks.push(() => bind(switch0, "checked", switch0_checked_binding));
     function switch1_checked_binding(value) {
-      ctx[25](value);
+      ctx[26](value);
     }
     let switch1_props = {
       title_fixed: "侧边栏debug按钮",
@@ -3513,15 +3514,15 @@
     };
     if (
       /*$_show_debug_btn*/
-      ctx[6] !== void 0
+      ctx[7] !== void 0
     ) {
       switch1_props.checked = /*$_show_debug_btn*/
-      ctx[6];
+      ctx[7];
     }
     switch1 = new Switch({ props: switch1_props });
     binding_callbacks.push(() => bind(switch1, "checked", switch1_checked_binding));
     function switch2_checked_binding(value) {
-      ctx[26](value);
+      ctx[27](value);
     }
     let switch2_props = {
       title_fixed: "悬浮预览大图",
@@ -3530,108 +3531,131 @@
     };
     if (
       /*$_show_nexus_pic*/
-      ctx[9] !== void 0
+      ctx[10] !== void 0
     ) {
       switch2_props.checked = /*$_show_nexus_pic*/
-      ctx[9];
+      ctx[10];
     }
     switch2 = new Switch({ props: switch2_props });
     binding_callbacks.push(() => bind(switch2, "checked", switch2_checked_binding));
     let if_block1 = (
       /*$_show_nexus_pic*/
-      ctx[9] && create_if_block_7$2(ctx)
+      ctx[10] && create_if_block_7$2(ctx)
     );
     function switch3_checked_binding(value) {
-      ctx[31](value);
+      ctx[32](value);
     }
-    let switch3_props = { title_fixed: "显示种子名称" };
+    let switch3_props = {
+      title_fixed: "卡片信息",
+      title_green: "显示下方所选信息(精简)",
+      title_red: "显示所有信息(较乱)",
+      green_state: false
+    };
+    if (
+      /*$_CARD_SHOW*/
+      ctx[3].all !== void 0
+    ) {
+      switch3_props.checked = /*$_CARD_SHOW*/
+      ctx[3].all;
+    }
+    switch3 = new Switch({ props: switch3_props });
+    binding_callbacks.push(() => bind(switch3, "checked", switch3_checked_binding));
+    switch3.$on(
+      "click",
+      /*sortMasonryBundle*/
+      ctx[19]
+    );
+    function switch4_checked_binding(value) {
+      ctx[33](value);
+    }
+    let switch4_props = { title_fixed: "显示种子名称" };
     if (
       /*$_CARD_SHOW*/
       ctx[3].title !== void 0
     ) {
-      switch3_props.checked = /*$_CARD_SHOW*/
-      ctx[3].title;
-    }
-    switch3 = new Switch({ props: switch3_props });
-    binding_callbacks.push(() => bind(switch3, "checked", switch3_checked_binding));
-    function switch4_checked_binding(value) {
-      ctx[32](value);
-    }
-    let switch4_props = { title_fixed: "显示置顶和免费" };
-    if (
-      /*$_CARD_SHOW*/
-      ctx[3].free !== void 0
-    ) {
       switch4_props.checked = /*$_CARD_SHOW*/
-      ctx[3].free;
+      ctx[3].title;
     }
     switch4 = new Switch({ props: switch4_props });
     binding_callbacks.push(() => bind(switch4, "checked", switch4_checked_binding));
     function switch5_checked_binding(value) {
-      ctx[33](value);
+      ctx[34](value);
     }
-    let switch5_props = { title_fixed: "显示副标题" };
+    let switch5_props = { title_fixed: "显示置顶和免费" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].sub_title !== void 0
+      ctx[3].free !== void 0
     ) {
       switch5_props.checked = /*$_CARD_SHOW*/
-      ctx[3].sub_title;
+      ctx[3].free;
     }
     switch5 = new Switch({ props: switch5_props });
     binding_callbacks.push(() => bind(switch5, "checked", switch5_checked_binding));
     function switch6_checked_binding(value) {
-      ctx[34](value);
+      ctx[35](value);
     }
-    let switch6_props = { title_fixed: "显示标签" };
+    let switch6_props = { title_fixed: "显示副标题" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].tags !== void 0
+      ctx[3].sub_title !== void 0
     ) {
       switch6_props.checked = /*$_CARD_SHOW*/
-      ctx[3].tags;
+      ctx[3].sub_title;
     }
     switch6 = new Switch({ props: switch6_props });
     binding_callbacks.push(() => bind(switch6, "checked", switch6_checked_binding));
     function switch7_checked_binding(value) {
-      ctx[35](value);
+      ctx[36](value);
     }
-    let switch7_props = { title_fixed: "显示大小&下载&收藏" };
+    let switch7_props = { title_fixed: "显示标签" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].size_download_collect !== void 0
+      ctx[3].tags !== void 0
     ) {
       switch7_props.checked = /*$_CARD_SHOW*/
-      ctx[3].size_download_collect;
+      ctx[3].tags;
     }
     switch7 = new Switch({ props: switch7_props });
     binding_callbacks.push(() => bind(switch7, "checked", switch7_checked_binding));
     function switch8_checked_binding(value) {
-      ctx[36](value);
+      ctx[37](value);
     }
-    let switch8_props = { title_fixed: "显示上传时间" };
+    let switch8_props = { title_fixed: "显示 [大小/下载/收藏]" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].upload_time !== void 0
+      ctx[3].size_download_collect !== void 0
     ) {
       switch8_props.checked = /*$_CARD_SHOW*/
-      ctx[3].upload_time;
+      ctx[3].size_download_collect;
     }
     switch8 = new Switch({ props: switch8_props });
     binding_callbacks.push(() => bind(switch8, "checked", switch8_checked_binding));
     function switch9_checked_binding(value) {
-      ctx[37](value);
+      ctx[38](value);
     }
-    let switch9_props = { title_fixed: "显示评论/上传/下载/完成" };
+    let switch9_props = { title_fixed: "显示上传时间" };
+    if (
+      /*$_CARD_SHOW*/
+      ctx[3].upload_time !== void 0
+    ) {
+      switch9_props.checked = /*$_CARD_SHOW*/
+      ctx[3].upload_time;
+    }
+    switch9 = new Switch({ props: switch9_props });
+    binding_callbacks.push(() => bind(switch9, "checked", switch9_checked_binding));
+    function switch10_checked_binding(value) {
+      ctx[39](value);
+    }
+    let switch10_props = { title_fixed: "显示 [评论/上传/下载/完成]" };
     if (
       /*$_CARD_SHOW*/
       ctx[3].statistics !== void 0
     ) {
-      switch9_props.checked = /*$_CARD_SHOW*/
+      switch10_props.checked = /*$_CARD_SHOW*/
       ctx[3].statistics;
     }
-    switch9 = new Switch({ props: switch9_props });
-    binding_callbacks.push(() => bind(switch9, "checked", switch9_checked_binding));
+    switch10 = new Switch({ props: switch10_props });
+    binding_callbacks.push(() => bind(switch10, "checked", switch10_checked_binding));
     return {
       c() {
         div8 = element("div");
@@ -3661,7 +3685,7 @@
           if_block1.c();
         t9 = space();
         button1 = element("button");
-        button1.textContent = "切换宽度";
+        button1.textContent = "切换宽度(开发中)";
         t11 = space();
         t12 = space();
         div6 = element("div");
@@ -3669,42 +3693,40 @@
         h11.textContent = "卡片信息";
         t14 = space();
         div3 = element("div");
-        button2 = element("button");
-        button2.textContent = "显示所有详情界面";
-        t16 = space();
+        create_component(switch3.$$.fragment);
+        t15 = space();
         div5 = element("div");
         h3 = element("h3");
         h3.textContent = "配置常驻卡片信息";
-        t18 = space();
+        t17 = space();
         div4 = element("div");
-        create_component(switch3.$$.fragment);
-        t19 = space();
         create_component(switch4.$$.fragment);
-        t20 = space();
+        t18 = space();
         create_component(switch5.$$.fragment);
-        t21 = space();
+        t19 = space();
         create_component(switch6.$$.fragment);
-        t22 = space();
+        t20 = space();
         create_component(switch7.$$.fragment);
-        t23 = space();
+        t21 = space();
         create_component(switch8.$$.fragment);
-        t24 = space();
+        t22 = space();
         create_component(switch9.$$.fragment);
-        t25 = space();
-        attr(div0, "class", "configP_title svelte-693cwj");
+        t23 = space();
+        create_component(switch10.$$.fragment);
+        t24 = space();
+        attr(div0, "class", "configP_title svelte-mdsgbd");
         attr(h10, "class", "s_title");
-        attr(button1, "class", "sideP__btn");
+        attr(button1, "class", "sideP__btn svelte-mdsgbd");
         attr(div1, "class", "s_panel");
-        attr(div2, "class", "section svelte-693cwj");
+        attr(div2, "class", "section svelte-mdsgbd");
         attr(h11, "class", "s_title");
-        attr(button2, "class", "sideP__btn");
         attr(div3, "class", "s_panel");
         attr(h3, "class", "s_title");
         attr(div4, "class", "s_panel");
-        attr(div5, "class", "section svelte-693cwj");
-        attr(div6, "class", "section svelte-693cwj");
-        attr(div7, "class", "configP_holder svelte-693cwj");
-        attr(div8, "class", "configP svelte-693cwj");
+        attr(div5, "class", "section svelte-mdsgbd");
+        attr(div6, "class", "section svelte-mdsgbd");
+        attr(div7, "class", "configP_holder svelte-mdsgbd");
+        attr(div8, "class", "configP svelte-mdsgbd");
       },
       m(target, anchor) {
         insert(target, div8, anchor);
@@ -3737,26 +3759,26 @@
         append(div6, h11);
         append(div6, t14);
         append(div6, div3);
-        append(div3, button2);
-        append(div6, t16);
+        mount_component(switch3, div3, null);
+        append(div6, t15);
         append(div6, div5);
         append(div5, h3);
-        append(div5, t18);
+        append(div5, t17);
         append(div5, div4);
-        mount_component(switch3, div4, null);
-        append(div4, t19);
         mount_component(switch4, div4, null);
-        append(div4, t20);
+        append(div4, t18);
         mount_component(switch5, div4, null);
-        append(div4, t21);
+        append(div4, t19);
         mount_component(switch6, div4, null);
-        append(div4, t22);
+        append(div4, t20);
         mount_component(switch7, div4, null);
-        append(div4, t23);
+        append(div4, t21);
         mount_component(switch8, div4, null);
-        append(div4, t24);
+        append(div4, t22);
         mount_component(switch9, div4, null);
-        append(div4, t25);
+        append(div4, t23);
+        mount_component(switch10, div4, null);
+        append(div4, t24);
         current = true;
         if (!mounted) {
           dispose = [
@@ -3764,7 +3786,7 @@
               button0,
               "click",
               /*click_handler_1*/
-              ctx[22]
+              ctx[23]
             ),
             listen(
               button1,
@@ -3772,15 +3794,9 @@
               /*config_changeWidth*/
               ctx[15]
             ),
-            listen(
-              button2,
-              "click",
-              /*config_showAllDetails*/
-              ctx[16]
-            ),
             listen(div8, "click", self(
               /*click_handler_5*/
-              ctx[52]
+              ctx[54]
             ))
           ];
           mounted = true;
@@ -3789,12 +3805,12 @@
       p(ctx2, dirty) {
         if (
           /*$_current_domain*/
-          ctx2[7] == "kp.m-team.cc"
+          ctx2[8] == "kp.m-team.cc"
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty[0] & /*$_current_domain*/
-            128) {
+            256) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -3821,30 +3837,30 @@
         switch0.$set(switch0_changes);
         const switch1_changes = {};
         if (!updating_checked_1 && dirty[0] & /*$_show_debug_btn*/
-        64) {
+        128) {
           updating_checked_1 = true;
           switch1_changes.checked = /*$_show_debug_btn*/
-          ctx2[6];
+          ctx2[7];
           add_flush_callback(() => updating_checked_1 = false);
         }
         switch1.$set(switch1_changes);
         const switch2_changes = {};
         if (!updating_checked_2 && dirty[0] & /*$_show_nexus_pic*/
-        512) {
+        1024) {
           updating_checked_2 = true;
           switch2_changes.checked = /*$_show_nexus_pic*/
-          ctx2[9];
+          ctx2[10];
           add_flush_callback(() => updating_checked_2 = false);
         }
         switch2.$set(switch2_changes);
         if (
           /*$_show_nexus_pic*/
-          ctx2[9]
+          ctx2[10]
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
             if (dirty[0] & /*$_show_nexus_pic*/
-            512) {
+            1024) {
               transition_in(if_block1, 1);
             }
           } else {
@@ -3865,7 +3881,7 @@
         8) {
           updating_checked_3 = true;
           switch3_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].title;
+          ctx2[3].all;
           add_flush_callback(() => updating_checked_3 = false);
         }
         switch3.$set(switch3_changes);
@@ -3874,7 +3890,7 @@
         8) {
           updating_checked_4 = true;
           switch4_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].free;
+          ctx2[3].title;
           add_flush_callback(() => updating_checked_4 = false);
         }
         switch4.$set(switch4_changes);
@@ -3883,7 +3899,7 @@
         8) {
           updating_checked_5 = true;
           switch5_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].sub_title;
+          ctx2[3].free;
           add_flush_callback(() => updating_checked_5 = false);
         }
         switch5.$set(switch5_changes);
@@ -3892,7 +3908,7 @@
         8) {
           updating_checked_6 = true;
           switch6_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].tags;
+          ctx2[3].sub_title;
           add_flush_callback(() => updating_checked_6 = false);
         }
         switch6.$set(switch6_changes);
@@ -3901,7 +3917,7 @@
         8) {
           updating_checked_7 = true;
           switch7_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].size_download_collect;
+          ctx2[3].tags;
           add_flush_callback(() => updating_checked_7 = false);
         }
         switch7.$set(switch7_changes);
@@ -3910,7 +3926,7 @@
         8) {
           updating_checked_8 = true;
           switch8_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].upload_time;
+          ctx2[3].size_download_collect;
           add_flush_callback(() => updating_checked_8 = false);
         }
         switch8.$set(switch8_changes);
@@ -3919,10 +3935,19 @@
         8) {
           updating_checked_9 = true;
           switch9_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].statistics;
+          ctx2[3].upload_time;
           add_flush_callback(() => updating_checked_9 = false);
         }
         switch9.$set(switch9_changes);
+        const switch10_changes = {};
+        if (!updating_checked_10 && dirty[0] & /*$_CARD_SHOW*/
+        8) {
+          updating_checked_10 = true;
+          switch10_changes.checked = /*$_CARD_SHOW*/
+          ctx2[3].statistics;
+          add_flush_callback(() => updating_checked_10 = false);
+        }
+        switch10.$set(switch10_changes);
       },
       i(local) {
         if (current)
@@ -3939,6 +3964,7 @@
         transition_in(switch7.$$.fragment, local);
         transition_in(switch8.$$.fragment, local);
         transition_in(switch9.$$.fragment, local);
+        transition_in(switch10.$$.fragment, local);
         add_render_callback(() => {
           if (!current)
             return;
@@ -3961,6 +3987,7 @@
         transition_out(switch7.$$.fragment, local);
         transition_out(switch8.$$.fragment, local);
         transition_out(switch9.$$.fragment, local);
+        transition_out(switch10.$$.fragment, local);
         if (!div8_transition)
           div8_transition = create_bidirectional_transition(div8, fade, { duration: 100 }, false);
         div8_transition.run(0);
@@ -3983,6 +4010,7 @@
         destroy_component(switch7);
         destroy_component(switch8);
         destroy_component(switch9);
+        destroy_component(switch10);
         if (detaching && div8_transition)
           div8_transition.end();
         mounted = false;
@@ -3999,7 +4027,7 @@
     let updating_checked;
     let current;
     function switch_1_checked_binding(value) {
-      ctx[23](value);
+      ctx[24](value);
     }
     let switch_1_props = {
       title_fixed: "隐藏Gay分区卡片",
@@ -4008,10 +4036,10 @@
     };
     if (
       /*$_SITE_SETTING*/
-      ctx[8].mt.hide_gay !== void 0
+      ctx[9].mt.hide_gay !== void 0
     ) {
       switch_1_props.checked = /*$_SITE_SETTING*/
-      ctx[8].mt.hide_gay;
+      ctx[9].mt.hide_gay;
     }
     switch_1 = new Switch({ props: switch_1_props });
     binding_callbacks.push(() => bind(switch_1, "checked", switch_1_checked_binding));
@@ -4025,7 +4053,7 @@
         create_component(switch_1.$$.fragment);
         attr(h1, "class", "s_title");
         attr(div0, "class", "s_panel");
-        attr(div1, "class", "section svelte-693cwj");
+        attr(div1, "class", "section svelte-mdsgbd");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -4038,10 +4066,10 @@
       p(ctx2, dirty) {
         const switch_1_changes = {};
         if (!updating_checked && dirty[0] & /*$_SITE_SETTING*/
-        256) {
+        512) {
           updating_checked = true;
           switch_1_changes.checked = /*$_SITE_SETTING*/
-          ctx2[8].mt.hide_gay;
+          ctx2[9].mt.hide_gay;
           add_flush_callback(() => updating_checked = false);
         }
         switch_1.$set(switch_1_changes);
@@ -4069,10 +4097,10 @@
     switch_1 = new Switch({
       props: {
         title_fixed: `悬浮预览延迟${/*$_delay_nexus_pic*/
-      ctx[10] ? ":" + /*$_delay_nexus_pic*/
-      ctx[10] + "ms" : ""}`,
+      ctx[11] ? ":" + /*$_delay_nexus_pic*/
+      ctx[11] + "ms" : ""}`,
         title_red: `${/*$_delay_nexus_pic*/
-      ctx[10] ? "" : "无延迟"}`,
+      ctx[11] ? "" : "无延迟"}`,
         label: "防止无意滑动时大图打开妨碍预览",
         type: "range",
         $$slots: { default: [create_default_slot] },
@@ -4090,17 +4118,17 @@
       p(ctx2, dirty) {
         const switch_1_changes = {};
         if (dirty[0] & /*$_delay_nexus_pic*/
-        1024)
+        2048)
           switch_1_changes.title_fixed = `悬浮预览延迟${/*$_delay_nexus_pic*/
-        ctx2[10] ? ":" + /*$_delay_nexus_pic*/
-        ctx2[10] + "ms" : ""}`;
+        ctx2[11] ? ":" + /*$_delay_nexus_pic*/
+        ctx2[11] + "ms" : ""}`;
         if (dirty[0] & /*$_delay_nexus_pic*/
-        1024)
+        2048)
           switch_1_changes.title_red = `${/*$_delay_nexus_pic*/
-        ctx2[10] ? "" : "无延迟"}`;
+        ctx2[11] ? "" : "无延迟"}`;
         if (dirty[0] & /*$_delay_nexus_pic*/
-        1024 | dirty[2] & /*$$scope*/
-        1) {
+        2048 | dirty[2] & /*$$scope*/
+        8) {
           switch_1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         switch_1.$set(switch_1_changes);
@@ -4138,7 +4166,7 @@
         set_input_value(
           input,
           /*$_delay_nexus_pic*/
-          ctx[10]
+          ctx[11]
         );
         if (!mounted) {
           dispose = [
@@ -4146,13 +4174,13 @@
               input,
               "change",
               /*input_change_input_handler*/
-              ctx[27]
+              ctx[28]
             ),
             listen(
               input,
               "input",
               /*input_change_input_handler*/
-              ctx[27]
+              ctx[28]
             )
           ];
           mounted = true;
@@ -4160,11 +4188,11 @@
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*$_delay_nexus_pic*/
-        1024) {
+        2048) {
           set_input_value(
             input,
             /*$_delay_nexus_pic*/
-            ctx2[10]
+            ctx2[11]
           );
         }
       },
@@ -4177,93 +4205,107 @@
     };
   }
   function create_fragment$3(ctx) {
-    let div2;
+    let div6;
     let div0;
     let t0;
-    let div1;
+    let div5;
     let button0;
-    let t2;
-    let button1;
     let t4;
-    let button2;
-    let t6;
-    let t7;
+    let button1;
     let t8;
-    let div3;
+    let t9;
+    let t10;
+    let div7;
     let current;
     let mounted;
     let dispose;
     let if_block0 = (
       /*$_show_debug_btn*/
-      ctx[6] && create_if_block_9$2(ctx)
+      ctx[7] && create_if_block_9$2(ctx)
     );
     let if_block1 = (
       /*$_show_configPanel*/
-      ctx[5] && create_if_block$3(ctx)
+      ctx[6] && create_if_block$3(ctx)
     );
     return {
       c() {
-        div2 = element("div");
+        div6 = element("div");
         div0 = element("div");
         t0 = space();
-        div1 = element("div");
+        div5 = element("div");
         button0 = element("button");
-        button0.textContent = "原有列表";
-        t2 = space();
-        button1 = element("button");
-        button1.textContent = "整理布局";
+        button0.innerHTML = `<div><svg viewBox="0 0 32 32" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
+                fill: none;
+                stroke: #000;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2px;
+              }
+            </style></defs><title></title><g data-name="43-browser" id="_43-browser"><rect class="cls-1" height="30" width="30" x="1" y="1"></rect><line class="cls-1" x1="1" x2="31" y1="9" y2="9"></line><line class="cls-1" x1="5" x2="7" y1="5" y2="5"></line><line class="cls-1" x1="11" x2="13" y1="5" y2="5"></line><line class="cls-1" x1="9" x2="25" y1="16" y2="16"></line><line class="cls-1" x1="7" x2="25" y1="20" y2="20"></line><line class="cls-1" x1="7" x2="25" y1="24" y2="24"></line></g></svg></div> 
+      <div>原有列表</div>`;
         t4 = space();
-        button2 = element("button");
-        button2.textContent = "呼出边栏";
-        t6 = space();
+        button1 = element("button");
+        button1.innerHTML = `<div><svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
+                fill: none;
+                stroke: #fff;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2px;
+              }
+            </style></defs><title></title><g data-name="80-setting" id="_80-setting"><circle class="cls-1" cx="10" cy="6" r="3"></circle><circle class="cls-1" cx="22" cy="16" r="3"></circle><circle class="cls-1" cx="10" cy="26" r="3"></circle><line class="cls-1" x1="7" x2="1" y1="6" y2="6"></line><line class="cls-1" x1="15" x2="1" y1="16" y2="16"></line><line class="cls-1" x1="7" x2="1" y1="26" y2="26"></line><line class="cls-1" x1="31" x2="17" y1="26" y2="26"></line><line class="cls-1" x1="31" x2="25" y1="16" y2="16"></line><line class="cls-1" x1="31" x2="17" y1="6" y2="6"></line></g></svg></div> 
+      <div>详细配置</div>`;
+        t8 = space();
         if (if_block0)
           if_block0.c();
-        t7 = space();
+        t9 = space();
         if (if_block1)
           if_block1.c();
-        t8 = space();
-        div3 = element("div");
-        div3.textContent = "重置瀑布流配置边栏位置";
-        attr(div0, "class", "sideP__title svelte-693cwj");
-        attr(button0, "class", "sideP__btn");
-        attr(button1, "class", "sideP__btn");
-        attr(button2, "class", "sideP__btn");
-        attr(div1, "class", "sideP__out svelte-693cwj");
-        attr(div2, "class", "sideP svelte-693cwj");
+        t10 = space();
+        div7 = element("div");
+        div7.textContent = "重置瀑布流配置边栏位置";
+        attr(div0, "class", "sideP__title svelte-mdsgbd");
+        attr(button0, "class", "sideP__btn svelte-mdsgbd");
+        attr(button1, "class", "sideP__btn svelte-mdsgbd");
+        attr(div5, "class", "sideP__out svelte-mdsgbd");
+        attr(div6, "class", "sideP svelte-mdsgbd");
         set_style(
-          div2,
+          div6,
           "top",
           /*$_panelPos*/
           ctx[4].y + "px"
         );
         set_style(
-          div2,
+          div6,
           "left",
           /*$_panelPos*/
           ctx[4].x + "px"
         );
-        attr(div3, "id", "reset_panel_pos");
-        attr(div3, "class", "svelte-693cwj");
+        set_style(
+          div6,
+          "background-color",
+          /*$_current_bgColor*/
+          ctx[5]
+        );
+        attr(div7, "id", "reset_panel_pos");
+        attr(div7, "class", "svelte-mdsgbd");
       },
       m(target, anchor) {
-        insert(target, div2, anchor);
-        append(div2, div0);
-        append(div2, t0);
-        append(div2, div1);
-        append(div1, button0);
-        append(div1, t2);
-        append(div1, button1);
-        append(div1, t4);
-        append(div1, button2);
-        append(div1, t6);
+        insert(target, div6, anchor);
+        append(div6, div0);
+        append(div6, t0);
+        append(div6, div5);
+        append(div5, button0);
+        append(div5, t4);
+        append(div5, button1);
+        append(div5, t8);
         if (if_block0)
-          if_block0.m(div1, null);
-        ctx[21](div2);
-        insert(target, t7, anchor);
+          if_block0.m(div5, null);
+        ctx[22](div6);
+        insert(target, t9, anchor);
         if (if_block1)
           if_block1.m(target, anchor);
-        insert(target, t8, anchor);
-        insert(target, div3, anchor);
+        insert(target, t10, anchor);
+        insert(target, div7, anchor);
         current = true;
         if (!mounted) {
           dispose = [
@@ -4271,31 +4313,25 @@
               div0,
               "mousedown",
               /*onMouseDown*/
-              ctx[11]
+              ctx[12]
             ),
             listen(
               button0,
               "click",
               /*__show_originTable*/
-              ctx[13]
+              ctx[14]
             ),
             listen(
               button1,
               "click",
-              /*__sort_masonry*/
-              ctx[14]
-            ),
-            listen(
-              button2,
-              "click",
               /*click_handler*/
-              ctx[20]
+              ctx[21]
             ),
             listen(
-              div3,
+              div7,
               "click",
               /*resetPanelPos*/
-              ctx[12]
+              ctx[13]
             )
           ];
           mounted = true;
@@ -4304,14 +4340,14 @@
       p(ctx2, dirty) {
         if (
           /*$_show_debug_btn*/
-          ctx2[6]
+          ctx2[7]
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
           } else {
             if_block0 = create_if_block_9$2(ctx2);
             if_block0.c();
-            if_block0.m(div1, null);
+            if_block0.m(div5, null);
           }
         } else if (if_block0) {
           if_block0.d(1);
@@ -4320,7 +4356,7 @@
         if (!current || dirty[0] & /*$_panelPos*/
         16) {
           set_style(
-            div2,
+            div6,
             "top",
             /*$_panelPos*/
             ctx2[4].y + "px"
@@ -4329,27 +4365,36 @@
         if (!current || dirty[0] & /*$_panelPos*/
         16) {
           set_style(
-            div2,
+            div6,
             "left",
             /*$_panelPos*/
             ctx2[4].x + "px"
           );
         }
+        if (!current || dirty[0] & /*$_current_bgColor*/
+        32) {
+          set_style(
+            div6,
+            "background-color",
+            /*$_current_bgColor*/
+            ctx2[5]
+          );
+        }
         if (
           /*$_show_configPanel*/
-          ctx2[5]
+          ctx2[6]
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
             if (dirty[0] & /*$_show_configPanel*/
-            32) {
+            64) {
               transition_in(if_block1, 1);
             }
           } else {
             if_block1 = create_if_block$3(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(t8.parentNode, t8);
+            if_block1.m(t10.parentNode, t10);
           }
         } else if (if_block1) {
           group_outros();
@@ -4371,53 +4416,62 @@
       },
       d(detaching) {
         if (detaching)
-          detach(div2);
+          detach(div6);
         if (if_block0)
           if_block0.d();
-        ctx[21](null);
+        ctx[22](null);
         if (detaching)
-          detach(t7);
+          detach(t9);
         if (if_block1)
           if_block1.d(detaching);
         if (detaching)
-          detach(t8);
+          detach(t10);
         if (detaching)
-          detach(div3);
+          detach(div7);
         mounted = false;
         run_all(dispose);
       }
     };
+  }
+  function posRangeIn(target, min, max) {
+    if (target <= min)
+      target = min;
+    if (target >= max)
+      target = max;
+    return target;
   }
   function instance$4($$self, $$props, $$invalidate) {
     let $_iframe_switch;
     let $_turnPage;
     let $_CARD_SHOW;
     let $_card_width;
-    let $_Global_Masonry;
     let $_show_originTable;
     let $_panelPos;
+    let $_current_bgColor;
     let $_show_configPanel;
     let $_show_debug_btn;
     let $_current_domain;
     let $_SITE_SETTING;
     let $_show_nexus_pic;
     let $_delay_nexus_pic;
-    component_subscribe($$self, _iframe_switch, ($$value) => $$invalidate(56, $_iframe_switch = $$value));
+    component_subscribe($$self, _iframe_switch, ($$value) => $$invalidate(58, $_iframe_switch = $$value));
     component_subscribe($$self, _turnPage, ($$value) => $$invalidate(2, $_turnPage = $$value));
     component_subscribe($$self, _CARD_SHOW, ($$value) => $$invalidate(3, $_CARD_SHOW = $$value));
-    component_subscribe($$self, _card_width, ($$value) => $$invalidate(57, $_card_width = $$value));
-    component_subscribe($$self, _Global_Masonry, ($$value) => $$invalidate(58, $_Global_Masonry = $$value));
-    component_subscribe($$self, _show_originTable, ($$value) => $$invalidate(59, $_show_originTable = $$value));
+    component_subscribe($$self, _card_width, ($$value) => $$invalidate(59, $_card_width = $$value));
+    component_subscribe($$self, _Global_Masonry, ($$value) => $$invalidate(60, $$value));
+    component_subscribe($$self, _show_originTable, ($$value) => $$invalidate(61, $_show_originTable = $$value));
     component_subscribe($$self, _panelPos, ($$value) => $$invalidate(4, $_panelPos = $$value));
-    component_subscribe($$self, _show_configPanel, ($$value) => $$invalidate(5, $_show_configPanel = $$value));
-    component_subscribe($$self, _show_debug_btn, ($$value) => $$invalidate(6, $_show_debug_btn = $$value));
-    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(7, $_current_domain = $$value));
-    component_subscribe($$self, _SITE_SETTING, ($$value) => $$invalidate(8, $_SITE_SETTING = $$value));
-    component_subscribe($$self, _show_nexus_pic, ($$value) => $$invalidate(9, $_show_nexus_pic = $$value));
-    component_subscribe($$self, _delay_nexus_pic, ($$value) => $$invalidate(10, $_delay_nexus_pic = $$value));
+    component_subscribe($$self, _current_bgColor, ($$value) => $$invalidate(5, $_current_bgColor = $$value));
+    component_subscribe($$self, _show_configPanel, ($$value) => $$invalidate(6, $_show_configPanel = $$value));
+    component_subscribe($$self, _show_debug_btn, ($$value) => $$invalidate(7, $_show_debug_btn = $$value));
+    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(8, $_current_domain = $$value));
+    component_subscribe($$self, _SITE_SETTING, ($$value) => $$invalidate(9, $_SITE_SETTING = $$value));
+    component_subscribe($$self, _show_nexus_pic, ($$value) => $$invalidate(10, $_show_nexus_pic = $$value));
+    component_subscribe($$self, _delay_nexus_pic, ($$value) => $$invalidate(11, $_delay_nexus_pic = $$value));
     let div;
     let isMouseDown = false;
-    let offsetX = 0, offsetY = 0;
+    let offsetX = 0;
+    let offsetY = 0;
     const onMouseDown = (e) => {
       e.preventDefault();
       isMouseDown = true;
@@ -4425,12 +4479,11 @@
       offsetY = e.clientY - div.getBoundingClientRect().top;
     };
     const onMouseMove = (e) => {
-      e.preventDefault();
       if (!isMouseDown)
         return;
-      const res_L = e.clientX - offsetX > 0 ? e.clientX - offsetX : 0;
-      const res_R = e.clientY - offsetY > 0 ? e.clientY - offsetY : 0;
-      set_store_value(_panelPos, $_panelPos = { x: res_L, y: res_R }, $_panelPos);
+      const res_X = posRangeIn(e.clientX - offsetX, 0, window.innerWidth - (div.getBoundingClientRect().width + 5));
+      const res_Y = posRangeIn(e.clientY - offsetY, 0, window.innerHeight - (div.getBoundingClientRect().height + 5));
+      set_store_value(_panelPos, $_panelPos = { x: res_X, y: res_Y }, $_panelPos);
     };
     const onMouseUp = () => {
       isMouseDown = false;
@@ -4443,24 +4496,16 @@
     let { originTable } = $$props;
     function __show_originTable() {
       set_store_value(_show_originTable, $_show_originTable = $_show_originTable == 0 ? 1 : 0, $_show_originTable);
-      $$invalidate(19, originTable.style.display = $_show_originTable === 1 ? "" : "none", originTable);
-    }
-    function __sort_masonry() {
-      $_Global_Masonry.layout();
+      $$invalidate(20, originTable.style.display = $_show_originTable === 1 ? "" : "none", originTable);
     }
     function config_changeWidth() {
       set_store_value(_card_width, $_card_width = $_card_width == 300 ? 200 : 300, $_card_width);
       console.log(`[debug]$card_width: ${$_card_width}`);
-      sortMasonry("fast");
-      sortMasonry("fast");
-      sortMasonry();
+      sortMasonryBundle();
     }
     function config_showAllDetails() {
       set_store_value(_CARD_SHOW, $_CARD_SHOW.all = !$_CARD_SHOW.all, $_CARD_SHOW);
-      sortMasonry("fast");
-      sortMasonry("fast");
-      sortMasonry();
-      sortMasonry();
+      sortMasonryBundle();
     }
     let label_switchMode = $_turnPage ? "滚动加载" : "按钮加载";
     function config_switchMode() {
@@ -4469,6 +4514,12 @@
     }
     function config_changeLoadMode() {
       set_store_value(_iframe_switch, $_iframe_switch = $_iframe_switch == 0 ? 1 : 0, $_iframe_switch);
+    }
+    function sortMasonryBundle() {
+      sortMasonry("fast");
+      sortMasonry("fast");
+      sortMasonry();
+      sortMasonry();
     }
     onMount(() => {
       window.addEventListener("mousemove", onMouseMove);
@@ -4481,7 +4532,7 @@
     const click_handler = () => {
       set_store_value(_show_configPanel, $_show_configPanel = !$_show_configPanel, $_show_configPanel);
     };
-    function div2_binding($$value) {
+    function div6_binding($$value) {
       binding_callbacks[$$value ? "unshift" : "push"](() => {
         div = $$value;
         $$invalidate(0, div);
@@ -4520,42 +4571,48 @@
       set_store_value(_delay_nexus_pic, $_delay_nexus_pic = $_delay_nexus_pic == 0 ? 600 : 0, $_delay_nexus_pic);
     };
     function switch3_checked_binding(value) {
+      if ($$self.$$.not_equal($_CARD_SHOW.all, value)) {
+        $_CARD_SHOW.all = value;
+        _CARD_SHOW.set($_CARD_SHOW);
+      }
+    }
+    function switch4_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.title, value)) {
         $_CARD_SHOW.title = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch4_checked_binding(value) {
+    function switch5_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.free, value)) {
         $_CARD_SHOW.free = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch5_checked_binding(value) {
+    function switch6_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.sub_title, value)) {
         $_CARD_SHOW.sub_title = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch6_checked_binding(value) {
+    function switch7_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.tags, value)) {
         $_CARD_SHOW.tags = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch7_checked_binding(value) {
+    function switch8_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.size_download_collect, value)) {
         $_CARD_SHOW.size_download_collect = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch8_checked_binding(value) {
+    function switch9_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.upload_time, value)) {
         $_CARD_SHOW.upload_time = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch9_checked_binding(value) {
+    function switch10_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.statistics, value)) {
         $_CARD_SHOW.statistics = value;
         _CARD_SHOW.set($_CARD_SHOW);
@@ -4613,7 +4670,7 @@
     const click_handler_5 = () => set_store_value(_show_configPanel, $_show_configPanel = false, $_show_configPanel);
     $$self.$$set = ($$props2) => {
       if ("originTable" in $$props2)
-        $$invalidate(19, originTable = $$props2.originTable);
+        $$invalidate(20, originTable = $$props2.originTable);
     };
     return [
       div,
@@ -4621,6 +4678,7 @@
       $_turnPage,
       $_CARD_SHOW,
       $_panelPos,
+      $_current_bgColor,
       $_show_configPanel,
       $_show_debug_btn,
       $_current_domain,
@@ -4630,14 +4688,14 @@
       onMouseDown,
       resetPanelPos,
       __show_originTable,
-      __sort_masonry,
       config_changeWidth,
       config_showAllDetails,
       config_switchMode,
       config_changeLoadMode,
+      sortMasonryBundle,
       originTable,
       click_handler,
-      div2_binding,
+      div6_binding,
       click_handler_1,
       switch_1_checked_binding,
       switch0_checked_binding,
@@ -4654,6 +4712,7 @@
       switch7_checked_binding,
       switch8_checked_binding,
       switch9_checked_binding,
+      switch10_checked_binding,
       input0_change_handler,
       change_handler,
       input1_change_handler,
@@ -4674,7 +4733,7 @@
   class Sidepanel extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance$4, create_fragment$3, safe_not_equal, { originTable: 19 }, null, [-1, -1, -1]);
+      init(this, options, instance$4, create_fragment$3, safe_not_equal, { originTable: 20 }, null, [-1, -1, -1]);
     }
   }
   const CONFIG$1 = {
@@ -6929,11 +6988,11 @@
         t0 = space();
         b = element("b");
         t1 = text(t1_value);
-        attr(a, "class", "two-lines svelte-1rfbgrc");
+        attr(a, "class", "two-lines svelte-1fw75v2");
         attr(a, "href", a_href_value = /*torrentInfo*/
         ctx[0].torrentLink);
         attr(a, "target", "_blank");
-        attr(div, "class", "card-title svelte-1rfbgrc");
+        attr(div, "class", "card-title svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -6987,7 +7046,7 @@
     return {
       c() {
         span = element("span");
-        attr(span, "class", "tempTags svelte-1rfbgrc");
+        attr(span, "class", "tempTags svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -7192,26 +7251,26 @@
         t25 = text(" ");
         b6 = element("b");
         t26 = text(t26_value);
-        attr(div0, "class", "cl-tags svelte-1rfbgrc");
+        attr(div0, "class", "cl-tags svelte-1fw75v2");
         html_tag.a = t3;
-        attr(div1, "class", "cl-center svelte-1rfbgrc");
+        attr(div1, "class", "cl-center svelte-1fw75v2");
         html_tag_1.a = t6;
         attr(a, "href", a_href_value = /*torrentInfo*/
         ctx[0].downloadLink);
-        attr(div2, "class", "cl-center svelte-1rfbgrc");
+        attr(div2, "class", "cl-center svelte-1fw75v2");
         html_tag_2.a = t9;
-        attr(div3, "class", "btnCollet cl-center svelte-1rfbgrc");
+        attr(div3, "class", "btnCollet cl-center svelte-1fw75v2");
         attr(div3, "id", div3_id_value = "tI_" + /*torrentInfo*/
         ctx[0].torrentIndex);
-        attr(div4, "class", "cl-center svelte-1rfbgrc");
-        attr(div5, "class", "card-line svelte-1rfbgrc");
-        attr(div6, "class", "card-line svelte-1rfbgrc");
+        attr(div4, "class", "cl-center svelte-1fw75v2");
+        attr(div5, "class", "card-line svelte-1fw75v2");
+        attr(div6, "class", "card-line svelte-1fw75v2");
         html_tag_3.a = t16;
         html_tag_4.a = t19;
         html_tag_5.a = t22;
         html_tag_6.a = t25;
-        attr(div7, "class", "card-line svelte-1rfbgrc");
-        attr(div8, "class", "card-details svelte-1rfbgrc");
+        attr(div7, "class", "card-line svelte-1fw75v2");
+        attr(div8, "class", "card-details svelte-1fw75v2");
       },
       m(target, anchor) {
         if (if_block0)
@@ -7446,8 +7505,8 @@
         if (if_block2)
           if_block2.c();
         attr(div0, "class", div0_class_value = "top_and_free " + /*torrentInfo*/
-        ctx[0].free_type + " svelte-1rfbgrc");
-        attr(div1, "class", "card-alter svelte-1rfbgrc");
+        ctx[0].free_type + " svelte-1fw75v2");
+        attr(div1, "class", "card-alter svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -7509,7 +7568,7 @@
         }
         if (dirty & /*torrentInfo*/
         1 && div0_class_value !== (div0_class_value = "top_and_free " + /*torrentInfo*/
-        ctx2[0].free_type + " svelte-1rfbgrc")) {
+        ctx2[0].free_type + " svelte-1fw75v2")) {
           attr(div0, "class", div0_class_value);
         }
       },
@@ -7634,7 +7693,7 @@
       c() {
         a = element("a");
         t = text(t_value);
-        attr(a, "class", "card-description svelte-1rfbgrc");
+        attr(a, "class", "card-description svelte-1fw75v2");
         attr(a, "href", a_href_value = /*torrentInfo*/
         ctx[0].torrentLink);
       },
@@ -7714,7 +7773,7 @@
         t4 = space();
         if (if_block5)
           if_block5.c();
-        attr(div, "class", "card-details svelte-1rfbgrc");
+        attr(div, "class", "card-details svelte-1fw75v2");
       },
       m(target, anchor) {
         if (if_block0)
@@ -7887,8 +7946,8 @@
         if (if_block2)
           if_block2.c();
         attr(div0, "class", div0_class_value = "top_and_free " + /*torrentInfo*/
-        ctx[0].free_type + " svelte-1rfbgrc");
-        attr(div1, "class", "card-alter svelte-1rfbgrc");
+        ctx[0].free_type + " svelte-1fw75v2");
+        attr(div1, "class", "card-alter svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -7950,7 +8009,7 @@
         }
         if (dirty & /*torrentInfo*/
         1 && div0_class_value !== (div0_class_value = "top_and_free " + /*torrentInfo*/
-        ctx2[0].free_type + " svelte-1rfbgrc")) {
+        ctx2[0].free_type + " svelte-1fw75v2")) {
           attr(div0, "class", div0_class_value);
         }
       },
@@ -8075,7 +8134,7 @@
       c() {
         a = element("a");
         t = text(t_value);
-        attr(a, "class", "card-description svelte-1rfbgrc");
+        attr(a, "class", "card-description svelte-1fw75v2");
         attr(a, "href", a_href_value = /*torrentInfo*/
         ctx[0].torrentLink);
       },
@@ -8112,7 +8171,7 @@
     return {
       c() {
         div = element("div");
-        attr(div, "class", "cl-tags svelte-1rfbgrc");
+        attr(div, "class", "cl-tags svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -8200,17 +8259,17 @@
         b1 = element("b");
         b1.textContent = "收藏";
         html_tag.a = t0;
-        attr(div0, "class", "cl-center svelte-1rfbgrc");
+        attr(div0, "class", "cl-center svelte-1fw75v2");
         html_tag_1.a = t3;
         attr(a, "href", a_href_value = /*torrentInfo*/
         ctx[0].downloadLink);
-        attr(div1, "class", "cl-center svelte-1rfbgrc");
+        attr(div1, "class", "cl-center svelte-1fw75v2");
         html_tag_2.a = t6;
-        attr(div2, "class", "btnCollet cl-center svelte-1rfbgrc");
+        attr(div2, "class", "btnCollet cl-center svelte-1fw75v2");
         attr(div2, "id", div2_id_value = "tI_" + /*torrentInfo*/
         ctx[0].torrentIndex);
-        attr(div3, "class", "cl-center svelte-1rfbgrc");
-        attr(div4, "class", "card-line svelte-1rfbgrc");
+        attr(div3, "class", "cl-center svelte-1fw75v2");
+        attr(div4, "class", "card-line svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div4, anchor);
@@ -8308,7 +8367,7 @@
         b.textContent = "上传时间:";
         t1 = space();
         t2 = text(t2_value);
-        attr(div, "class", "card-line svelte-1rfbgrc");
+        attr(div, "class", "card-line svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -8407,7 +8466,7 @@
         html_tag_1.a = t3;
         html_tag_2.a = t6;
         html_tag_3.a = t9;
-        attr(div, "class", "card-line svelte-1rfbgrc");
+        attr(div, "class", "card-line svelte-1fw75v2");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -8538,12 +8597,12 @@
         t7 = space();
         if (if_block2)
           if_block2.c();
-        attr(img0, "class", "card_category-img svelte-1rfbgrc");
+        attr(img0, "class", "card_category-img svelte-1fw75v2");
         if (!src_url_equal(img0.src, img0_src_value = /*torrentInfo*/
         ctx[0]._categoryImg))
           attr(img0, "src", img0_src_value);
         attr(img0, "alt", "");
-        attr(div0, "class", "card-category svelte-1rfbgrc");
+        attr(div0, "class", "card-category svelte-1fw75v2");
         attr(div0, "data-href", div0_data_href_value = /*torrentInfo*/
         ctx[0].categoryLink);
         set_style(div0, "background-color", CONFIG.CATEGORY[
@@ -8557,17 +8616,17 @@
           /*torrentInfo*/
           ctx[0].categoryNumber
         ]) : "black");
-        attr(img1, "class", "card-image--img nexus-lazy-load_Kesa svelte-1rfbgrc");
+        attr(img1, "class", "card-image--img nexus-lazy-load_Kesa svelte-1fw75v2");
         if (!src_url_equal(img1.src, img1_src_value = CONFIG.LOADING_PIC))
           attr(img1, "src", img1_src_value);
         attr(img1, "data-src", img1_data_src_value = /*torrentInfo*/
         ctx[0].picLink);
         attr(img1, "alt", img1_alt_value = /*torrentInfo*/
         ctx[0].torrentName);
-        attr(div1, "class", "card-index svelte-1rfbgrc");
-        attr(div2, "class", "card-image svelte-1rfbgrc");
-        attr(div3, "class", "card-holder svelte-1rfbgrc");
-        attr(div4, "class", "card svelte-1rfbgrc");
+        attr(div1, "class", "card-index svelte-1fw75v2");
+        attr(div2, "class", "card-image svelte-1fw75v2");
+        attr(div3, "class", "card-holder svelte-1fw75v2");
+        attr(div4, "class", "card svelte-1fw75v2");
         set_style(
           div4,
           "display",
@@ -9520,8 +9579,8 @@
     const CARD = {
       /** 瀑布流卡片宽度 */
       CARD_WIDTH: $_card_width,
-      /** 瀑布流卡片边框宽度 -> 这个2是真值, 但是边框好像是会随着分辨率和缩放变化, 给高有利大分辨率, 给低有利于小分辨率 */
-      CARD_BORDER: 3,
+      /** NOTE: 瀑布流卡片边框宽度 -> 这个2是真值, 但是边框好像是会随着分辨率和缩放变化, 给高有利大分辨率, 给低有利于小分辨率 */
+      CARD_BORDER: 0,
       /** 瀑布流卡片索引 */
       CARD_INDEX: 0,
       /** 图片悬浮预览方式
