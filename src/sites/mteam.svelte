@@ -370,6 +370,7 @@
 
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   /* 卡片种类tag预览图 */
