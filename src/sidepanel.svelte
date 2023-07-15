@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import {
+    _current_bgColor,
     _show_originTable,
     _Global_Masonry,
     _card_width,
@@ -105,18 +106,14 @@
     $_card_width = $_card_width == 300 ? 200 : 300;
     console.log(`[debug]\$card_width: ${$_card_width}`);
 
-    sortMasonry("fast");
-    sortMasonry("fast");
-    sortMasonry();
+    sortMasonryBundle();
   }
 
   /** 显示所有详情界面 */
   function config_showAllDetails() {
     $_CARD_SHOW.all = !$_CARD_SHOW.all;
-    sortMasonry("fast");
-    sortMasonry("fast");
-    sortMasonry();
-    sortMasonry();
+
+    sortMasonryBundle();
   }
 
   /** 模式切换按钮标签 */
@@ -129,6 +126,16 @@
   /** 切换下一页加载模式 */
   function config_changeLoadMode() {
     $_iframe_switch = $_iframe_switch == 0 ? 1 : 0;
+  }
+
+  // ------------------------------------------------
+
+  /** 封装的瀑布流整理函数 */
+  function sortMasonryBundle() {
+    sortMasonry("fast");
+    sortMasonry("fast");
+    sortMasonry();
+    sortMasonry();
   }
 
   // ------------------------------------------------
@@ -148,7 +155,11 @@
 <div
   class="sideP"
   bind:this={div}
-  style="top:{$_panelPos.y}px; left:{$_panelPos.x}px"
+  style="
+  top:{$_panelPos.y}px;
+  left:{$_panelPos.x}px;
+  background-color:{$_current_bgColor};
+  "
 >
   <!-- 侧边栏拖拽条 -->
   <!-- TODO: 仿照 PTPP 插件做拖拽效果, 优先度低 -->
@@ -157,10 +168,43 @@
   <!-- 按钮列表 -->
   <div class="sideP__out">
     <!-- 按钮1: 显示原有列表 -->
-    <button class="sideP__btn" on:click={__show_originTable}>原有列表</button>
+    <button class="sideP__btn" on:click={__show_originTable}>
+      <div>
+        <!-- svg 列表图标 -->
+        <svg
+          viewBox="0 0 32 32"
+          width="20"
+          height="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <style>
+              .cls-1 {
+                fill: none;
+                stroke: #000;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2px;
+              }
+            </style>
+          </defs>
+          <title />
+          <g data-name="43-browser" id="_43-browser">
+            <rect class="cls-1" height="30" width="30" x="1" y="1" />
+            <line class="cls-1" x1="1" x2="31" y1="9" y2="9" />
+            <line class="cls-1" x1="5" x2="7" y1="5" y2="5" />
+            <line class="cls-1" x1="11" x2="13" y1="5" y2="5" />
+            <line class="cls-1" x1="9" x2="25" y1="16" y2="16" />
+            <line class="cls-1" x1="7" x2="25" y1="20" y2="20" />
+            <line class="cls-1" x1="7" x2="25" y1="24" y2="24" />
+          </g>
+        </svg>
+      </div>
+      <div>原有列表</div>
+    </button>
 
     <!-- 按钮2: 手动整理布局 -->
-    <button class="sideP__btn" on:click={__sort_masonry}>整理布局</button>
+    <!-- <button class="sideP__btn" on:click={__sort_masonry}>整理布局</button> -->
 
     <!-- 按钮3: 呼出完整侧边栏 -->
     <button
@@ -169,7 +213,40 @@
         $_show_configPanel = !$_show_configPanel;
       }}
     >
-      呼出边栏
+      <div>
+        <!-- svg 设置图标 -->
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 32 32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <style>
+              .cls-1 {
+                fill: none;
+                stroke: #fff;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2px;
+              }
+            </style>
+          </defs>
+          <title />
+          <g data-name="80-setting" id="_80-setting">
+            <circle class="cls-1" cx="10" cy="6" r="3" />
+            <circle class="cls-1" cx="22" cy="16" r="3" />
+            <circle class="cls-1" cx="10" cy="26" r="3" />
+            <line class="cls-1" x1="7" x2="1" y1="6" y2="6" />
+            <line class="cls-1" x1="15" x2="1" y1="16" y2="16" />
+            <line class="cls-1" x1="7" x2="1" y1="26" y2="26" />
+            <line class="cls-1" x1="31" x2="17" y1="26" y2="26" />
+            <line class="cls-1" x1="31" x2="25" y1="16" y2="16" />
+            <line class="cls-1" x1="31" x2="17" y1="6" y2="6" />
+          </g>
+        </svg>
+      </div>
+      <div>呼出边栏</div>
     </button>
 
     {#if $_show_debug_btn}
@@ -258,7 +335,7 @@
         <h1 class="s_title">常用配置</h1>
         <div class="s_panel">
           <Switch
-            title_fixed={"按钮加载方式"}
+            title_fixed={"加载下一页方式"}
             title_green="按钮(默认)"
             title_red="滚动(谨慎使用)"
             label="滚动模式下 MT 等网站频繁使用可能会导致 120"
@@ -300,7 +377,7 @@
 
           <!-- 按钮: 切换宽度 -->
           <button class="sideP__btn" on:click={config_changeWidth}>
-            切换宽度
+            切换宽度(开发中)
           </button>
 
           <!-- NOTE: 废弃的旧型样式 -->
@@ -388,9 +465,15 @@
         <h1 class="s_title">卡片信息</h1>
         <div class="s_panel">
           <!-- 按钮: 显示详情 -->
-          <button class="sideP__btn" on:click={config_showAllDetails}>
-            显示所有详情界面
-          </button>
+          <Switch
+            title_fixed="卡片信息"
+            title_green="显示下方所选信息(精简)"
+            title_red="显示所有信息(较乱)"
+            bind:checked={$_CARD_SHOW.all}
+            green_state={false}
+            on:click={sortMasonryBundle}
+          />
+          <!-- <button class="sideP__btn" on:click={config_showAllDetails}>显示所有详情界面</button> -->
         </div>
 
         <!-- 子面板: 配置常驻卡片信息 -->
@@ -411,7 +494,7 @@
             />
             <Switch title_fixed="显示标签" bind:checked={$_CARD_SHOW.tags} />
             <Switch
-              title_fixed="显示大小&下载&收藏"
+              title_fixed="显示 [大小/下载/收藏]"
               bind:checked={$_CARD_SHOW.size_download_collect}
             />
             <Switch
@@ -419,7 +502,7 @@
               bind:checked={$_CARD_SHOW.upload_time}
             />
             <Switch
-              title_fixed="显示评论/上传/下载/完成"
+              title_fixed="显示 [评论/上传/下载/完成]"
               bind:checked={$_CARD_SHOW.statistics}
             />
 
@@ -523,6 +606,8 @@
 <style>
   .sideP {
     position: fixed;
+
+    /* 已动态配置 */
     /* left: 0px; */
     /* top: 0px; */
 
@@ -533,7 +618,8 @@
 
     margin: 4px 2px;
 
-    background-color: aqua;
+    /* 已动态配置 */
+    /* background-color: #9ac6ff; */
 
     border-radius: 8px;
     overflow: hidden;
@@ -559,23 +645,25 @@
   .sideP__out {
     display: flex;
     flex-direction: column;
-
-    & button {
-      background-color: gray;
-      color: white;
-
-      padding: 4px 2px;
-
-      margin: 4px;
-      border-radius: 8px;
-
-      cursor: pointer;
-
-      &:hover {
-        background-color: black;
-      }
-    }
   }
+
+  .sideP__btn {
+    background-color: gray;
+    color: white;
+
+    padding: 4px 8px;
+
+    margin: 4px;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    border: none;
+  }
+  .sideP__btn:hover {
+    background-color: rgb(101, 49, 255);
+  }
+
   .configP {
     position: fixed;
 
