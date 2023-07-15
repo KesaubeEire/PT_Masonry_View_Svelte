@@ -211,7 +211,12 @@
   const config = GLOBAL_SITE[$_current_domain];
   let infoList = [];
   infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(originTable)];
-  console.log(infoList);
+
+  console.log("---> 环境:\t", import.meta.env.VITE_APP_ENV);
+
+  if (import.meta.env.VITE_APP_ENV == "development") {
+    console.log(infoList);
+  }
 
   // NOTE: 如果站点有特殊操作, 这里执行
   GLOBAL_SITE[$_current_domain]?.special();
