@@ -2,7 +2,7 @@
 // @name            PT种子列表瀑布流视图(Svelte重构)
 // @name:en         PT_Masonry_View_Svelte
 // @namespace       https://github.com/KesaubeEire/PT_Masonry_View_Svelte
-// @version         1.0.2
+// @version         1.0.3
 // @author          Kesa
 // @description     PT种子列表无限下拉瀑布流视图(Svelte重构)
 // @description:en  PT Masonry View by Svelte.
@@ -4761,10 +4761,11 @@
       411: "#FAC05E",
       419: "#FAC05E",
       423: "#FAC05E",
-      // [紫色]音声: 外语 中文 视频
+      // [紫色]声音: 外语音声 中文音声 视频音声 音乐
       420: "#3FA7D6",
       421: "#3FA7D6",
       422: "#3FA7D6",
+      437: "#3FA7D6",
       // [红色]游戏: 游戏 中文游戏
       415: "#EE6352",
       418: "#EE6352"
@@ -4776,8 +4777,8 @@
     /** NOTE: 站点特殊操作 */
     special: function() {
       $("ksearchboxmain") ? $("ksearchboxmain").style.display = "none" : null;
-      const link = document.querySelector('a[href="?sort=7&type=asc"]');
-      link.childNodes[0].style.color = "black";
+      const link = document.querySelector('a[href="?sort=7&type=asc&seeders_begin=1"]');
+      link ? link.childNodes[0].style.color = "black" : null;
     }
   };
   function TORRENT_LIST_TO_JSON$1(torrent_list_Dom) {
@@ -9677,7 +9678,7 @@
     const config = SITE[$_current_domain];
     let infoList = [];
     infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(originTable)];
-    console.log(infoList);
+    console.log("---> 环境:	", "production");
     (_a = SITE[$_current_domain]) == null ? void 0 : _a.special();
     let masonry2;
     let debounceLoad;
@@ -9774,7 +9775,7 @@
       49153) {
         if (masonry2) {
           $$invalidate(0, CARD.CARD_WIDTH = $_card_width, CARD);
-          console.log(CARD.CARD_WIDTH);
+          console.log("卡片宽度:	", CARD.CARD_WIDTH);
           CHANGE_CARD_LAYOUT();
         }
       }
