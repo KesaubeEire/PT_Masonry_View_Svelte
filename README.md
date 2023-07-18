@@ -35,7 +35,7 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
 0. 注意事项
     1. 建议使用 Chrome 浏览器, 火狐等其他浏览器可能存在不知名问题(from tg by 天 胖)
     2. **不支持 Dark Passion 主题!!! 推荐 blue gene 主题!!!**
-    
+
 1. 本脚本功能:
    1. 支持在已适配的站点将种子列表变为瀑布流视图
    1. 在侧边栏区域可以设置各种配置
@@ -85,15 +85,16 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
 
 - 样式类
     - [x] iframe 两侧颜色降低亮度(from tg by LNN)
-    - [x] TODO: 边栏整体向 bilibili-evolve 看齐(from tg by LNN)
+    - [x] 边栏整体向 bilibili-evolve 看齐(from tg by LNN)
+    - [x] MT卡片分类文字居中(from tg by 天 胖)
     - [ ] TODO: 将 'new' 'hot' 和 index 一样放在图片上下左右
     - [ ] TODO: 改改阴影, 学习 [如何用 CSS 中写出超级美丽的阴影效果](https://juejin.cn/post/7034323356459466760)(from tg by Kyaru)
-    - [x] MT卡片分类文字居中(from tg by 天 胖)
+    - [ ] 刚进种子页面会出现蚂蚁线, 考虑改进一下?(from tg by LNN)
 
 
 - 站点指定修改类
-    - [x] 给龟站的搜索箱默认设置为"不扩展", 否则平常占地方(from tg by LNN)
-    - [x] "点此查看即将断种资源" 文字设置为黑色(from tg by LNN)
+    - [x] Kame: 给龟站的搜索箱默认设置为"不扩展", 否则平常占地方(from tg by LNN)
+    - [x] Kame: "点此查看即将断种资源" 文字设置为黑色(from tg by LNN)
 
 - 说明类
   - [ ] github & 油猴介绍 数据脱敏 (from tg by 天 胖)

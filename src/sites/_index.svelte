@@ -226,7 +226,7 @@
   let masonry;
   $: if (masonry) {
     CARD.CARD_WIDTH = $_card_width;
-    console.log(CARD.CARD_WIDTH);
+    console.log("卡片宽度:\t", CARD.CARD_WIDTH);
 
     CHANGE_CARD_LAYOUT();
   }
