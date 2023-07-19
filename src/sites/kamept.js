@@ -1,4 +1,3 @@
-import { sortMasonry } from '../utils'
 export { CONFIG as config };
 const CONFIG = {
   /** 默认的种子表格 dom selector */
