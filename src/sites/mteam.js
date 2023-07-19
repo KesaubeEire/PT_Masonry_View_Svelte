@@ -1,3 +1,4 @@
+import { _iframe_switch, _iframe_url } from '../stores'
 export { CONFIG as config };
 const CONFIG = {
   /** 默认的种子表格 dom selector */
@@ -63,8 +64,27 @@ const CONFIG = {
 
   /** NOTE: 站点特殊操作 */
   special: function () {
+    table_Iframe_Set();
+  },
+
+  /** NOTE: 站点下一页加载后操作 */
+  pageLoaded: function () {
+    table_Iframe_Set();
   }
 };
+
+/** 原表格点击图片显示 iframe */
+function table_Iframe_Set() {
+  const lists = Array.from(document.querySelectorAll('td.torrentimg a'))
+  lists.forEach(el => el.addEventListener('click', function (event) {
+    // 阻止 a 标签的默认行为
+    event.preventDefault();
+
+    // 对 iframe 进行操作
+    _iframe_switch.set(1)
+    _iframe_url.set(el.href + "#kdescr")
+  }))
+}
 
 /**
  * 将 种子列表dom 的信息变为 json对象列表

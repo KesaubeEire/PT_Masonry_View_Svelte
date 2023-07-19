@@ -303,8 +303,20 @@
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
         const table = doc.querySelector(GET_TORRENT_LIST_SELECTOR());
+
+        // NOTE: 原表格随着下一页加载增多
+        // console.log(table);
+        const list = Array.from(table.cloneNode(true).children[0].children);
+        originTable.children[0].append(...list);
         // console.log(table);
 
+        // NOTE: 如果站点有下一页加载后操作, 这里执行
+        // GLOBAL_SITE[$_current_domain]?.pageLoaded();
+        typeof GLOBAL_SITE[$_current_domain]?.pageLoaded === "function"
+          ? GLOBAL_SITE[$_current_domain]?.pageLoaded()
+          : null;
+
+        // NOTE: 瀑布流
         infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(table)];
 
         // // |--|-- 4.2.3 渲染 下一页信息 并 加到 waterfallNode 里面来
