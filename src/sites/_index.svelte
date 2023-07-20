@@ -68,6 +68,9 @@
     /** 翻页: 是否为初始跳转页面 */
     IS_ORIGIN: true,
 
+    /** 翻页: 初始页面 */
+    PAGE_ORIGIN: 0,
+
     /** 翻页: 当前页数 */
     PAGE_CURRENT: 0,
 
@@ -268,6 +271,9 @@
       ? Number(urlSearchParams.get("page"))
       : PAGE.PAGE_CURRENT;
 
+    // PAGE 初始页面值获取
+    if (PAGE.IS_ORIGIN) PAGE.PAGE_ORIGIN = PAGE.PAGE_CURRENT;
+
     // 如果 "page" 参数不存在，则将页数设为 0，否则打印当前页数
     if (!PAGE.PAGE_CURRENT) {
       console.log(
@@ -305,10 +311,17 @@
         const table = doc.querySelector(GET_TORRENT_LIST_SELECTOR());
 
         // NOTE: 原表格随着下一页加载增多
+        // FIXME: 目前这里没有问题, 但是保不准其他站点会有问题, 到时候再说吧
         // console.log(table);
+        // 获取下一页表格
         const list = Array.from(table.cloneNode(true).children[0].children);
+        // 改第一行的标题名称
+        list[0].children[1].textContent = `
+        ↓ 新加载第${PAGE.PAGE_NEXT - PAGE.PAGE_ORIGIN}页`;
+
+        console.log(PAGE.PAGE_ORIGIN);
+        // 将新表格加入原表格
         originTable.children[0].append(...list);
-        // console.log(table);
 
         // NOTE: 如果站点有下一页加载后操作, 这里执行
         // GLOBAL_SITE[$_current_domain]?.pageLoaded();
