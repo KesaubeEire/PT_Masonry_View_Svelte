@@ -95,6 +95,7 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
 - 站点指定修改类
     - [x] Kame: 给龟站的搜索箱默认设置为"不扩展", 否则平常占地方(from tg by LNN)
     - [x] Kame: "点此查看即将断种资源" 文字设置为黑色(from tg by LNN)
+    - [x] Kame: 勋章 z-index 较低会被卡片挡住(from tg by bacz)
 
 - 说明类
   - [ ] github & 油猴介绍 数据脱敏 (from tg by 天 胖)

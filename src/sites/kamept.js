@@ -57,6 +57,11 @@ const CONFIG = {
     // @ts-ignore
     link ? link.childNodes[0].style.color = 'black' : null;
 
+
+    // 让勋章不被卡片遮盖
+    let np = document.querySelector('img#nexus-preview');
+    if (np)
+      np.style.zIndex = 12000;
     // -------------------------------
 
     // 原表格点击图片显示 iframe
@@ -86,7 +91,7 @@ function table_Iframe_Set() {
 
     // 对 iframe 进行操作
     _iframe_switch.set(1)
-    
+
     // console.log(el.children[0].children[0].children[1].querySelector('a').href);
     _iframe_url.set(el.children[0].children[0].children[1].querySelector('a').href + "#kdescr")
   }))
