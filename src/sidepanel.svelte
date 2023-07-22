@@ -5,6 +5,7 @@
     _current_bgColor,
     _show_originTable,
     _Global_Masonry,
+    _show_mode,
     _card_width,
     _CARD_SHOW,
     _SITE_SETTING,
@@ -23,7 +24,7 @@
 
   // 配置拖拽侧边栏 ------------------------------------------------
   /** 侧边栏的 dom 对象 */
-  let div;
+  let sideDom;
   /** 是否触发移动 trigger */
   let isMouseDown = false;
   /** 侧边栏横坐标 */
@@ -34,8 +35,8 @@
   const onMouseDown = (e) => {
     e.preventDefault();
     isMouseDown = true;
-    offsetX = e.clientX - div.getBoundingClientRect().left;
-    offsetY = e.clientY - div.getBoundingClientRect().top;
+    offsetX = e.clientX - sideDom.getBoundingClientRect().left;
+    offsetY = e.clientY - sideDom.getBoundingClientRect().top;
   };
 
   const onMouseMove = (e) => {
@@ -46,15 +47,15 @@
     const res_X = posRangeIn(
       e.clientX - offsetX,
       0,
-      window.innerWidth - (div.getBoundingClientRect().width + 5)
+      window.innerWidth - (sideDom.getBoundingClientRect().width + 5)
     );
     const res_Y = posRangeIn(
       e.clientY - offsetY,
       0,
-      window.innerHeight - (div.getBoundingClientRect().height + 5)
+      window.innerHeight - (sideDom.getBoundingClientRect().height + 5)
     );
 
-    // console.log(div.getBoundingClientRect().width);
+    // console.log(sideDom.getBoundingClientRect().width);
 
     $_panelPos = { x: res_X, y: res_Y };
   };
@@ -91,8 +92,12 @@
   function __show_originTable() {
     // console.log($_show_originTable);
 
-    $_show_originTable = $_show_originTable == 0 ? 1 : 0;
-    originTable.style.display = $_show_originTable === 1 ? "" : "none";
+    // $_show_originTable = $_show_originTable == 0 ? 1 : 0;
+    // originTable.style.display = $_show_originTable === 1 ? "" : "none";
+
+    $_show_mode = !$_show_mode;
+
+    window.CHANGE_CARD_LAYOUT();
   }
 
   /** 按钮2函数: 手动整理瀑布流布局*/
@@ -154,7 +159,7 @@
 <!-- --------------------------------NOTE:侧边栏-------------------------------- -->
 <div
   class="sideP"
-  bind:this={div}
+  bind:this={sideDom}
   style="
   top:{$_panelPos.y}px;
   left:{$_panelPos.x}px;
@@ -169,38 +174,85 @@
   <div class="sideP__out">
     <!-- 按钮1: 显示原有列表 -->
     <button class="sideP__btn" on:click={__show_originTable}>
-      <div>
-        <!-- svg 列表图标 -->
-        <svg
-          viewBox="0 0 32 32"
-          width="20"
-          height="20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <style>
-              .cls-1 {
-                fill: none;
-                stroke: #000;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2px;
-              }
-            </style>
-          </defs>
-          <title />
-          <g data-name="43-browser" id="_43-browser">
-            <rect class="cls-1" height="30" width="30" x="1" y="1" />
-            <line class="cls-1" x1="1" x2="31" y1="9" y2="9" />
-            <line class="cls-1" x1="5" x2="7" y1="5" y2="5" />
-            <line class="cls-1" x1="11" x2="13" y1="5" y2="5" />
-            <line class="cls-1" x1="9" x2="25" y1="16" y2="16" />
-            <line class="cls-1" x1="7" x2="25" y1="20" y2="20" />
-            <line class="cls-1" x1="7" x2="25" y1="24" y2="24" />
-          </g>
-        </svg>
-      </div>
-      <div>原有列表</div>
+      {#if $_show_mode}
+        <div>
+          <svg
+            enable-background="new 0 0 64 64"
+            width="24"
+            height="24"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 64 64"
+          >
+            <path
+              d="M19,2.875H3.5c-0.829,0-1.5,0.671-1.5,1.5v19.979c0,0.829,0.671,1.5,1.5,1.5H19c0.829,0,1.5-0.671,1.5-1.5V4.375  C20.5,3.546,19.829,2.875,19,2.875z M17.5,22.854H5V5.875h12.5V22.854z"
+              fill="white"
+            />
+            <path
+              d="M19,28.773H3.5c-0.829,0-1.5,0.671-1.5,1.5v6.166c0,0.828,0.671,1.5,1.5,1.5H19c0.829,0,1.5-0.672,1.5-1.5v-6.166  C20.5,29.445,19.829,28.773,19,28.773z M17.5,34.939H5v-3.166h12.5V34.939z"
+              fill="white"
+            />
+            <path
+              d="M19,40.859H3.5c-0.829,0-1.5,0.672-1.5,1.5v17.266c0,0.828,0.671,1.5,1.5,1.5H19c0.829,0,1.5-0.672,1.5-1.5V42.359  C20.5,41.531,19.829,40.859,19,40.859z M17.5,58.125H5V43.859h12.5V58.125z"
+              fill="white"
+            />
+            <path
+              d="M40,2.875H24.5c-0.829,0-1.5,0.671-1.5,1.5v14.25c0,0.829,0.671,1.5,1.5,1.5H40c0.828,0,1.5-0.671,1.5-1.5V4.375  C41.5,3.546,40.828,2.875,40,2.875z M38.5,17.125H26V5.875h12.5V17.125z"
+              fill="white"
+            />
+            <path
+              d="M40,23.125H24.5c-0.829,0-1.5,0.671-1.5,1.5V46.5c0,0.828,0.671,1.5,1.5,1.5H40c0.828,0,1.5-0.672,1.5-1.5V24.625  C41.5,23.796,40.828,23.125,40,23.125z M38.5,45H26V26.125h12.5V45z"
+              fill="white"
+            />
+            <path
+              d="M40,51H24.5c-0.829,0-1.5,0.672-1.5,1.5v7.125c0,0.828,0.671,1.5,1.5,1.5H40c0.828,0,1.5-0.672,1.5-1.5V52.5  C41.5,51.672,40.828,51,40,51z M38.5,58.125H26V54h12.5V58.125z"
+              fill="white"
+            />
+            <path
+              d="M60.5,2.875H45c-0.828,0-1.5,0.671-1.5,1.5v35.171c0,0.828,0.672,1.5,1.5,1.5h15.5c0.828,0,1.5-0.672,1.5-1.5V4.375  C62,3.546,61.328,2.875,60.5,2.875z M59,38.046H46.5V5.875H59V38.046z"
+              fill="white"
+            />
+            <path
+              d="M60.5,44.346H45c-0.828,0-1.5,0.672-1.5,1.5v13.779c0,0.828,0.672,1.5,1.5,1.5h15.5c0.828,0,1.5-0.672,1.5-1.5V45.846  C62,45.018,61.328,44.346,60.5,44.346z M59,58.125H46.5V47.346H59V58.125z"
+              fill="white"
+            />
+          </svg>
+        </div>
+        <div>瀑布流</div>
+      {:else}
+        <div>
+          <!-- svg 列表图标 -->
+          <svg
+            viewBox="0 0 32 32"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <style>
+                .cls-1 {
+                  fill: none;
+                  stroke: #000;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-width: 2px;
+                }
+              </style>
+            </defs>
+            <title />
+            <g data-name="43-browser" id="_43-browser">
+              <rect class="cls-1" height="30" width="30" x="1" y="1" />
+              <line class="cls-1" x1="1" x2="31" y1="9" y2="9" />
+              <line class="cls-1" x1="5" x2="7" y1="5" y2="5" />
+              <line class="cls-1" x1="11" x2="13" y1="5" y2="5" />
+              <line class="cls-1" x1="9" x2="25" y1="16" y2="16" />
+              <line class="cls-1" x1="7" x2="25" y1="20" y2="20" />
+              <line class="cls-1" x1="7" x2="25" y1="24" y2="24" />
+            </g>
+          </svg>
+        </div>
+        <div>原有列表</div>
+      {/if}
     </button>
 
     <!-- 按钮2: 手动整理布局 -->
@@ -216,8 +268,8 @@
       <div>
         <!-- svg 设置图标 -->
         <svg
-          width="20"
-          height="20"
+          width="24"
+          height="24"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -334,6 +386,17 @@
       <div class="section">
         <h1 class="s_title">常用配置</h1>
         <div class="s_panel">
+          <Switch
+            title_fixed={"显示模式"}
+            title_green="瀑布流"
+            title_red="原始表格"
+            label="原始表格模式仅支持点击图片显示iframe和加载下一页"
+            bind:checked={$_show_mode}
+            func={() => {
+              window.CHANGE_CARD_LAYOUT();
+            }}
+          />
+
           <Switch
             title_fixed={"加载下一页方式"}
             title_green="按钮(默认)"

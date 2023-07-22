@@ -22,6 +22,9 @@ function persistStore(key, startValue) {
 /** 全局Masonry */
 export const _Global_Masonry = writable({});
 
+/** 显示模式: 表格(0) or 瀑布流(1) */
+export const _show_mode = persistStore('_showMode', 1);
+
 // iframe变量 -------------------------------------
 /** iframe 开关 */
 export const _iframe_switch = writable(0)

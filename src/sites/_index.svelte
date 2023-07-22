@@ -10,7 +10,6 @@
     _show_configPanel,
   } from "../stores";
   import { onMount, afterUpdate } from "svelte";
-  import { fade } from "svelte/transition";
 
   import { sortMasonry, NEXUS_TOOLS, debounce } from "../utils";
   import {
@@ -30,6 +29,7 @@
 
   /** 父传值: 原有种子列表dom*/
   export let originTable;
+
   /** 父传值: 瀑布流dom*/
   export let waterfallNode;
 
@@ -64,22 +64,7 @@
     sortMasonry("fast");
     sortMasonry("fast");
   }
-
-  // 面板相关 ------------------------------------------------
-  /** 关闭 iframe */
-  function toggleIframe() {
-    $_iframe_switch = 0;
-  }
-
-  /** esc 控制关闭所有面板 */
-  function key_closePanels(event) {
-    // console.log(event);
-    if (event.key === "Escape") {
-      console.log(event);
-      $_iframe_switch = 0;
-      $_show_configPanel = false;
-    }
-  }
+  window.CHANGE_CARD_LAYOUT = CHANGE_CARD_LAYOUT;
 
   // 翻页相关 ------------------------------------------------
 
@@ -113,6 +98,7 @@
       }, PAGE.GAP);
     }
   }
+  window.turnPage = turnPage;
 
   /** 延迟调用 Nexus Tool */
   function nexus_tool_delay() {
@@ -348,6 +334,7 @@
   });
 </script>
 
+<!-- 卡片渲染模版 -->
 {#if $_current_domain == "kamept.com"}
   {#each infoList as info (info.torrentIndex)}
     <Kamept torrentInfo={info} cardWidth={CARD.CARD_WIDTH} {ICON} />
@@ -377,25 +364,6 @@
   </button>
 </div>
 
-<!-- iframe 详情 -->
-{#if $_iframe_switch}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div id="_iframe" on:click={toggleIframe} transition:fade={{ duration: 300 }}>
-    <iframe
-      src={$_iframe_url}
-      frameborder="0"
-      title="wow"
-      style="width:
-        {GLOBAL_SITE[$_current_domain]
-        ? GLOBAL_SITE[$_current_domain].Iframe_Width
-        : 1000}px"
-    />
-  </div>
-{/if}
-
-<!-- NOTE: svelte 绑定 window -> 按 escape 退出各种子面板 -->
-<svelte:window on:keydown|capture={key_closePanels} />
-
 <style>
   /* 卡片: 收藏按钮 */
   #turnPage {
@@ -407,24 +375,5 @@
 
     position: absolute;
     bottom: 0px;
-  }
-
-  div#_iframe {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 38, 38, 0.607);
-    z-index: 30000;
-
-    display: flex;
-  }
-
-  iframe {
-    /* width: 1246px; */
-    height: 96%;
-
-    margin: auto;
   }
 </style>
