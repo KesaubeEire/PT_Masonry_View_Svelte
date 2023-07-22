@@ -79,9 +79,9 @@ RT, 本油猴脚本专为 PT 打造, 让你顺畅划划点点, 一页爽逛种�
     - [x] Nexus 触摸显示大图放个半秒再显示？避免划过显示一堆不想看的？(from tg by LNN & 龟龟)
     - [x] 配置一下标题的隐藏(from tg by LNN)
     - [x] 侧边栏右侧位置保护(from tg by 天 胖)
+    - [x] 将是否打开原有列表记忆在 localstorage 里(from tg by 天 胖)
+    - [x] 给列表模式加点击 iframe 显示详情(from tg by 天 胖)
     - [ ] TODO: 排列模式:按照列的模式加紧(from tg by 天 胖)
-    - [ ] TODO: 将是否打开原有列表记忆在 localstorage 里(from tg by 天 胖)
-    - [ ] TODO: 给列表模式加点击 iframe 显示详情(from tg by 天 胖)
 
 - 样式类
     - [x] iframe 两侧颜色降低亮度(from tg by LNN)
