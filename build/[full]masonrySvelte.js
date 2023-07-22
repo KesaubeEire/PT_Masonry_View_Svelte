@@ -2,7 +2,7 @@
 // @name            PT种子列表瀑布流视图(Svelte重构)
 // @name:en         PT_Masonry_View_Svelte
 // @namespace       https://github.com/KesaubeEire/PT_Masonry_View_Svelte
-// @version         1.0.3
+// @version         1.1.0
 // @author          Kesa
 // @description     PT种子列表无限下拉瀑布流视图(Svelte重构)
 // @description:en  PT Masonry View by Svelte.
@@ -19,7 +19,7 @@
 // @grant           none
 // ==/UserScript==
 
-(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' div.waterfall{width:100%;padding-top:20px;padding-bottom:60px;border-radius:20px;height:100%;margin:20px auto;transition:height .3s}button.debug{position:fixed;top:10px;right:10px;padding:4px;background-color:#333;color:#fff;border:none;border-radius:5px;cursor:pointer}button#toggle_oldTable{top:10px}button#btnReLayout{top:40px}button#btnSwitchMode{top:70px}button#sort_masonry{top:100px}.switch.svelte-2vaqag.svelte-2vaqag{width:100%;height:30px;display:flex;align-items:center;justify-content:space-between}.s_title.svelte-2vaqag.svelte-2vaqag{display:flex;align-items:center;font-size:14px;position:relative}.title_green.svelte-2vaqag.svelte-2vaqag{color:green;font-weight:800}.title_red.svelte-2vaqag.svelte-2vaqag{color:red;font-weight:800}.s_title.svelte-2vaqag:has(.hint):hover ._hint.svelte-2vaqag{display:block}._hint.svelte-2vaqag.svelte-2vaqag{display:none;position:absolute;bottom:28px;left:0;width:max-content;height:auto;background-color:#fff;border:1px solid black;border-radius:8px;padding:4px 8px;box-sizing:content-box;z-index:1}input[type=checkbox].svelte-2vaqag.svelte-2vaqag{width:0px;height:0px;display:none;visibility:hidden}label.svelte-2vaqag.svelte-2vaqag{width:48px;height:12px;display:inline-block;position:relative;background-color:#777;border:2px solid #555;border-radius:30px;transition:all .2s}label.svelte-2vaqag.svelte-2vaqag:after{content:"";display:block;width:24px;height:24px;background-color:#555;position:absolute;border-radius:50%;left:-2px;top:-6px;transition:transform .2s}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag{background-color:#00a0fc;border-color:#006dc9}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag:after{background-color:#0054b0;transform:translate(28px)}.sideP.svelte-mdsgbd.svelte-mdsgbd{position:fixed;opacity:.4;margin:4px 2px;border-radius:8px;overflow:hidden;z-index:40000;border:2px solid transparent}.sideP.svelte-mdsgbd.svelte-mdsgbd:hover{opacity:1;border:2px solid yellow}.sideP__title.svelte-mdsgbd.svelte-mdsgbd{width:100%;height:8px;background-color:#ff0}.sideP__title.svelte-mdsgbd.svelte-mdsgbd:hover{cursor:move}.sideP__out.svelte-mdsgbd.svelte-mdsgbd{display:flex;flex-direction:column}.sideP__btn.svelte-mdsgbd.svelte-mdsgbd{background-color:gray;color:#fff;padding:4px 8px;margin:4px;border-radius:8px;cursor:pointer;border:none}.sideP__btn.svelte-mdsgbd.svelte-mdsgbd:hover{background-color:#6531ff}.configP.svelte-mdsgbd.svelte-mdsgbd{position:fixed;left:0;top:0;width:100vw;height:100vh;padding:0;margin:0;z-index:50000;background-color:#0003}.configP_holder.svelte-mdsgbd.svelte-mdsgbd{position:absolute;right:20px;top:20px;overflow-y:scroll;width:360px;max-height:calc(100vh - 40px);padding:0;margin:0;border-radius:24px;border:2px solid black;background-color:#d4e7ff}.configP_holder.svelte-mdsgbd.svelte-mdsgbd::-webkit-scrollbar{display:none}.configP_title.svelte-mdsgbd.svelte-mdsgbd{position:fixed;box-sizing:border-box;width:inherit;display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 10px;border-top-left-radius:24px;border-top-right-radius:24px;border-bottom:2px solid black;background-color:#9ac6ff;z-index:2}.configP_title.svelte-mdsgbd.svelte-mdsgbd p{font-size:18px;font-weight:500}.configP_title.svelte-mdsgbd.svelte-mdsgbd button{border:none;padding:0;margin:0;background-color:transparent}.section.svelte-mdsgbd.svelte-mdsgbd{margin:16px 18px}.section.svelte-mdsgbd.svelte-mdsgbd button{border-radius:10px;margin:4px;padding:12px 16px}.section.svelte-mdsgbd.svelte-mdsgbd .s_title{text-align:center}.section.svelte-mdsgbd.svelte-mdsgbd .s_panel{display:flex;flex-direction:column;justify-content:space-evenly;align-items:center}.section.svelte-mdsgbd.svelte-mdsgbd .s_checkbox{padding:12px;margin:4px;border-radius:10px;border:1px solid black;font-size:14px;display:flex;align-items:center}.configP_holder.svelte-mdsgbd .section.svelte-mdsgbd:nth-child(2){margin-top:48px}#reset_panel_pos.svelte-mdsgbd.svelte-mdsgbd{width:100%;text-align:center;border:1px solid black;border-radius:16px}.card.svelte-vdh3h6.svelte-vdh3h6{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-vdh3h6.svelte-vdh3h6:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-vdh3h6.svelte-vdh3h6{padding:2px 0}.card-holder.svelte-vdh3h6.svelte-vdh3h6{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-category.svelte-vdh3h6.svelte-vdh3h6{text-align:center;letter-spacing:2px;font-weight:700}.card-line.svelte-vdh3h6.svelte-vdh3h6{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-vdh3h6.svelte-vdh3h6{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-vdh3h6.svelte-vdh3h6:hover{-webkit-line-clamp:100}.cl-center.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:left;align-items:center;flex-wrap:wrap;gap:2px;transform:translate(4px)}.cl-tags.svelte-vdh3h6.svelte-vdh3h6:has(span){padding-top:2px}.card-details.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-vdh3h6.svelte-vdh3h6{height:100%;position:relative}.card-image.svelte-vdh3h6 img.svelte-vdh3h6{width:100%;object-fit:cover}.card-alter.svelte-vdh3h6.svelte-vdh3h6{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-vdh3h6.svelte-vdh3h6{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-vdh3h6.svelte-vdh3h6{color:#00f}._2XFree.svelte-vdh3h6.svelte-vdh3h6{color:green}.card-description.svelte-vdh3h6.svelte-vdh3h6{padding-left:4px;padding-right:4px}.card-index.svelte-vdh3h6.svelte-vdh3h6{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-vdh3h6.svelte-vdh3h6{padding:1px 2px;cursor:pointer}.hot.svelte-vdh3h6.svelte-vdh3h6,.new.svelte-vdh3h6.svelte-vdh3h6{padding:0 2px;border-radius:8px;background:white;margin:2px}.card-category.svelte-1fw75v2.svelte-1fw75v2{height:24px;padding:0 2px;border:1px;background:black;color:#fff;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:flex;align-items:center;justify-content:center}.card_category-img.svelte-1fw75v2.svelte-1fw75v2{height:32px;background-size:100% 141%;background-position:center top;padding-top:6px}.card.svelte-1fw75v2.svelte-1fw75v2{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-1fw75v2.svelte-1fw75v2:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-1fw75v2.svelte-1fw75v2{padding:2px 0}.card-holder.svelte-1fw75v2.svelte-1fw75v2{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-line.svelte-1fw75v2.svelte-1fw75v2{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-1fw75v2.svelte-1fw75v2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-1fw75v2.svelte-1fw75v2:hover{-webkit-line-clamp:100}.cl-center.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2px;padding-top:4px;padding-bottom:2px}.cl-tags.svelte-1fw75v2.svelte-1fw75v2:has(span){padding-top:2px}.card-details.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-1fw75v2.svelte-1fw75v2{height:100%;position:relative}.card-image.svelte-1fw75v2 img.svelte-1fw75v2{width:100%;object-fit:cover}.card-alter.svelte-1fw75v2.svelte-1fw75v2{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-1fw75v2.svelte-1fw75v2{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-1fw75v2.svelte-1fw75v2{color:#00f}._2XFree.svelte-1fw75v2.svelte-1fw75v2{color:green}.card-description.svelte-1fw75v2.svelte-1fw75v2{padding-left:4px;padding-right:4px}.card-index.svelte-1fw75v2.svelte-1fw75v2{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-1fw75v2.svelte-1fw75v2{padding:1px 2px;cursor:pointer}.tempTags.svelte-1fw75v2.svelte-1fw75v2{background-color:#fff;margin-left:2px;padding-left:2px;padding-right:2px;border-radius:4px}#turnPage.svelte-tr7wwl{width:100%;height:32px;border-radius:16px;line-height:20px;font-size:14px;position:absolute;bottom:0px}div#_iframe.svelte-tr7wwl{position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#0026269b;z-index:30000;display:flex}iframe.svelte-tr7wwl{height:96%;margin:auto} ');
+(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' div.waterfall{width:100%;padding-top:20px;padding-bottom:60px;border-radius:20px;height:100%;margin:20px auto;transition:height .3s}button.debug{position:fixed;top:10px;right:10px;padding:4px;background-color:#333;color:#fff;border:none;border-radius:5px;cursor:pointer}button#toggle_oldTable{top:10px}button#btnReLayout{top:40px}button#btnSwitchMode{top:70px}button#sort_masonry{top:100px}.switch.svelte-2vaqag.svelte-2vaqag{width:100%;height:30px;display:flex;align-items:center;justify-content:space-between}.s_title.svelte-2vaqag.svelte-2vaqag{display:flex;align-items:center;font-size:14px;position:relative}.title_green.svelte-2vaqag.svelte-2vaqag{color:green;font-weight:800}.title_red.svelte-2vaqag.svelte-2vaqag{color:red;font-weight:800}.s_title.svelte-2vaqag:has(.hint):hover ._hint.svelte-2vaqag{display:block}._hint.svelte-2vaqag.svelte-2vaqag{display:none;position:absolute;bottom:28px;left:0;width:max-content;height:auto;background-color:#fff;border:1px solid black;border-radius:8px;padding:4px 8px;box-sizing:content-box;z-index:1}input[type=checkbox].svelte-2vaqag.svelte-2vaqag{width:0px;height:0px;display:none;visibility:hidden}label.svelte-2vaqag.svelte-2vaqag{width:48px;height:12px;display:inline-block;position:relative;background-color:#777;border:2px solid #555;border-radius:30px;transition:all .2s}label.svelte-2vaqag.svelte-2vaqag:after{content:"";display:block;width:24px;height:24px;background-color:#555;position:absolute;border-radius:50%;left:-2px;top:-6px;transition:transform .2s}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag{background-color:#00a0fc;border-color:#006dc9}input[type=checkbox].svelte-2vaqag:checked~label.svelte-2vaqag:after{background-color:#0054b0;transform:translate(28px)}.sideP.svelte-mdsgbd.svelte-mdsgbd{position:fixed;opacity:.4;margin:4px 2px;border-radius:8px;overflow:hidden;z-index:40000;border:2px solid transparent}.sideP.svelte-mdsgbd.svelte-mdsgbd:hover{opacity:1;border:2px solid yellow}.sideP__title.svelte-mdsgbd.svelte-mdsgbd{width:100%;height:8px;background-color:#ff0}.sideP__title.svelte-mdsgbd.svelte-mdsgbd:hover{cursor:move}.sideP__out.svelte-mdsgbd.svelte-mdsgbd{display:flex;flex-direction:column}.sideP__btn.svelte-mdsgbd.svelte-mdsgbd{background-color:gray;color:#fff;padding:4px 8px;margin:4px;border-radius:8px;cursor:pointer;border:none}.sideP__btn.svelte-mdsgbd.svelte-mdsgbd:hover{background-color:#6531ff}.configP.svelte-mdsgbd.svelte-mdsgbd{position:fixed;left:0;top:0;width:100vw;height:100vh;padding:0;margin:0;z-index:50000;background-color:#0003}.configP_holder.svelte-mdsgbd.svelte-mdsgbd{position:absolute;right:20px;top:20px;overflow-y:scroll;width:360px;max-height:calc(100vh - 40px);padding:0;margin:0;border-radius:24px;border:2px solid black;background-color:#d4e7ff}.configP_holder.svelte-mdsgbd.svelte-mdsgbd::-webkit-scrollbar{display:none}.configP_title.svelte-mdsgbd.svelte-mdsgbd{position:fixed;box-sizing:border-box;width:inherit;display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 10px;border-top-left-radius:24px;border-top-right-radius:24px;border-bottom:2px solid black;background-color:#9ac6ff;z-index:2}.configP_title.svelte-mdsgbd.svelte-mdsgbd p{font-size:18px;font-weight:500}.configP_title.svelte-mdsgbd.svelte-mdsgbd button{border:none;padding:0;margin:0;background-color:transparent}.section.svelte-mdsgbd.svelte-mdsgbd{margin:16px 18px}.section.svelte-mdsgbd.svelte-mdsgbd button{border-radius:10px;margin:4px;padding:12px 16px}.section.svelte-mdsgbd.svelte-mdsgbd .s_title{text-align:center}.section.svelte-mdsgbd.svelte-mdsgbd .s_panel{display:flex;flex-direction:column;justify-content:space-evenly;align-items:center}.section.svelte-mdsgbd.svelte-mdsgbd .s_checkbox{padding:12px;margin:4px;border-radius:10px;border:1px solid black;font-size:14px;display:flex;align-items:center}.configP_holder.svelte-mdsgbd .section.svelte-mdsgbd:nth-child(2){margin-top:48px}#reset_panel_pos.svelte-mdsgbd.svelte-mdsgbd{width:100%;text-align:center;border:1px solid black;border-radius:16px}.card.svelte-vdh3h6.svelte-vdh3h6{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-vdh3h6.svelte-vdh3h6:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-vdh3h6.svelte-vdh3h6{padding:2px 0}.card-holder.svelte-vdh3h6.svelte-vdh3h6{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-category.svelte-vdh3h6.svelte-vdh3h6{text-align:center;letter-spacing:2px;font-weight:700}.card-line.svelte-vdh3h6.svelte-vdh3h6{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-vdh3h6.svelte-vdh3h6{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-vdh3h6.svelte-vdh3h6:hover{-webkit-line-clamp:100}.cl-center.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:left;align-items:center;flex-wrap:wrap;gap:2px;transform:translate(4px)}.cl-tags.svelte-vdh3h6.svelte-vdh3h6:has(span){padding-top:2px}.card-details.svelte-vdh3h6.svelte-vdh3h6{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-vdh3h6.svelte-vdh3h6{height:100%;position:relative}.card-image.svelte-vdh3h6 img.svelte-vdh3h6{width:100%;object-fit:cover}.card-alter.svelte-vdh3h6.svelte-vdh3h6{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-vdh3h6.svelte-vdh3h6{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-vdh3h6.svelte-vdh3h6{color:#00f}._2XFree.svelte-vdh3h6.svelte-vdh3h6{color:green}.card-description.svelte-vdh3h6.svelte-vdh3h6{padding-left:4px;padding-right:4px}.card-index.svelte-vdh3h6.svelte-vdh3h6{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-vdh3h6.svelte-vdh3h6{padding:1px 2px;cursor:pointer}.hot.svelte-vdh3h6.svelte-vdh3h6,.new.svelte-vdh3h6.svelte-vdh3h6{padding:0 2px;border-radius:8px;background:white;margin:2px}.card-category.svelte-1fw75v2.svelte-1fw75v2{height:24px;padding:0 2px;border:1px;background:black;color:#fff;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:flex;align-items:center;justify-content:center}.card_category-img.svelte-1fw75v2.svelte-1fw75v2{height:32px;background-size:100% 141%;background-position:center top;padding-top:6px}.card.svelte-1fw75v2.svelte-1fw75v2{border:1px solid rgba(255,255,255,.5);border-radius:16px;margin:6px 0;overflow:hidden;cursor:pointer;box-shadow:#0000004d 3px 3px,#0000001a -1px -1px;transition:box-shadow .2s}.card.svelte-1fw75v2.svelte-1fw75v2:hover{box-shadow:#7300ff4d 5px 5px,#0000001a -1px -1px}.card-title.svelte-1fw75v2.svelte-1fw75v2{padding:2px 0}.card-holder.svelte-1fw75v2.svelte-1fw75v2{background-color:#ffffff80;background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0))}.card-line.svelte-1fw75v2.svelte-1fw75v2{margin-top:1px;margin-bottom:1px;display:flex;justify-content:space-evenly;align-items:center;height:20px}.two-lines.svelte-1fw75v2.svelte-1fw75v2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .3s}.two-lines.svelte-1fw75v2.svelte-1fw75v2:hover{-webkit-line-clamp:100}.cl-center.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:space-evenly;align-items:center}.cl-tags.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2px;padding-top:4px;padding-bottom:2px}.cl-tags.svelte-1fw75v2.svelte-1fw75v2:has(span){padding-top:2px}.card-details.svelte-1fw75v2.svelte-1fw75v2{display:flex;justify-content:center;align-items:center;flex-direction:column}.card-image.svelte-1fw75v2.svelte-1fw75v2{height:100%;position:relative}.card-image.svelte-1fw75v2 img.svelte-1fw75v2{width:100%;object-fit:cover}.card-alter.svelte-1fw75v2.svelte-1fw75v2{text-align:center;height:20px;display:flex;justify-content:center;align-items:center}.top_and_free.svelte-1fw75v2.svelte-1fw75v2{padding:2px;border-radius:4px;margin-bottom:2px;display:flex;justify-content:center;align-items:center;line-height:11px;height:11px;font-size:10px}._Free.svelte-1fw75v2.svelte-1fw75v2{color:#00f}._2XFree.svelte-1fw75v2.svelte-1fw75v2{color:green}.card-description.svelte-1fw75v2.svelte-1fw75v2{padding-left:4px;padding-right:4px}.card-index.svelte-1fw75v2.svelte-1fw75v2{position:absolute;top:0;left:0;padding-right:9px;padding-left:2px;margin:0;height:20px;line-height:16px;font-size:16px;background-color:#000;color:#ff0;border-top-right-radius:100px;border-bottom-right-radius:100px;display:flex;align-items:center;pointer-events:none}.btnCollet.svelte-1fw75v2.svelte-1fw75v2{padding:1px 2px;cursor:pointer}.tempTags.svelte-1fw75v2.svelte-1fw75v2{background-color:#fff;margin-left:2px;padding-left:2px;padding-right:2px;border-radius:4px}#turnPage.svelte-kydsmq{width:100%;height:32px;border-radius:16px;line-height:20px;font-size:14px;position:absolute;bottom:0px}#_turnPage.svelte-2j14uu{width:100%;height:32px;border-radius:16px;line-height:20px;font-size:14px;margin:10px 0;padding:0 10px}div#_iframe.svelte-1wevt6e{position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#0026269b;z-index:30000;display:flex}iframe.svelte-1wevt6e{height:96%;margin:auto} ');
 
 (function () {
   'use strict';
@@ -148,7 +148,6 @@
       }
     };
   }
-  const globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
   function append(target, node) {
     target.appendChild(node);
   }
@@ -862,11 +861,11 @@
     updateJQuery(jQuery2 || window2.jQuery);
     return jQueryBridget;
   });
-  (function(global2, factory8) {
+  (function(global, factory8) {
     if (typeof define == "function" && define.amd) {
       define("ev-emitter/ev-emitter", factory8);
     } else {
-      global2.EvEmitter = factory8();
+      global.EvEmitter = factory8();
     }
   })(typeof window != "undefined" ? window : globalThis, function() {
     function EvEmitter() {
@@ -2595,11 +2594,11 @@
     return store;
   }
   const _Global_Masonry = writable({});
+  const _show_mode = persistStore("_showMode", 1);
   const _iframe_switch = writable(0);
   const _iframe_url = writable("https://kamept.com/index.php");
   const _current_domain = persistStore("_domain", "");
   const _current_bgColor = persistStore("_bgColor", "");
-  const _show_originTable = writable(0);
   const _show_configPanel = writable(false);
   const _panelPos = persistStore("_panelPos", { x: 0, y: 0 });
   const _turnPage = persistStore("_turnPage", false);
@@ -2732,7 +2731,7 @@
     function select_block_type(ctx2, dirty) {
       if (
         /*green_state*/
-        ctx2[6]
+        ctx2[7]
       )
         return create_if_block_3$3;
       if (
@@ -2845,8 +2844,8 @@
         /*checked*/
         ctx2[0]
       )
-        return create_if_block_4$3;
-      return create_else_block$1;
+        return create_if_block_4$2;
+      return create_else_block$2;
     }
     let current_block_type = select_block_type_1(ctx);
     let if_block = current_block_type(ctx);
@@ -2878,7 +2877,7 @@
       }
     };
   }
-  function create_else_block$1(ctx) {
+  function create_else_block$2(ctx) {
     let span;
     let t;
     return {
@@ -2909,7 +2908,7 @@
       }
     };
   }
-  function create_if_block_4$3(ctx) {
+  function create_if_block_4$2(ctx) {
     let span;
     let t;
     return {
@@ -2940,7 +2939,7 @@
       }
     };
   }
-  function create_if_block_1$3(ctx) {
+  function create_if_block_1$4(ctx) {
     let div;
     let input;
     let t;
@@ -2955,10 +2954,10 @@
         label_1 = element("label");
         attr(input, "type", "checkbox");
         attr(input, "id", "_t" + /*id*/
-        ctx[7]);
+        ctx[8]);
         attr(input, "class", "svelte-2vaqag");
         attr(label_1, "for", "_t" + /*id*/
-        ctx[7]);
+        ctx[8]);
         attr(label_1, "class", "svelte-2vaqag");
         attr(div, "class", "s_switch");
       },
@@ -2975,13 +2974,13 @@
               input,
               "change",
               /*input_change_handler*/
-              ctx[10]
+              ctx[11]
             ),
             listen(
               input,
               "change",
               /*change_handler*/
-              ctx[11]
+              ctx[12]
             )
           ];
           mounted = true;
@@ -3002,17 +3001,17 @@
       }
     };
   }
-  function create_if_block$4(ctx) {
+  function create_if_block$6(ctx) {
     let current;
     const default_slot_template = (
       /*#slots*/
-      ctx[9].default
+      ctx[10].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$$scope*/
-      ctx[8],
+      ctx[9],
       null
     );
     return {
@@ -3029,20 +3028,20 @@
       p(ctx2, dirty) {
         if (default_slot) {
           if (default_slot.p && (!current || dirty & /*$$scope*/
-          256)) {
+          512)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$$scope*/
-              ctx2[8],
+              ctx2[9],
               !current ? get_all_dirty_from_scope(
                 /*$$scope*/
-                ctx2[8]
+                ctx2[9]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$$scope*/
-                ctx2[8],
+                ctx2[9],
                 dirty,
                 null
               ),
@@ -3067,7 +3066,7 @@
       }
     };
   }
-  function create_fragment$4(ctx) {
+  function create_fragment$6(ctx) {
     let div1;
     let div0;
     let t0;
@@ -3087,11 +3086,11 @@
     );
     let if_block2 = (
       /*type*/
-      ctx[1] == "switch" && create_if_block_1$3(ctx)
+      ctx[1] == "switch" && create_if_block_1$4(ctx)
     );
     let if_block3 = (
       /*type*/
-      ctx[1] == "range" && create_if_block$4(ctx)
+      ctx[1] == "range" && create_if_block$6(ctx)
     );
     return {
       c() {
@@ -3195,7 +3194,7 @@
           if (if_block2) {
             if_block2.p(ctx2, dirty);
           } else {
-            if_block2 = create_if_block_1$3(ctx2);
+            if_block2 = create_if_block_1$4(ctx2);
             if_block2.c();
             if_block2.m(div1, t4);
           }
@@ -3214,7 +3213,7 @@
               transition_in(if_block3, 1);
             }
           } else {
-            if_block3 = create_if_block$4(ctx2);
+            if_block3 = create_if_block$6(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
             if_block3.m(div1, null);
@@ -3251,13 +3250,14 @@
       }
     };
   }
-  function instance$5($$self, $$props, $$invalidate) {
+  function instance$6($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
     let { type = "switch" } = $$props;
     let { title_fixed = "" } = $$props;
     let { title_green = "" } = $$props;
     let { title_red = "" } = $$props;
     let { label = "" } = $$props;
+    let { func: func2 = null } = $$props;
     const id = Math.random().toFixed(8);
     let { checked = false } = $$props;
     let { green_state = true } = $$props;
@@ -3267,6 +3267,8 @@
     }
     const change_handler = () => {
       console.log(title_fixed, checked);
+      if (func2 != null)
+        func2();
     };
     $$self.$$set = ($$props2) => {
       if ("type" in $$props2)
@@ -3279,12 +3281,14 @@
         $$invalidate(4, title_red = $$props2.title_red);
       if ("label" in $$props2)
         $$invalidate(5, label = $$props2.label);
+      if ("func" in $$props2)
+        $$invalidate(6, func2 = $$props2.func);
       if ("checked" in $$props2)
         $$invalidate(0, checked = $$props2.checked);
       if ("green_state" in $$props2)
-        $$invalidate(6, green_state = $$props2.green_state);
+        $$invalidate(7, green_state = $$props2.green_state);
       if ("$$scope" in $$props2)
-        $$invalidate(8, $$scope = $$props2.$$scope);
+        $$invalidate(9, $$scope = $$props2.$$scope);
     };
     return [
       checked,
@@ -3293,6 +3297,7 @@
       title_green,
       title_red,
       label,
+      func2,
       green_state,
       id,
       $$scope,
@@ -3304,16 +3309,78 @@
   class Switch extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance$5, create_fragment$4, safe_not_equal, {
+      init(this, options, instance$6, create_fragment$6, safe_not_equal, {
         type: 1,
         title_fixed: 2,
         title_green: 3,
         title_red: 4,
         label: 5,
+        func: 6,
         checked: 0,
-        green_state: 6
+        green_state: 7
       });
     }
+  }
+  function create_else_block_4(ctx) {
+    let div0;
+    let t1;
+    let div1;
+    return {
+      c() {
+        div0 = element("div");
+        div0.innerHTML = `<svg viewBox="0 0 32 32" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
+                  fill: none;
+                  stroke: #000;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-width: 2px;
+                }
+              </style></defs><title></title><g data-name="43-browser" id="_43-browser"><rect class="cls-1" height="30" width="30" x="1" y="1"></rect><line class="cls-1" x1="1" x2="31" y1="9" y2="9"></line><line class="cls-1" x1="5" x2="7" y1="5" y2="5"></line><line class="cls-1" x1="11" x2="13" y1="5" y2="5"></line><line class="cls-1" x1="9" x2="25" y1="16" y2="16"></line><line class="cls-1" x1="7" x2="25" y1="20" y2="20"></line><line class="cls-1" x1="7" x2="25" y1="24" y2="24"></line></g></svg>`;
+        t1 = space();
+        div1 = element("div");
+        div1.textContent = "原有列表";
+      },
+      m(target, anchor) {
+        insert(target, div0, anchor);
+        insert(target, t1, anchor);
+        insert(target, div1, anchor);
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div0);
+        if (detaching)
+          detach(t1);
+        if (detaching)
+          detach(div1);
+      }
+    };
+  }
+  function create_if_block_10$2(ctx) {
+    let div0;
+    let t0;
+    let div1;
+    return {
+      c() {
+        div0 = element("div");
+        div0.innerHTML = `<svg enable-background="new 0 0 64 64" width="24" height="24" id="Layer_1" version="1.1" viewBox="0 0 64 64"><path d="M19,2.875H3.5c-0.829,0-1.5,0.671-1.5,1.5v19.979c0,0.829,0.671,1.5,1.5,1.5H19c0.829,0,1.5-0.671,1.5-1.5V4.375  C20.5,3.546,19.829,2.875,19,2.875z M17.5,22.854H5V5.875h12.5V22.854z" fill="white"></path><path d="M19,28.773H3.5c-0.829,0-1.5,0.671-1.5,1.5v6.166c0,0.828,0.671,1.5,1.5,1.5H19c0.829,0,1.5-0.672,1.5-1.5v-6.166  C20.5,29.445,19.829,28.773,19,28.773z M17.5,34.939H5v-3.166h12.5V34.939z" fill="white"></path><path d="M19,40.859H3.5c-0.829,0-1.5,0.672-1.5,1.5v17.266c0,0.828,0.671,1.5,1.5,1.5H19c0.829,0,1.5-0.672,1.5-1.5V42.359  C20.5,41.531,19.829,40.859,19,40.859z M17.5,58.125H5V43.859h12.5V58.125z" fill="white"></path><path d="M40,2.875H24.5c-0.829,0-1.5,0.671-1.5,1.5v14.25c0,0.829,0.671,1.5,1.5,1.5H40c0.828,0,1.5-0.671,1.5-1.5V4.375  C41.5,3.546,40.828,2.875,40,2.875z M38.5,17.125H26V5.875h12.5V17.125z" fill="white"></path><path d="M40,23.125H24.5c-0.829,0-1.5,0.671-1.5,1.5V46.5c0,0.828,0.671,1.5,1.5,1.5H40c0.828,0,1.5-0.672,1.5-1.5V24.625  C41.5,23.796,40.828,23.125,40,23.125z M38.5,45H26V26.125h12.5V45z" fill="white"></path><path d="M40,51H24.5c-0.829,0-1.5,0.672-1.5,1.5v7.125c0,0.828,0.671,1.5,1.5,1.5H40c0.828,0,1.5-0.672,1.5-1.5V52.5  C41.5,51.672,40.828,51,40,51z M38.5,58.125H26V54h12.5V58.125z" fill="white"></path><path d="M60.5,2.875H45c-0.828,0-1.5,0.671-1.5,1.5v35.171c0,0.828,0.672,1.5,1.5,1.5h15.5c0.828,0,1.5-0.672,1.5-1.5V4.375  C62,3.546,61.328,2.875,60.5,2.875z M59,38.046H46.5V5.875H59V38.046z" fill="white"></path><path d="M60.5,44.346H45c-0.828,0-1.5,0.672-1.5,1.5v13.779c0,0.828,0.672,1.5,1.5,1.5h15.5c0.828,0,1.5-0.672,1.5-1.5V45.846  C62,45.018,61.328,44.346,60.5,44.346z M59,58.125H46.5V47.346H59V58.125z" fill="white"></path></svg>`;
+        t0 = space();
+        div1 = element("div");
+        div1.textContent = "瀑布流";
+      },
+      m(target, anchor) {
+        insert(target, div0, anchor);
+        insert(target, t0, anchor);
+        insert(target, div1, anchor);
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div0);
+        if (detaching)
+          detach(t0);
+        if (detaching)
+          detach(div1);
+      }
+    };
   }
   function create_if_block_9$2(ctx) {
     let button0;
@@ -3365,25 +3432,25 @@
               button0,
               "click",
               /*config_changeWidth*/
-              ctx[15]
+              ctx[16]
             ),
             listen(
               button1,
               "click",
               /*config_showAllDetails*/
-              ctx[16]
+              ctx[17]
             ),
             listen(
               button2,
               "click",
               /*config_switchMode*/
-              ctx[17]
+              ctx[18]
             ),
             listen(
               button3,
               "click",
               /*config_changeLoadMode*/
-              ctx[18]
+              ctx[19]
             )
           ];
           mounted = true;
@@ -3418,7 +3485,7 @@
       }
     };
   }
-  function create_if_block$3(ctx) {
+  function create_if_block$5(ctx) {
     let div8;
     let div7;
     let div0;
@@ -3440,24 +3507,24 @@
     let switch2;
     let updating_checked_2;
     let t8;
-    let t9;
-    let button1;
-    let t11;
-    let t12;
-    let div6;
-    let h11;
-    let t14;
-    let div3;
     let switch3;
     let updating_checked_3;
+    let t9;
+    let t10;
+    let button1;
+    let t12;
+    let t13;
+    let div6;
+    let h11;
     let t15;
-    let div5;
-    let h3;
-    let t17;
-    let div4;
+    let div3;
     let switch4;
     let updating_checked_4;
+    let t16;
+    let div5;
+    let h3;
     let t18;
+    let div4;
     let switch5;
     let updating_checked_5;
     let t19;
@@ -3476,18 +3543,43 @@
     let switch10;
     let updating_checked_10;
     let t24;
+    let switch11;
+    let updating_checked_11;
+    let t25;
     let div8_transition;
     let current;
     let mounted;
     let dispose;
     let if_block0 = (
       /*$_current_domain*/
-      ctx[8] == "kp.m-team.cc" && create_if_block_8$2(ctx)
+      ctx[9] == "kp.m-team.cc" && create_if_block_8$2(ctx)
     );
     function switch0_checked_binding(value) {
-      ctx[25](value);
+      ctx[27](value);
     }
     let switch0_props = {
+      title_fixed: "显示模式",
+      title_green: "瀑布流",
+      title_red: "原始表格",
+      label: "原始表格模式仅支持点击图片显示iframe和加载下一页",
+      func: (
+        /*func*/
+        ctx[26]
+      )
+    };
+    if (
+      /*$_show_mode*/
+      ctx[4] !== void 0
+    ) {
+      switch0_props.checked = /*$_show_mode*/
+      ctx[4];
+    }
+    switch0 = new Switch({ props: switch0_props });
+    binding_callbacks.push(() => bind(switch0, "checked", switch0_checked_binding));
+    function switch1_checked_binding(value) {
+      ctx[28](value);
+    }
+    let switch1_props = {
       title_fixed: "加载下一页方式",
       title_green: "按钮(默认)",
       title_red: "滚动(谨慎使用)",
@@ -3498,15 +3590,15 @@
       /*$_turnPage*/
       ctx[2] !== void 0
     ) {
-      switch0_props.checked = /*$_turnPage*/
+      switch1_props.checked = /*$_turnPage*/
       ctx[2];
     }
-    switch0 = new Switch({ props: switch0_props });
-    binding_callbacks.push(() => bind(switch0, "checked", switch0_checked_binding));
-    function switch1_checked_binding(value) {
-      ctx[26](value);
+    switch1 = new Switch({ props: switch1_props });
+    binding_callbacks.push(() => bind(switch1, "checked", switch1_checked_binding));
+    function switch2_checked_binding(value) {
+      ctx[29](value);
     }
-    let switch1_props = {
+    let switch2_props = {
       title_fixed: "侧边栏debug按钮",
       title_green: "隐藏(默认)",
       title_red: "显示(开发用)",
@@ -3514,38 +3606,38 @@
     };
     if (
       /*$_show_debug_btn*/
-      ctx[7] !== void 0
+      ctx[8] !== void 0
     ) {
-      switch1_props.checked = /*$_show_debug_btn*/
-      ctx[7];
+      switch2_props.checked = /*$_show_debug_btn*/
+      ctx[8];
     }
-    switch1 = new Switch({ props: switch1_props });
-    binding_callbacks.push(() => bind(switch1, "checked", switch1_checked_binding));
-    function switch2_checked_binding(value) {
-      ctx[27](value);
+    switch2 = new Switch({ props: switch2_props });
+    binding_callbacks.push(() => bind(switch2, "checked", switch2_checked_binding));
+    function switch3_checked_binding(value) {
+      ctx[30](value);
     }
-    let switch2_props = {
+    let switch3_props = {
       title_fixed: "悬浮预览大图",
       title_green: "默认开启",
       title_red: "核心功能->确定不用再关"
     };
     if (
       /*$_show_nexus_pic*/
-      ctx[10] !== void 0
+      ctx[11] !== void 0
     ) {
-      switch2_props.checked = /*$_show_nexus_pic*/
-      ctx[10];
+      switch3_props.checked = /*$_show_nexus_pic*/
+      ctx[11];
     }
-    switch2 = new Switch({ props: switch2_props });
-    binding_callbacks.push(() => bind(switch2, "checked", switch2_checked_binding));
+    switch3 = new Switch({ props: switch3_props });
+    binding_callbacks.push(() => bind(switch3, "checked", switch3_checked_binding));
     let if_block1 = (
       /*$_show_nexus_pic*/
-      ctx[10] && create_if_block_7$2(ctx)
+      ctx[11] && create_if_block_7$2(ctx)
     );
-    function switch3_checked_binding(value) {
-      ctx[32](value);
+    function switch4_checked_binding(value) {
+      ctx[35](value);
     }
-    let switch3_props = {
+    let switch4_props = {
       title_fixed: "卡片信息",
       title_green: "显示下方所选信息(精简)",
       title_red: "显示所有信息(较乱)",
@@ -3555,107 +3647,107 @@
       /*$_CARD_SHOW*/
       ctx[3].all !== void 0
     ) {
-      switch3_props.checked = /*$_CARD_SHOW*/
+      switch4_props.checked = /*$_CARD_SHOW*/
       ctx[3].all;
     }
-    switch3 = new Switch({ props: switch3_props });
-    binding_callbacks.push(() => bind(switch3, "checked", switch3_checked_binding));
-    switch3.$on(
+    switch4 = new Switch({ props: switch4_props });
+    binding_callbacks.push(() => bind(switch4, "checked", switch4_checked_binding));
+    switch4.$on(
       "click",
       /*sortMasonryBundle*/
-      ctx[19]
+      ctx[20]
     );
-    function switch4_checked_binding(value) {
-      ctx[33](value);
+    function switch5_checked_binding(value) {
+      ctx[36](value);
     }
-    let switch4_props = { title_fixed: "显示种子名称" };
+    let switch5_props = { title_fixed: "显示种子名称" };
     if (
       /*$_CARD_SHOW*/
       ctx[3].title !== void 0
     ) {
-      switch4_props.checked = /*$_CARD_SHOW*/
-      ctx[3].title;
-    }
-    switch4 = new Switch({ props: switch4_props });
-    binding_callbacks.push(() => bind(switch4, "checked", switch4_checked_binding));
-    function switch5_checked_binding(value) {
-      ctx[34](value);
-    }
-    let switch5_props = { title_fixed: "显示置顶和免费" };
-    if (
-      /*$_CARD_SHOW*/
-      ctx[3].free !== void 0
-    ) {
       switch5_props.checked = /*$_CARD_SHOW*/
-      ctx[3].free;
+      ctx[3].title;
     }
     switch5 = new Switch({ props: switch5_props });
     binding_callbacks.push(() => bind(switch5, "checked", switch5_checked_binding));
     function switch6_checked_binding(value) {
-      ctx[35](value);
+      ctx[37](value);
     }
-    let switch6_props = { title_fixed: "显示副标题" };
+    let switch6_props = { title_fixed: "显示置顶和免费" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].sub_title !== void 0
+      ctx[3].free !== void 0
     ) {
       switch6_props.checked = /*$_CARD_SHOW*/
-      ctx[3].sub_title;
+      ctx[3].free;
     }
     switch6 = new Switch({ props: switch6_props });
     binding_callbacks.push(() => bind(switch6, "checked", switch6_checked_binding));
     function switch7_checked_binding(value) {
-      ctx[36](value);
+      ctx[38](value);
     }
-    let switch7_props = { title_fixed: "显示标签" };
+    let switch7_props = { title_fixed: "显示副标题" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].tags !== void 0
+      ctx[3].sub_title !== void 0
     ) {
       switch7_props.checked = /*$_CARD_SHOW*/
-      ctx[3].tags;
+      ctx[3].sub_title;
     }
     switch7 = new Switch({ props: switch7_props });
     binding_callbacks.push(() => bind(switch7, "checked", switch7_checked_binding));
     function switch8_checked_binding(value) {
-      ctx[37](value);
+      ctx[39](value);
     }
-    let switch8_props = { title_fixed: "显示 [大小/下载/收藏]" };
+    let switch8_props = { title_fixed: "显示标签" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].size_download_collect !== void 0
+      ctx[3].tags !== void 0
     ) {
       switch8_props.checked = /*$_CARD_SHOW*/
-      ctx[3].size_download_collect;
+      ctx[3].tags;
     }
     switch8 = new Switch({ props: switch8_props });
     binding_callbacks.push(() => bind(switch8, "checked", switch8_checked_binding));
     function switch9_checked_binding(value) {
-      ctx[38](value);
+      ctx[40](value);
     }
-    let switch9_props = { title_fixed: "显示上传时间" };
+    let switch9_props = { title_fixed: "显示 [大小/下载/收藏]" };
     if (
       /*$_CARD_SHOW*/
-      ctx[3].upload_time !== void 0
+      ctx[3].size_download_collect !== void 0
     ) {
       switch9_props.checked = /*$_CARD_SHOW*/
-      ctx[3].upload_time;
+      ctx[3].size_download_collect;
     }
     switch9 = new Switch({ props: switch9_props });
     binding_callbacks.push(() => bind(switch9, "checked", switch9_checked_binding));
     function switch10_checked_binding(value) {
-      ctx[39](value);
+      ctx[41](value);
     }
-    let switch10_props = { title_fixed: "显示 [评论/上传/下载/完成]" };
+    let switch10_props = { title_fixed: "显示上传时间" };
+    if (
+      /*$_CARD_SHOW*/
+      ctx[3].upload_time !== void 0
+    ) {
+      switch10_props.checked = /*$_CARD_SHOW*/
+      ctx[3].upload_time;
+    }
+    switch10 = new Switch({ props: switch10_props });
+    binding_callbacks.push(() => bind(switch10, "checked", switch10_checked_binding));
+    function switch11_checked_binding(value) {
+      ctx[42](value);
+    }
+    let switch11_props = { title_fixed: "显示 [评论/上传/下载/完成]" };
     if (
       /*$_CARD_SHOW*/
       ctx[3].statistics !== void 0
     ) {
-      switch10_props.checked = /*$_CARD_SHOW*/
+      switch11_props.checked = /*$_CARD_SHOW*/
       ctx[3].statistics;
     }
-    switch10 = new Switch({ props: switch10_props });
-    binding_callbacks.push(() => bind(switch10, "checked", switch10_checked_binding));
+    switch11 = new Switch({ props: switch11_props });
+    binding_callbacks.push(() => bind(switch11, "checked", switch11_checked_binding));
     return {
       c() {
         div8 = element("div");
@@ -3681,27 +3773,27 @@
         t7 = space();
         create_component(switch2.$$.fragment);
         t8 = space();
+        create_component(switch3.$$.fragment);
+        t9 = space();
         if (if_block1)
           if_block1.c();
-        t9 = space();
+        t10 = space();
         button1 = element("button");
         button1.textContent = "切换宽度(开发中)";
-        t11 = space();
         t12 = space();
+        t13 = space();
         div6 = element("div");
         h11 = element("h1");
         h11.textContent = "卡片信息";
-        t14 = space();
-        div3 = element("div");
-        create_component(switch3.$$.fragment);
         t15 = space();
+        div3 = element("div");
+        create_component(switch4.$$.fragment);
+        t16 = space();
         div5 = element("div");
         h3 = element("h3");
         h3.textContent = "配置常驻卡片信息";
-        t17 = space();
-        div4 = element("div");
-        create_component(switch4.$$.fragment);
         t18 = space();
+        div4 = element("div");
         create_component(switch5.$$.fragment);
         t19 = space();
         create_component(switch6.$$.fragment);
@@ -3714,6 +3806,8 @@
         t23 = space();
         create_component(switch10.$$.fragment);
         t24 = space();
+        create_component(switch11.$$.fragment);
+        t25 = space();
         attr(div0, "class", "configP_title svelte-mdsgbd");
         attr(h10, "class", "s_title");
         attr(button1, "class", "sideP__btn svelte-mdsgbd");
@@ -3749,24 +3843,24 @@
         append(div1, t7);
         mount_component(switch2, div1, null);
         append(div1, t8);
+        mount_component(switch3, div1, null);
+        append(div1, t9);
         if (if_block1)
           if_block1.m(div1, null);
-        append(div1, t9);
+        append(div1, t10);
         append(div1, button1);
-        append(div1, t11);
-        append(div7, t12);
+        append(div1, t12);
+        append(div7, t13);
         append(div7, div6);
         append(div6, h11);
-        append(div6, t14);
-        append(div6, div3);
-        mount_component(switch3, div3, null);
         append(div6, t15);
+        append(div6, div3);
+        mount_component(switch4, div3, null);
+        append(div6, t16);
         append(div6, div5);
         append(div5, h3);
-        append(div5, t17);
+        append(div5, t18);
         append(div5, div4);
-        mount_component(switch4, div4, null);
-        append(div4, t18);
         mount_component(switch5, div4, null);
         append(div4, t19);
         mount_component(switch6, div4, null);
@@ -3779,6 +3873,8 @@
         append(div4, t23);
         mount_component(switch10, div4, null);
         append(div4, t24);
+        mount_component(switch11, div4, null);
+        append(div4, t25);
         current = true;
         if (!mounted) {
           dispose = [
@@ -3786,17 +3882,17 @@
               button0,
               "click",
               /*click_handler_1*/
-              ctx[23]
+              ctx[24]
             ),
             listen(
               button1,
               "click",
               /*config_changeWidth*/
-              ctx[15]
+              ctx[16]
             ),
             listen(div8, "click", self(
               /*click_handler_5*/
-              ctx[54]
+              ctx[57]
             ))
           ];
           mounted = true;
@@ -3805,12 +3901,12 @@
       p(ctx2, dirty) {
         if (
           /*$_current_domain*/
-          ctx2[8] == "kp.m-team.cc"
+          ctx2[9] == "kp.m-team.cc"
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty[0] & /*$_current_domain*/
-            256) {
+            512) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -3827,47 +3923,56 @@
           check_outros();
         }
         const switch0_changes = {};
-        if (!updating_checked && dirty[0] & /*$_turnPage*/
-        4) {
+        if (!updating_checked && dirty[0] & /*$_show_mode*/
+        16) {
           updating_checked = true;
-          switch0_changes.checked = /*$_turnPage*/
-          ctx2[2];
+          switch0_changes.checked = /*$_show_mode*/
+          ctx2[4];
           add_flush_callback(() => updating_checked = false);
         }
         switch0.$set(switch0_changes);
         const switch1_changes = {};
-        if (!updating_checked_1 && dirty[0] & /*$_show_debug_btn*/
-        128) {
+        if (!updating_checked_1 && dirty[0] & /*$_turnPage*/
+        4) {
           updating_checked_1 = true;
-          switch1_changes.checked = /*$_show_debug_btn*/
-          ctx2[7];
+          switch1_changes.checked = /*$_turnPage*/
+          ctx2[2];
           add_flush_callback(() => updating_checked_1 = false);
         }
         switch1.$set(switch1_changes);
         const switch2_changes = {};
-        if (!updating_checked_2 && dirty[0] & /*$_show_nexus_pic*/
-        1024) {
+        if (!updating_checked_2 && dirty[0] & /*$_show_debug_btn*/
+        256) {
           updating_checked_2 = true;
-          switch2_changes.checked = /*$_show_nexus_pic*/
-          ctx2[10];
+          switch2_changes.checked = /*$_show_debug_btn*/
+          ctx2[8];
           add_flush_callback(() => updating_checked_2 = false);
         }
         switch2.$set(switch2_changes);
+        const switch3_changes = {};
+        if (!updating_checked_3 && dirty[0] & /*$_show_nexus_pic*/
+        2048) {
+          updating_checked_3 = true;
+          switch3_changes.checked = /*$_show_nexus_pic*/
+          ctx2[11];
+          add_flush_callback(() => updating_checked_3 = false);
+        }
+        switch3.$set(switch3_changes);
         if (
           /*$_show_nexus_pic*/
-          ctx2[10]
+          ctx2[11]
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
             if (dirty[0] & /*$_show_nexus_pic*/
-            1024) {
+            2048) {
               transition_in(if_block1, 1);
             }
           } else {
             if_block1 = create_if_block_7$2(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(div1, t9);
+            if_block1.m(div1, t10);
           }
         } else if (if_block1) {
           group_outros();
@@ -3876,21 +3981,12 @@
           });
           check_outros();
         }
-        const switch3_changes = {};
-        if (!updating_checked_3 && dirty[0] & /*$_CARD_SHOW*/
-        8) {
-          updating_checked_3 = true;
-          switch3_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].all;
-          add_flush_callback(() => updating_checked_3 = false);
-        }
-        switch3.$set(switch3_changes);
         const switch4_changes = {};
         if (!updating_checked_4 && dirty[0] & /*$_CARD_SHOW*/
         8) {
           updating_checked_4 = true;
           switch4_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].title;
+          ctx2[3].all;
           add_flush_callback(() => updating_checked_4 = false);
         }
         switch4.$set(switch4_changes);
@@ -3899,7 +3995,7 @@
         8) {
           updating_checked_5 = true;
           switch5_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].free;
+          ctx2[3].title;
           add_flush_callback(() => updating_checked_5 = false);
         }
         switch5.$set(switch5_changes);
@@ -3908,7 +4004,7 @@
         8) {
           updating_checked_6 = true;
           switch6_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].sub_title;
+          ctx2[3].free;
           add_flush_callback(() => updating_checked_6 = false);
         }
         switch6.$set(switch6_changes);
@@ -3917,7 +4013,7 @@
         8) {
           updating_checked_7 = true;
           switch7_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].tags;
+          ctx2[3].sub_title;
           add_flush_callback(() => updating_checked_7 = false);
         }
         switch7.$set(switch7_changes);
@@ -3926,7 +4022,7 @@
         8) {
           updating_checked_8 = true;
           switch8_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].size_download_collect;
+          ctx2[3].tags;
           add_flush_callback(() => updating_checked_8 = false);
         }
         switch8.$set(switch8_changes);
@@ -3935,7 +4031,7 @@
         8) {
           updating_checked_9 = true;
           switch9_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].upload_time;
+          ctx2[3].size_download_collect;
           add_flush_callback(() => updating_checked_9 = false);
         }
         switch9.$set(switch9_changes);
@@ -3944,10 +4040,19 @@
         8) {
           updating_checked_10 = true;
           switch10_changes.checked = /*$_CARD_SHOW*/
-          ctx2[3].statistics;
+          ctx2[3].upload_time;
           add_flush_callback(() => updating_checked_10 = false);
         }
         switch10.$set(switch10_changes);
+        const switch11_changes = {};
+        if (!updating_checked_11 && dirty[0] & /*$_CARD_SHOW*/
+        8) {
+          updating_checked_11 = true;
+          switch11_changes.checked = /*$_CARD_SHOW*/
+          ctx2[3].statistics;
+          add_flush_callback(() => updating_checked_11 = false);
+        }
+        switch11.$set(switch11_changes);
       },
       i(local) {
         if (current)
@@ -3956,8 +4061,8 @@
         transition_in(switch0.$$.fragment, local);
         transition_in(switch1.$$.fragment, local);
         transition_in(switch2.$$.fragment, local);
-        transition_in(if_block1);
         transition_in(switch3.$$.fragment, local);
+        transition_in(if_block1);
         transition_in(switch4.$$.fragment, local);
         transition_in(switch5.$$.fragment, local);
         transition_in(switch6.$$.fragment, local);
@@ -3965,6 +4070,7 @@
         transition_in(switch8.$$.fragment, local);
         transition_in(switch9.$$.fragment, local);
         transition_in(switch10.$$.fragment, local);
+        transition_in(switch11.$$.fragment, local);
         add_render_callback(() => {
           if (!current)
             return;
@@ -3979,8 +4085,8 @@
         transition_out(switch0.$$.fragment, local);
         transition_out(switch1.$$.fragment, local);
         transition_out(switch2.$$.fragment, local);
-        transition_out(if_block1);
         transition_out(switch3.$$.fragment, local);
+        transition_out(if_block1);
         transition_out(switch4.$$.fragment, local);
         transition_out(switch5.$$.fragment, local);
         transition_out(switch6.$$.fragment, local);
@@ -3988,6 +4094,7 @@
         transition_out(switch8.$$.fragment, local);
         transition_out(switch9.$$.fragment, local);
         transition_out(switch10.$$.fragment, local);
+        transition_out(switch11.$$.fragment, local);
         if (!div8_transition)
           div8_transition = create_bidirectional_transition(div8, fade, { duration: 100 }, false);
         div8_transition.run(0);
@@ -4001,9 +4108,9 @@
         destroy_component(switch0);
         destroy_component(switch1);
         destroy_component(switch2);
+        destroy_component(switch3);
         if (if_block1)
           if_block1.d();
-        destroy_component(switch3);
         destroy_component(switch4);
         destroy_component(switch5);
         destroy_component(switch6);
@@ -4011,6 +4118,7 @@
         destroy_component(switch8);
         destroy_component(switch9);
         destroy_component(switch10);
+        destroy_component(switch11);
         if (detaching && div8_transition)
           div8_transition.end();
         mounted = false;
@@ -4027,7 +4135,7 @@
     let updating_checked;
     let current;
     function switch_1_checked_binding(value) {
-      ctx[24](value);
+      ctx[25](value);
     }
     let switch_1_props = {
       title_fixed: "隐藏Gay分区卡片",
@@ -4036,10 +4144,10 @@
     };
     if (
       /*$_SITE_SETTING*/
-      ctx[9].mt.hide_gay !== void 0
+      ctx[10].mt.hide_gay !== void 0
     ) {
       switch_1_props.checked = /*$_SITE_SETTING*/
-      ctx[9].mt.hide_gay;
+      ctx[10].mt.hide_gay;
     }
     switch_1 = new Switch({ props: switch_1_props });
     binding_callbacks.push(() => bind(switch_1, "checked", switch_1_checked_binding));
@@ -4066,10 +4174,10 @@
       p(ctx2, dirty) {
         const switch_1_changes = {};
         if (!updating_checked && dirty[0] & /*$_SITE_SETTING*/
-        512) {
+        1024) {
           updating_checked = true;
           switch_1_changes.checked = /*$_SITE_SETTING*/
-          ctx2[9].mt.hide_gay;
+          ctx2[10].mt.hide_gay;
           add_flush_callback(() => updating_checked = false);
         }
         switch_1.$set(switch_1_changes);
@@ -4097,10 +4205,10 @@
     switch_1 = new Switch({
       props: {
         title_fixed: `悬浮预览延迟${/*$_delay_nexus_pic*/
-      ctx[11] ? ":" + /*$_delay_nexus_pic*/
-      ctx[11] + "ms" : ""}`,
+      ctx[12] ? ":" + /*$_delay_nexus_pic*/
+      ctx[12] + "ms" : ""}`,
         title_red: `${/*$_delay_nexus_pic*/
-      ctx[11] ? "" : "无延迟"}`,
+      ctx[12] ? "" : "无延迟"}`,
         label: "防止无意滑动时大图打开妨碍预览",
         type: "range",
         $$slots: { default: [create_default_slot] },
@@ -4118,17 +4226,17 @@
       p(ctx2, dirty) {
         const switch_1_changes = {};
         if (dirty[0] & /*$_delay_nexus_pic*/
-        2048)
+        4096)
           switch_1_changes.title_fixed = `悬浮预览延迟${/*$_delay_nexus_pic*/
-        ctx2[11] ? ":" + /*$_delay_nexus_pic*/
-        ctx2[11] + "ms" : ""}`;
+        ctx2[12] ? ":" + /*$_delay_nexus_pic*/
+        ctx2[12] + "ms" : ""}`;
         if (dirty[0] & /*$_delay_nexus_pic*/
-        2048)
+        4096)
           switch_1_changes.title_red = `${/*$_delay_nexus_pic*/
-        ctx2[11] ? "" : "无延迟"}`;
+        ctx2[12] ? "" : "无延迟"}`;
         if (dirty[0] & /*$_delay_nexus_pic*/
-        2048 | dirty[2] & /*$$scope*/
-        8) {
+        4096 | dirty[2] & /*$$scope*/
+        32) {
           switch_1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         switch_1.$set(switch_1_changes);
@@ -4166,7 +4274,7 @@
         set_input_value(
           input,
           /*$_delay_nexus_pic*/
-          ctx[11]
+          ctx[12]
         );
         if (!mounted) {
           dispose = [
@@ -4174,13 +4282,13 @@
               input,
               "change",
               /*input_change_input_handler*/
-              ctx[28]
+              ctx[31]
             ),
             listen(
               input,
               "input",
               /*input_change_input_handler*/
-              ctx[28]
+              ctx[31]
             )
           ];
           mounted = true;
@@ -4188,11 +4296,11 @@
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*$_delay_nexus_pic*/
-        2048) {
+        4096) {
           set_input_value(
             input,
             /*$_delay_nexus_pic*/
-            ctx2[11]
+            ctx2[12]
           );
         }
       },
@@ -4204,48 +4312,50 @@
       }
     };
   }
-  function create_fragment$3(ctx) {
-    let div6;
+  function create_fragment$5(ctx) {
+    let div4;
     let div0;
     let t0;
-    let div5;
+    let div3;
     let button0;
-    let t4;
+    let t1;
     let button1;
-    let t8;
-    let t9;
-    let t10;
-    let div7;
+    let t5;
+    let t6;
+    let t7;
+    let div5;
     let current;
     let mounted;
     let dispose;
-    let if_block0 = (
-      /*$_show_debug_btn*/
-      ctx[7] && create_if_block_9$2(ctx)
-    );
+    function select_block_type(ctx2, dirty) {
+      if (
+        /*$_show_mode*/
+        ctx2[4]
+      )
+        return create_if_block_10$2;
+      return create_else_block_4;
+    }
+    let current_block_type = select_block_type(ctx);
+    let if_block0 = current_block_type(ctx);
     let if_block1 = (
+      /*$_show_debug_btn*/
+      ctx[8] && create_if_block_9$2(ctx)
+    );
+    let if_block2 = (
       /*$_show_configPanel*/
-      ctx[6] && create_if_block$3(ctx)
+      ctx[7] && create_if_block$5(ctx)
     );
     return {
       c() {
-        div6 = element("div");
+        div4 = element("div");
         div0 = element("div");
         t0 = space();
-        div5 = element("div");
+        div3 = element("div");
         button0 = element("button");
-        button0.innerHTML = `<div><svg viewBox="0 0 32 32" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
-                fill: none;
-                stroke: #000;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2px;
-              }
-            </style></defs><title></title><g data-name="43-browser" id="_43-browser"><rect class="cls-1" height="30" width="30" x="1" y="1"></rect><line class="cls-1" x1="1" x2="31" y1="9" y2="9"></line><line class="cls-1" x1="5" x2="7" y1="5" y2="5"></line><line class="cls-1" x1="11" x2="13" y1="5" y2="5"></line><line class="cls-1" x1="9" x2="25" y1="16" y2="16"></line><line class="cls-1" x1="7" x2="25" y1="20" y2="20"></line><line class="cls-1" x1="7" x2="25" y1="24" y2="24"></line></g></svg></div> 
-      <div>原有列表</div>`;
-        t4 = space();
+        if_block0.c();
+        t1 = space();
         button1 = element("button");
-        button1.innerHTML = `<div><svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
+        button1.innerHTML = `<div><svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
                 fill: none;
                 stroke: #fff;
                 stroke-linecap: round;
@@ -4254,58 +4364,59 @@
               }
             </style></defs><title></title><g data-name="80-setting" id="_80-setting"><circle class="cls-1" cx="10" cy="6" r="3"></circle><circle class="cls-1" cx="22" cy="16" r="3"></circle><circle class="cls-1" cx="10" cy="26" r="3"></circle><line class="cls-1" x1="7" x2="1" y1="6" y2="6"></line><line class="cls-1" x1="15" x2="1" y1="16" y2="16"></line><line class="cls-1" x1="7" x2="1" y1="26" y2="26"></line><line class="cls-1" x1="31" x2="17" y1="26" y2="26"></line><line class="cls-1" x1="31" x2="25" y1="16" y2="16"></line><line class="cls-1" x1="31" x2="17" y1="6" y2="6"></line></g></svg></div> 
       <div>详细配置</div>`;
-        t8 = space();
-        if (if_block0)
-          if_block0.c();
-        t9 = space();
+        t5 = space();
         if (if_block1)
           if_block1.c();
-        t10 = space();
-        div7 = element("div");
-        div7.textContent = "重置瀑布流配置边栏位置";
+        t6 = space();
+        if (if_block2)
+          if_block2.c();
+        t7 = space();
+        div5 = element("div");
+        div5.textContent = "重置瀑布流配置边栏位置";
         attr(div0, "class", "sideP__title svelte-mdsgbd");
         attr(button0, "class", "sideP__btn svelte-mdsgbd");
         attr(button1, "class", "sideP__btn svelte-mdsgbd");
-        attr(div5, "class", "sideP__out svelte-mdsgbd");
-        attr(div6, "class", "sideP svelte-mdsgbd");
+        attr(div3, "class", "sideP__out svelte-mdsgbd");
+        attr(div4, "class", "sideP svelte-mdsgbd");
         set_style(
-          div6,
+          div4,
           "top",
           /*$_panelPos*/
-          ctx[4].y + "px"
+          ctx[5].y + "px"
         );
         set_style(
-          div6,
+          div4,
           "left",
           /*$_panelPos*/
-          ctx[4].x + "px"
+          ctx[5].x + "px"
         );
         set_style(
-          div6,
+          div4,
           "background-color",
           /*$_current_bgColor*/
-          ctx[5]
+          ctx[6]
         );
-        attr(div7, "id", "reset_panel_pos");
-        attr(div7, "class", "svelte-mdsgbd");
+        attr(div5, "id", "reset_panel_pos");
+        attr(div5, "class", "svelte-mdsgbd");
       },
       m(target, anchor) {
-        insert(target, div6, anchor);
-        append(div6, div0);
-        append(div6, t0);
-        append(div6, div5);
-        append(div5, button0);
-        append(div5, t4);
-        append(div5, button1);
-        append(div5, t8);
-        if (if_block0)
-          if_block0.m(div5, null);
-        ctx[22](div6);
-        insert(target, t9, anchor);
+        insert(target, div4, anchor);
+        append(div4, div0);
+        append(div4, t0);
+        append(div4, div3);
+        append(div3, button0);
+        if_block0.m(button0, null);
+        append(div3, t1);
+        append(div3, button1);
+        append(div3, t5);
         if (if_block1)
-          if_block1.m(target, anchor);
-        insert(target, t10, anchor);
-        insert(target, div7, anchor);
+          if_block1.m(div3, null);
+        ctx[23](div4);
+        insert(target, t6, anchor);
+        if (if_block2)
+          if_block2.m(target, anchor);
+        insert(target, t7, anchor);
+        insert(target, div5, anchor);
         current = true;
         if (!mounted) {
           dispose = [
@@ -4313,93 +4424,101 @@
               div0,
               "mousedown",
               /*onMouseDown*/
-              ctx[12]
+              ctx[13]
             ),
             listen(
               button0,
               "click",
               /*__show_originTable*/
-              ctx[14]
+              ctx[15]
             ),
             listen(
               button1,
               "click",
               /*click_handler*/
-              ctx[21]
+              ctx[22]
             ),
             listen(
-              div7,
+              div5,
               "click",
               /*resetPanelPos*/
-              ctx[13]
+              ctx[14]
             )
           ];
           mounted = true;
         }
       },
       p(ctx2, dirty) {
+        if (current_block_type !== (current_block_type = select_block_type(ctx2))) {
+          if_block0.d(1);
+          if_block0 = current_block_type(ctx2);
+          if (if_block0) {
+            if_block0.c();
+            if_block0.m(button0, null);
+          }
+        }
         if (
           /*$_show_debug_btn*/
-          ctx2[7]
+          ctx2[8]
         ) {
-          if (if_block0) {
-            if_block0.p(ctx2, dirty);
+          if (if_block1) {
+            if_block1.p(ctx2, dirty);
           } else {
-            if_block0 = create_if_block_9$2(ctx2);
-            if_block0.c();
-            if_block0.m(div5, null);
+            if_block1 = create_if_block_9$2(ctx2);
+            if_block1.c();
+            if_block1.m(div3, null);
           }
-        } else if (if_block0) {
-          if_block0.d(1);
-          if_block0 = null;
+        } else if (if_block1) {
+          if_block1.d(1);
+          if_block1 = null;
         }
         if (!current || dirty[0] & /*$_panelPos*/
-        16) {
+        32) {
           set_style(
-            div6,
+            div4,
             "top",
             /*$_panelPos*/
-            ctx2[4].y + "px"
+            ctx2[5].y + "px"
           );
         }
         if (!current || dirty[0] & /*$_panelPos*/
-        16) {
+        32) {
           set_style(
-            div6,
+            div4,
             "left",
             /*$_panelPos*/
-            ctx2[4].x + "px"
+            ctx2[5].x + "px"
           );
         }
         if (!current || dirty[0] & /*$_current_bgColor*/
-        32) {
+        64) {
           set_style(
-            div6,
+            div4,
             "background-color",
             /*$_current_bgColor*/
-            ctx2[5]
+            ctx2[6]
           );
         }
         if (
           /*$_show_configPanel*/
-          ctx2[6]
+          ctx2[7]
         ) {
-          if (if_block1) {
-            if_block1.p(ctx2, dirty);
+          if (if_block2) {
+            if_block2.p(ctx2, dirty);
             if (dirty[0] & /*$_show_configPanel*/
-            64) {
-              transition_in(if_block1, 1);
+            128) {
+              transition_in(if_block2, 1);
             }
           } else {
-            if_block1 = create_if_block$3(ctx2);
-            if_block1.c();
-            transition_in(if_block1, 1);
-            if_block1.m(t10.parentNode, t10);
+            if_block2 = create_if_block$5(ctx2);
+            if_block2.c();
+            transition_in(if_block2, 1);
+            if_block2.m(t7.parentNode, t7);
           }
-        } else if (if_block1) {
+        } else if (if_block2) {
           group_outros();
-          transition_out(if_block1, 1, 1, () => {
-            if_block1 = null;
+          transition_out(if_block2, 1, 1, () => {
+            if_block2 = null;
           });
           check_outros();
         }
@@ -4407,27 +4526,28 @@
       i(local) {
         if (current)
           return;
-        transition_in(if_block1);
+        transition_in(if_block2);
         current = true;
       },
       o(local) {
-        transition_out(if_block1);
+        transition_out(if_block2);
         current = false;
       },
       d(detaching) {
         if (detaching)
-          detach(div6);
-        if (if_block0)
-          if_block0.d();
-        ctx[22](null);
-        if (detaching)
-          detach(t9);
+          detach(div4);
+        if_block0.d();
         if (if_block1)
-          if_block1.d(detaching);
+          if_block1.d();
+        ctx[23](null);
         if (detaching)
-          detach(t10);
+          detach(t6);
+        if (if_block2)
+          if_block2.d(detaching);
         if (detaching)
-          detach(div7);
+          detach(t7);
+        if (detaching)
+          detach(div5);
         mounted = false;
         run_all(dispose);
       }
@@ -4440,12 +4560,12 @@
       target = max;
     return target;
   }
-  function instance$4($$self, $$props, $$invalidate) {
+  function instance$5($$self, $$props, $$invalidate) {
     let $_iframe_switch;
     let $_turnPage;
     let $_CARD_SHOW;
     let $_card_width;
-    let $_show_originTable;
+    let $_show_mode;
     let $_panelPos;
     let $_current_bgColor;
     let $_show_configPanel;
@@ -4454,35 +4574,35 @@
     let $_SITE_SETTING;
     let $_show_nexus_pic;
     let $_delay_nexus_pic;
-    component_subscribe($$self, _iframe_switch, ($$value) => $$invalidate(58, $_iframe_switch = $$value));
+    component_subscribe($$self, _iframe_switch, ($$value) => $$invalidate(61, $_iframe_switch = $$value));
     component_subscribe($$self, _turnPage, ($$value) => $$invalidate(2, $_turnPage = $$value));
     component_subscribe($$self, _CARD_SHOW, ($$value) => $$invalidate(3, $_CARD_SHOW = $$value));
-    component_subscribe($$self, _card_width, ($$value) => $$invalidate(59, $_card_width = $$value));
-    component_subscribe($$self, _Global_Masonry, ($$value) => $$invalidate(60, $$value));
-    component_subscribe($$self, _show_originTable, ($$value) => $$invalidate(61, $_show_originTable = $$value));
-    component_subscribe($$self, _panelPos, ($$value) => $$invalidate(4, $_panelPos = $$value));
-    component_subscribe($$self, _current_bgColor, ($$value) => $$invalidate(5, $_current_bgColor = $$value));
-    component_subscribe($$self, _show_configPanel, ($$value) => $$invalidate(6, $_show_configPanel = $$value));
-    component_subscribe($$self, _show_debug_btn, ($$value) => $$invalidate(7, $_show_debug_btn = $$value));
-    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(8, $_current_domain = $$value));
-    component_subscribe($$self, _SITE_SETTING, ($$value) => $$invalidate(9, $_SITE_SETTING = $$value));
-    component_subscribe($$self, _show_nexus_pic, ($$value) => $$invalidate(10, $_show_nexus_pic = $$value));
-    component_subscribe($$self, _delay_nexus_pic, ($$value) => $$invalidate(11, $_delay_nexus_pic = $$value));
-    let div;
+    component_subscribe($$self, _card_width, ($$value) => $$invalidate(62, $_card_width = $$value));
+    component_subscribe($$self, _Global_Masonry, ($$value) => $$invalidate(63, $$value));
+    component_subscribe($$self, _show_mode, ($$value) => $$invalidate(4, $_show_mode = $$value));
+    component_subscribe($$self, _panelPos, ($$value) => $$invalidate(5, $_panelPos = $$value));
+    component_subscribe($$self, _current_bgColor, ($$value) => $$invalidate(6, $_current_bgColor = $$value));
+    component_subscribe($$self, _show_configPanel, ($$value) => $$invalidate(7, $_show_configPanel = $$value));
+    component_subscribe($$self, _show_debug_btn, ($$value) => $$invalidate(8, $_show_debug_btn = $$value));
+    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(9, $_current_domain = $$value));
+    component_subscribe($$self, _SITE_SETTING, ($$value) => $$invalidate(10, $_SITE_SETTING = $$value));
+    component_subscribe($$self, _show_nexus_pic, ($$value) => $$invalidate(11, $_show_nexus_pic = $$value));
+    component_subscribe($$self, _delay_nexus_pic, ($$value) => $$invalidate(12, $_delay_nexus_pic = $$value));
+    let sideDom;
     let isMouseDown = false;
     let offsetX = 0;
     let offsetY = 0;
     const onMouseDown = (e) => {
       e.preventDefault();
       isMouseDown = true;
-      offsetX = e.clientX - div.getBoundingClientRect().left;
-      offsetY = e.clientY - div.getBoundingClientRect().top;
+      offsetX = e.clientX - sideDom.getBoundingClientRect().left;
+      offsetY = e.clientY - sideDom.getBoundingClientRect().top;
     };
     const onMouseMove = (e) => {
       if (!isMouseDown)
         return;
-      const res_X = posRangeIn(e.clientX - offsetX, 0, window.innerWidth - (div.getBoundingClientRect().width + 5));
-      const res_Y = posRangeIn(e.clientY - offsetY, 0, window.innerHeight - (div.getBoundingClientRect().height + 5));
+      const res_X = posRangeIn(e.clientX - offsetX, 0, window.innerWidth - (sideDom.getBoundingClientRect().width + 5));
+      const res_Y = posRangeIn(e.clientY - offsetY, 0, window.innerHeight - (sideDom.getBoundingClientRect().height + 5));
       set_store_value(_panelPos, $_panelPos = { x: res_X, y: res_Y }, $_panelPos);
     };
     const onMouseUp = () => {
@@ -4495,8 +4615,8 @@
     }
     let { originTable } = $$props;
     function __show_originTable() {
-      set_store_value(_show_originTable, $_show_originTable = $_show_originTable == 0 ? 1 : 0, $_show_originTable);
-      $$invalidate(20, originTable.style.display = $_show_originTable === 1 ? "" : "none", originTable);
+      set_store_value(_show_mode, $_show_mode = !$_show_mode, $_show_mode);
+      window.CHANGE_CARD_LAYOUT();
     }
     function config_changeWidth() {
       set_store_value(_card_width, $_card_width = $_card_width == 300 ? 200 : 300, $_card_width);
@@ -4532,10 +4652,10 @@
     const click_handler = () => {
       set_store_value(_show_configPanel, $_show_configPanel = !$_show_configPanel, $_show_configPanel);
     };
-    function div6_binding($$value) {
+    function div4_binding($$value) {
       binding_callbacks[$$value ? "unshift" : "push"](() => {
-        div = $$value;
-        $$invalidate(0, div);
+        sideDom = $$value;
+        $$invalidate(0, sideDom);
       });
     }
     const click_handler_1 = () => set_store_value(_show_configPanel, $_show_configPanel = false, $_show_configPanel);
@@ -4545,15 +4665,22 @@
         _SITE_SETTING.set($_SITE_SETTING);
       }
     }
+    const func2 = () => {
+      window.CHANGE_CARD_LAYOUT();
+    };
     function switch0_checked_binding(value) {
+      $_show_mode = value;
+      _show_mode.set($_show_mode);
+    }
+    function switch1_checked_binding(value) {
       $_turnPage = value;
       _turnPage.set($_turnPage);
     }
-    function switch1_checked_binding(value) {
+    function switch2_checked_binding(value) {
       $_show_debug_btn = value;
       _show_debug_btn.set($_show_debug_btn);
     }
-    function switch2_checked_binding(value) {
+    function switch3_checked_binding(value) {
       $_show_nexus_pic = value;
       _show_nexus_pic.set($_show_nexus_pic);
     }
@@ -4570,49 +4697,49 @@
     const click_handler_4 = () => {
       set_store_value(_delay_nexus_pic, $_delay_nexus_pic = $_delay_nexus_pic == 0 ? 600 : 0, $_delay_nexus_pic);
     };
-    function switch3_checked_binding(value) {
+    function switch4_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.all, value)) {
         $_CARD_SHOW.all = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch4_checked_binding(value) {
+    function switch5_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.title, value)) {
         $_CARD_SHOW.title = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch5_checked_binding(value) {
+    function switch6_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.free, value)) {
         $_CARD_SHOW.free = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch6_checked_binding(value) {
+    function switch7_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.sub_title, value)) {
         $_CARD_SHOW.sub_title = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch7_checked_binding(value) {
+    function switch8_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.tags, value)) {
         $_CARD_SHOW.tags = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch8_checked_binding(value) {
+    function switch9_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.size_download_collect, value)) {
         $_CARD_SHOW.size_download_collect = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch9_checked_binding(value) {
+    function switch10_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.upload_time, value)) {
         $_CARD_SHOW.upload_time = value;
         _CARD_SHOW.set($_CARD_SHOW);
       }
     }
-    function switch10_checked_binding(value) {
+    function switch11_checked_binding(value) {
       if ($$self.$$.not_equal($_CARD_SHOW.statistics, value)) {
         $_CARD_SHOW.statistics = value;
         _CARD_SHOW.set($_CARD_SHOW);
@@ -4670,13 +4797,14 @@
     const click_handler_5 = () => set_store_value(_show_configPanel, $_show_configPanel = false, $_show_configPanel);
     $$self.$$set = ($$props2) => {
       if ("originTable" in $$props2)
-        $$invalidate(20, originTable = $$props2.originTable);
+        $$invalidate(21, originTable = $$props2.originTable);
     };
     return [
-      div,
+      sideDom,
       label_switchMode,
       $_turnPage,
       $_CARD_SHOW,
+      $_show_mode,
       $_panelPos,
       $_current_bgColor,
       $_show_configPanel,
@@ -4695,17 +4823,18 @@
       sortMasonryBundle,
       originTable,
       click_handler,
-      div6_binding,
+      div4_binding,
       click_handler_1,
       switch_1_checked_binding,
+      func2,
       switch0_checked_binding,
       switch1_checked_binding,
       switch2_checked_binding,
+      switch3_checked_binding,
       input_change_input_handler,
       click_handler_2,
       click_handler_3,
       click_handler_4,
-      switch3_checked_binding,
       switch4_checked_binding,
       switch5_checked_binding,
       switch6_checked_binding,
@@ -4713,6 +4842,7 @@
       switch8_checked_binding,
       switch9_checked_binding,
       switch10_checked_binding,
+      switch11_checked_binding,
       input0_change_handler,
       change_handler,
       input1_change_handler,
@@ -4733,7 +4863,7 @@
   class Sidepanel extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance$4, create_fragment$3, safe_not_equal, { originTable: 20 }, null, [-1, -1, -1]);
+      init(this, options, instance$5, create_fragment$5, safe_not_equal, { originTable: 21 }, null, [-1, -1, -1]);
     }
   }
   const CONFIG$1 = {
@@ -4779,8 +4909,27 @@
       $("ksearchboxmain") ? $("ksearchboxmain").style.display = "none" : null;
       const link = document.querySelector('a[href="?sort=7&type=asc&seeders_begin=1"]');
       link ? link.childNodes[0].style.color = "black" : null;
+      let np = document.querySelector("img#nexus-preview");
+      if (np)
+        np.style.zIndex = 12e3;
+      table_Iframe_Set$1();
+    },
+    /** NOTE: 站点下一页加载后操作 */
+    pageLoaded: function() {
+      var script = document.createElement("script");
+      script.src = "https://kamept.com/js/nexus.js";
+      document.head.appendChild(script);
+      table_Iframe_Set$1();
     }
   };
+  function table_Iframe_Set$1() {
+    const lists = Array.from(document.querySelectorAll(".torrentname"));
+    lists.forEach((el) => el.addEventListener("click", function(event) {
+      event.preventDefault();
+      _iframe_switch.set(1);
+      _iframe_url.set(el.children[0].children[0].children[1].querySelector("a").href + "#kdescr");
+    }));
+  }
   function TORRENT_LIST_TO_JSON$1(torrent_list_Dom) {
     const rows = torrent_list_Dom.querySelectorAll("tbody tr");
     const data = [];
@@ -4960,9 +5109,21 @@
     Iframe_Width: 1260,
     /** NOTE: 站点特殊操作 */
     special: function() {
-      console.log("23333333333333333333");
+      table_Iframe_Set();
+    },
+    /** NOTE: 站点下一页加载后操作 */
+    pageLoaded: function() {
+      table_Iframe_Set();
     }
   };
+  function table_Iframe_Set() {
+    const lists = Array.from(document.querySelectorAll("td.torrentimg a"));
+    lists.forEach((el) => el.addEventListener("click", function(event) {
+      event.preventDefault();
+      _iframe_switch.set(1);
+      _iframe_url.set(el.href + "#kdescr");
+    }));
+  }
   function TORRENT_LIST_TO_JSON(torrent_list_Dom) {
     const rows = torrent_list_Dom.querySelectorAll("tbody tr");
     const data = [];
@@ -5071,6 +5232,55 @@
     console.log("|-> 站点selector:", res);
     return res;
   }
+  const CARD = {
+    /** 瀑布流卡片宽度 */
+    CARD_WIDTH: get_store_value(_card_width),
+    /** NOTE: 瀑布流卡片边框宽度 -> 这个2是真值, 但是边框好像是会随着分辨率和缩放变化, 给高有利大分辨率, 给低有利于小分辨率 */
+    CARD_BORDER: 0,
+    /** 瀑布流卡片索引 */
+    CARD_INDEX: 0,
+    /** 图片悬浮预览方式
+     * 0: 一律放大到全视窗[默认]
+     * 1: 最小为原图
+     */
+    PIC_HOVER_STYLE: 0
+  };
+  const PAGE = {
+    /** 翻页: 底部检测时间间隔 */
+    GAP: 3e3,
+    /** 翻页: 底部检测视点与底部距离 */
+    DISTANCE: 300,
+    /** 翻页: 是否为初始跳转页面 */
+    IS_ORIGIN: true,
+    /** 翻页: 初始页面 */
+    PAGE_ORIGIN: 0,
+    /** 翻页: 当前页数 */
+    PAGE_CURRENT: 0,
+    /** 翻页: 下一页数 */
+    PAGE_NEXT: 0,
+    /** 翻页: 下一页的链接 */
+    NEXT_URL: "",
+    /** 翻页: 下一页的加载方式: Button | Slip */
+    SWITCH_MODE: "Button"
+  };
+  const ICON = {
+    /** 大小图标 */
+    SIZE: '<img class="size" src="pic/trans.gif" style=" transform: translateY(-0.4px);" alt="size" title="大小">',
+    /** 评论图标 */
+    COMMENT: '<img class="comments" src="pic/trans.gif" alt="comments" title="评论数">',
+    /** 上传人数图标 */
+    SEEDERS: '<img class="seeders" src="pic/trans.gif" alt="seeders" title="种子数">',
+    /** 下载人数图标 */
+    LEECHERS: '<img class="leechers" src="pic/trans.gif" alt="leechers" title="下载数">',
+    /** 已完成人数图标 */
+    SNATCHED: '<img class="snatched" src="pic/trans.gif" alt="snatched" title="完成数">',
+    /** 下载图标 */
+    DOWNLOAD: '<img class="download" src="pic/trans.gif" style=" transform: translateY(1px);" alt="download" title="下载本种">',
+    /** 未收藏图标 */
+    COLLET: '<img class="delbookmark" src="pic/trans.gif" alt="Unbookmarked" title="收藏">',
+    /** 已收藏图标 */
+    COLLETED: '<img class="bookmark" src="pic/trans.gif" alt="Bookmarked">'
+  };
   function create_if_block_16$1(ctx) {
     let div;
     let a;
@@ -5789,7 +5999,7 @@
       }
     };
   }
-  function create_if_block$2(ctx) {
+  function create_if_block$4(ctx) {
     let t0;
     let t1;
     let t2;
@@ -5809,7 +6019,7 @@
     );
     let if_block2 = (
       /*$_CARD_SHOW*/
-      ctx[5].tags && create_if_block_4$2(ctx)
+      ctx[5].tags && create_if_block_4$1(ctx)
     );
     let if_block3 = (
       /*$_CARD_SHOW*/
@@ -5821,7 +6031,7 @@
     );
     let if_block5 = (
       /*$_CARD_SHOW*/
-      ctx[5].statistics && create_if_block_1$2(ctx)
+      ctx[5].statistics && create_if_block_1$3(ctx)
     );
     return {
       c() {
@@ -5906,7 +6116,7 @@
           if (if_block2) {
             if_block2.p(ctx2, dirty);
           } else {
-            if_block2 = create_if_block_4$2(ctx2);
+            if_block2 = create_if_block_4$1(ctx2);
             if_block2.c();
             if_block2.m(t2.parentNode, t2);
           }
@@ -5951,7 +6161,7 @@
           if (if_block5) {
             if_block5.p(ctx2, dirty);
           } else {
-            if_block5 = create_if_block_1$2(ctx2);
+            if_block5 = create_if_block_1$3(ctx2);
             if_block5.c();
             if_block5.m(div, null);
           }
@@ -6228,7 +6438,7 @@
       }
     };
   }
-  function create_if_block_4$2(ctx) {
+  function create_if_block_4$1(ctx) {
     let div;
     let raw_value = (
       /*torrentInfo*/
@@ -6456,7 +6666,7 @@
       }
     };
   }
-  function create_if_block_1$2(ctx) {
+  function create_if_block_1$3(ctx) {
     let div;
     let html_tag;
     let raw0_value = (
@@ -6599,7 +6809,7 @@
       }
     };
   }
-  function create_fragment$2(ctx) {
+  function create_fragment$4(ctx) {
     let div4;
     let div3;
     let div0;
@@ -6639,7 +6849,7 @@
     );
     let if_block2 = !/*$_CARD_SHOW*/
     (ctx[5].all || /*_hover*/
-    ctx[3]) && create_if_block$2(ctx);
+    ctx[3]) && create_if_block$4(ctx);
     return {
       c() {
         div4 = element("div");
@@ -6830,7 +7040,7 @@
           if (if_block2) {
             if_block2.p(ctx2, dirty);
           } else {
-            if_block2 = create_if_block$2(ctx2);
+            if_block2 = create_if_block$4(ctx2);
             if_block2.c();
             if_block2.m(div3, null);
           }
@@ -6900,7 +7110,7 @@
   const func$1 = (e) => e.outerHTML;
   const func_1$1 = (e) => e.outerHTML;
   const func_3$1 = (e) => e.outerHTML;
-  function instance$3($$self, $$props, $$invalidate) {
+  function instance$4($$self, $$props, $$invalidate) {
     let $_iframe_url;
     let $_iframe_switch;
     let $_current_bgColor;
@@ -6918,7 +7128,7 @@
     }
     let { torrentInfo } = $$props;
     let { cardWidth } = $$props;
-    let { ICON } = $$props;
+    let { ICON: ICON2 } = $$props;
     let _hover = false;
     function card_show_detail() {
       $$invalidate(3, _hover = true);
@@ -6942,12 +7152,12 @@
       if ("cardWidth" in $$props2)
         $$invalidate(1, cardWidth = $$props2.cardWidth);
       if ("ICON" in $$props2)
-        $$invalidate(2, ICON = $$props2.ICON);
+        $$invalidate(2, ICON2 = $$props2.ICON);
     };
     return [
       torrentInfo,
       cardWidth,
-      ICON,
+      ICON2,
       _hover,
       $_current_bgColor,
       $_CARD_SHOW,
@@ -6962,7 +7172,7 @@
   class Kamept extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance$3, create_fragment$2, safe_not_equal, { torrentInfo: 0, cardWidth: 1, ICON: 2 });
+      init(this, options, instance$4, create_fragment$4, safe_not_equal, { torrentInfo: 0, cardWidth: 1, ICON: 2 });
     }
   }
   function create_if_block_16(ctx) {
@@ -7719,7 +7929,7 @@
       }
     };
   }
-  function create_if_block$1(ctx) {
+  function create_if_block$3(ctx) {
     let t0;
     let t1;
     let t2;
@@ -7740,7 +7950,7 @@
     let if_block2 = (
       /*$_CARD_SHOW*/
       ctx[6].tags && /*torrentInfo*/
-      ctx[0].tagsDOM.length != 0 && create_if_block_4$1(ctx)
+      ctx[0].tagsDOM.length != 0 && create_if_block_4(ctx)
     );
     let if_block3 = (
       /*$_CARD_SHOW*/
@@ -7752,7 +7962,7 @@
     );
     let if_block5 = (
       /*$_CARD_SHOW*/
-      ctx[6].statistics && create_if_block_1$1(ctx)
+      ctx[6].statistics && create_if_block_1$2(ctx)
     );
     return {
       c() {
@@ -7838,7 +8048,7 @@
           if (if_block2) {
             if_block2.p(ctx2, dirty);
           } else {
-            if_block2 = create_if_block_4$1(ctx2);
+            if_block2 = create_if_block_4(ctx2);
             if_block2.c();
             if_block2.m(t2.parentNode, t2);
           }
@@ -7883,7 +8093,7 @@
           if (if_block5) {
             if_block5.p(ctx2, dirty);
           } else {
-            if_block5 = create_if_block_1$1(ctx2);
+            if_block5 = create_if_block_1$2(ctx2);
             if_block5.c();
             if_block5.m(div, null);
           }
@@ -8160,7 +8370,7 @@
       }
     };
   }
-  function create_if_block_4$1(ctx) {
+  function create_if_block_4(ctx) {
     let div;
     let raw_value = (
       /*torrentInfo*/
@@ -8388,7 +8598,7 @@
       }
     };
   }
-  function create_if_block_1$1(ctx) {
+  function create_if_block_1$2(ctx) {
     let div;
     let html_tag;
     let raw0_value = (
@@ -8531,7 +8741,7 @@
       }
     };
   }
-  function create_fragment$1(ctx) {
+  function create_fragment$3(ctx) {
     let div4;
     let div3;
     let div0;
@@ -8574,7 +8784,7 @@
     );
     let if_block2 = !/*$_CARD_SHOW*/
     (ctx[6].all || /*_hover*/
-    ctx[3]) && create_if_block$1(ctx);
+    ctx[3]) && create_if_block$3(ctx);
     return {
       c() {
         div4 = element("div");
@@ -8786,7 +8996,7 @@
           if (if_block2) {
             if_block2.p(ctx2, dirty);
           } else {
-            if_block2 = create_if_block$1(ctx2);
+            if_block2 = create_if_block$3(ctx2);
             if_block2.c();
             if_block2.m(div3, null);
           }
@@ -8866,7 +9076,7 @@
   const func = (e) => e.outerHTML;
   const func_1 = (e) => e.outerHTML;
   const func_3 = (e) => e.outerHTML;
-  function instance$2($$self, $$props, $$invalidate) {
+  function instance$3($$self, $$props, $$invalidate) {
     let $_iframe_url;
     let $_iframe_switch;
     let $_SITE_SETTING;
@@ -8886,7 +9096,7 @@
     }
     let { torrentInfo } = $$props;
     let { cardWidth } = $$props;
-    let { ICON } = $$props;
+    let { ICON: ICON2 } = $$props;
     let _hover = false;
     function card_show_detail() {
       $$invalidate(3, _hover = true);
@@ -8910,12 +9120,12 @@
       if ("cardWidth" in $$props2)
         $$invalidate(1, cardWidth = $$props2.cardWidth);
       if ("ICON" in $$props2)
-        $$invalidate(2, ICON = $$props2.ICON);
+        $$invalidate(2, ICON2 = $$props2.ICON);
     };
     return [
       torrentInfo,
       cardWidth,
-      ICON,
+      ICON2,
       _hover,
       $_SITE_SETTING,
       $_current_bgColor,
@@ -8931,18 +9141,17 @@
   class Mteam extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance$2, create_fragment$1, safe_not_equal, { torrentInfo: 0, cardWidth: 1, ICON: 2 });
+      init(this, options, instance$3, create_fragment$3, safe_not_equal, { torrentInfo: 0, cardWidth: 1, ICON: 2 });
     }
   }
-  const { window: window_1 } = globals;
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[30] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[30] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function create_else_block_1(ctx) {
@@ -8964,7 +9173,7 @@
       }
     };
   }
-  function create_if_block_4(ctx) {
+  function create_if_block_3(ctx) {
     let each_blocks = [];
     let each_1_lookup = /* @__PURE__ */ new Map();
     let each_1_anchor;
@@ -8975,7 +9184,7 @@
     );
     const get_key = (ctx2) => (
       /*info*/
-      ctx2[30].torrentIndex
+      ctx2[24].torrentIndex
     );
     for (let i = 0; i < each_value_1.length; i += 1) {
       let child_ctx = get_each_context_1(ctx, each_value_1, i);
@@ -8999,8 +9208,8 @@
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*infoList, CARD, ICON*/
-        133) {
+        if (dirty & /*infoList, CARD, ICON*/
+        5) {
           each_value_1 = /*infoList*/
           ctx2[2];
           group_outros();
@@ -9031,7 +9240,7 @@
       }
     };
   }
-  function create_if_block_3(ctx) {
+  function create_if_block_2(ctx) {
     let each_blocks = [];
     let each_1_lookup = /* @__PURE__ */ new Map();
     let each_1_anchor;
@@ -9042,7 +9251,7 @@
     );
     const get_key = (ctx2) => (
       /*info*/
-      ctx2[30].torrentIndex
+      ctx2[24].torrentIndex
     );
     for (let i = 0; i < each_value.length; i += 1) {
       let child_ctx = get_each_context(ctx, each_value, i);
@@ -9066,8 +9275,8 @@
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*infoList, CARD, ICON*/
-        133) {
+        if (dirty & /*infoList, CARD, ICON*/
+        5) {
           each_value = /*infoList*/
           ctx2[2];
           group_outros();
@@ -9106,16 +9315,13 @@
       props: {
         torrentInfo: (
           /*info*/
-          ctx[30]
+          ctx[24]
         ),
         cardWidth: (
           /*CARD*/
           ctx[0].CARD_WIDTH
         ),
-        ICON: (
-          /*ICON*/
-          ctx[7]
-        )
+        ICON
       }
     });
     return {
@@ -9134,11 +9340,11 @@
       p(new_ctx, dirty) {
         ctx = new_ctx;
         const mteam_changes = {};
-        if (dirty[0] & /*infoList*/
+        if (dirty & /*infoList*/
         4)
           mteam_changes.torrentInfo = /*info*/
-          ctx[30];
-        if (dirty[0] & /*CARD*/
+          ctx[24];
+        if (dirty & /*CARD*/
         1)
           mteam_changes.cardWidth = /*CARD*/
           ctx[0].CARD_WIDTH;
@@ -9169,16 +9375,13 @@
       props: {
         torrentInfo: (
           /*info*/
-          ctx[30]
+          ctx[24]
         ),
         cardWidth: (
           /*CARD*/
           ctx[0].CARD_WIDTH
         ),
-        ICON: (
-          /*ICON*/
-          ctx[7]
-        )
+        ICON
       }
     });
     return {
@@ -9197,11 +9400,11 @@
       p(new_ctx, dirty) {
         ctx = new_ctx;
         const kamept_changes = {};
-        if (dirty[0] & /*infoList*/
+        if (dirty & /*infoList*/
         4)
           kamept_changes.torrentInfo = /*info*/
-          ctx[30];
-        if (dirty[0] & /*CARD*/
+          ctx[24];
+        if (dirty & /*CARD*/
         1)
           kamept_changes.cardWidth = /*CARD*/
           ctx[0].CARD_WIDTH;
@@ -9224,10 +9427,10 @@
       }
     };
   }
-  function create_else_block(ctx) {
+  function create_else_block$1(ctx) {
     let t_value = (
       /*LOAD_TEXT*/
-      ctx[10].normal + ""
+      ctx[5].normal + ""
     );
     let t;
     return {
@@ -9244,10 +9447,10 @@
       }
     };
   }
-  function create_if_block_2(ctx) {
+  function create_if_block_1$1(ctx) {
     let t_value = (
       /*LOAD_TEXT*/
-      ctx[10].suspend + ""
+      ctx[5].suspend + ""
     );
     let t;
     return {
@@ -9264,10 +9467,10 @@
       }
     };
   }
-  function create_if_block_1(ctx) {
+  function create_if_block$2(ctx) {
     let t_value = (
       /*LOAD_TEXT*/
-      ctx[10].disable + ""
+      ctx[5].disable + ""
     );
     let t;
     return {
@@ -9284,116 +9487,27 @@
       }
     };
   }
-  function create_if_block(ctx) {
-    let div;
-    let iframe;
-    let iframe_src_value;
-    let div_transition;
-    let current;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        div = element("div");
-        iframe = element("iframe");
-        if (!src_url_equal(iframe.src, iframe_src_value = /*$_iframe_url*/
-        ctx[6]))
-          attr(iframe, "src", iframe_src_value);
-        attr(iframe, "frameborder", "0");
-        attr(iframe, "title", "wow");
-        set_style(iframe, "width", (SITE[
-          /*$_current_domain*/
-          ctx[4]
-        ] ? SITE[
-          /*$_current_domain*/
-          ctx[4]
-        ].Iframe_Width : 1e3) + "px");
-        attr(iframe, "class", "svelte-tr7wwl");
-        attr(div, "id", "_iframe");
-        attr(div, "class", "svelte-tr7wwl");
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        append(div, iframe);
-        current = true;
-        if (!mounted) {
-          dispose = listen(
-            div,
-            "click",
-            /*toggleIframe*/
-            ctx[8]
-          );
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (!current || dirty[0] & /*$_iframe_url*/
-        64 && !src_url_equal(iframe.src, iframe_src_value = /*$_iframe_url*/
-        ctx2[6])) {
-          attr(iframe, "src", iframe_src_value);
-        }
-        if (!current || dirty[0] & /*$_current_domain*/
-        16) {
-          set_style(iframe, "width", (SITE[
-            /*$_current_domain*/
-            ctx2[4]
-          ] ? SITE[
-            /*$_current_domain*/
-            ctx2[4]
-          ].Iframe_Width : 1e3) + "px");
-        }
-      },
-      i(local) {
-        if (current)
-          return;
-        add_render_callback(() => {
-          if (!current)
-            return;
-          if (!div_transition)
-            div_transition = create_bidirectional_transition(div, fade, { duration: 300 }, true);
-          div_transition.run(1);
-        });
-        current = true;
-      },
-      o(local) {
-        if (!div_transition)
-          div_transition = create_bidirectional_transition(div, fade, { duration: 300 }, false);
-        div_transition.run(0);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching)
-          detach(div);
-        if (detaching && div_transition)
-          div_transition.end();
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_fragment(ctx) {
+  function create_fragment$2(ctx) {
     let current_block_type_index;
     let if_block0;
-    let t0;
+    let t;
     let div;
     let button;
     let button_disabled_value;
-    let t1;
-    let if_block2_anchor;
     let current;
     let mounted;
     let dispose;
-    const if_block_creators = [create_if_block_3, create_if_block_4, create_else_block_1];
+    const if_block_creators = [create_if_block_2, create_if_block_3, create_else_block_1];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
         /*$_current_domain*/
-        ctx2[4] == "kamept.com"
+        ctx2[3] == "kamept.com"
       )
         return 0;
       if (
         /*$_current_domain*/
-        ctx2[4] == "kp.m-team.cc"
+        ctx2[3] == "kp.m-team.cc"
       )
         return 1;
       return 2;
@@ -9403,70 +9517,49 @@
     function select_block_type_1(ctx2, dirty) {
       if (
         /*$_turnPage*/
-        ctx2[3]
+        ctx2[4]
       )
-        return create_if_block_1;
+        return create_if_block$2;
       if (
         /*isButtonDisabled*/
         ctx2[1]
       )
-        return create_if_block_2;
-      return create_else_block;
+        return create_if_block_1$1;
+      return create_else_block$1;
     }
     let current_block_type = select_block_type_1(ctx);
     let if_block1 = current_block_type(ctx);
-    let if_block2 = (
-      /*$_iframe_switch*/
-      ctx[5] && create_if_block(ctx)
-    );
     return {
       c() {
         if_block0.c();
-        t0 = space();
+        t = space();
         div = element("div");
         button = element("button");
         if_block1.c();
-        t1 = space();
-        if (if_block2)
-          if_block2.c();
-        if_block2_anchor = empty();
         attr(button, "id", "turnPage");
         button.disabled = button_disabled_value = /*$_turnPage*/
-        ctx[3] || /*isButtonDisabled*/
+        ctx[4] || /*isButtonDisabled*/
         ctx[1];
-        attr(button, "class", "svelte-tr7wwl");
+        attr(button, "class", "svelte-kydsmq");
       },
       m(target, anchor) {
         if_blocks[current_block_type_index].m(target, anchor);
-        insert(target, t0, anchor);
+        insert(target, t, anchor);
         insert(target, div, anchor);
         append(div, button);
         if_block1.m(button, null);
-        insert(target, t1, anchor);
-        if (if_block2)
-          if_block2.m(target, anchor);
-        insert(target, if_block2_anchor, anchor);
         current = true;
         if (!mounted) {
-          dispose = [
-            listen(
-              window_1,
-              "keydown",
-              /*key_closePanels*/
-              ctx[9],
-              true
-            ),
-            listen(
-              button,
-              "click",
-              /*turnPage*/
-              ctx[11]
-            )
-          ];
+          dispose = listen(
+            button,
+            "click",
+            /*turnPage*/
+            ctx[6]
+          );
           mounted = true;
         }
       },
-      p(ctx2, dirty) {
+      p(ctx2, [dirty]) {
         let previous_block_index = current_block_type_index;
         current_block_type_index = select_block_type(ctx2);
         if (current_block_type_index === previous_block_index) {
@@ -9485,7 +9578,7 @@
             if_block0.p(ctx2, dirty);
           }
           transition_in(if_block0, 1);
-          if_block0.m(t0.parentNode, t0);
+          if_block0.m(t.parentNode, t);
         }
         if (current_block_type === (current_block_type = select_block_type_1(ctx2)) && if_block1) {
           if_block1.p(ctx2, dirty);
@@ -9497,133 +9590,49 @@
             if_block1.m(button, null);
           }
         }
-        if (!current || dirty[0] & /*$_turnPage, isButtonDisabled*/
-        10 && button_disabled_value !== (button_disabled_value = /*$_turnPage*/
-        ctx2[3] || /*isButtonDisabled*/
+        if (!current || dirty & /*$_turnPage, isButtonDisabled*/
+        18 && button_disabled_value !== (button_disabled_value = /*$_turnPage*/
+        ctx2[4] || /*isButtonDisabled*/
         ctx2[1])) {
           button.disabled = button_disabled_value;
-        }
-        if (
-          /*$_iframe_switch*/
-          ctx2[5]
-        ) {
-          if (if_block2) {
-            if_block2.p(ctx2, dirty);
-            if (dirty[0] & /*$_iframe_switch*/
-            32) {
-              transition_in(if_block2, 1);
-            }
-          } else {
-            if_block2 = create_if_block(ctx2);
-            if_block2.c();
-            transition_in(if_block2, 1);
-            if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
-          }
-        } else if (if_block2) {
-          group_outros();
-          transition_out(if_block2, 1, 1, () => {
-            if_block2 = null;
-          });
-          check_outros();
         }
       },
       i(local) {
         if (current)
           return;
         transition_in(if_block0);
-        transition_in(if_block2);
         current = true;
       },
       o(local) {
         transition_out(if_block0);
-        transition_out(if_block2);
         current = false;
       },
       d(detaching) {
         if_blocks[current_block_type_index].d(detaching);
         if (detaching)
-          detach(t0);
+          detach(t);
         if (detaching)
           detach(div);
         if_block1.d();
-        if (detaching)
-          detach(t1);
-        if (if_block2)
-          if_block2.d(detaching);
-        if (detaching)
-          detach(if_block2_anchor);
         mounted = false;
-        run_all(dispose);
+        dispose();
       }
     };
   }
-  function instance$1($$self, $$props, $$invalidate) {
+  function instance$2($$self, $$props, $$invalidate) {
     var _a;
     let $_Global_Masonry;
     let $_card_width;
-    let $_turnPage;
     let $_current_domain;
+    let $_turnPage;
     let $_current_bgColor;
-    let $_show_configPanel;
-    let $_iframe_switch;
-    let $_iframe_url;
-    component_subscribe($$self, _Global_Masonry, ($$value) => $$invalidate(19, $_Global_Masonry = $$value));
-    component_subscribe($$self, _card_width, ($$value) => $$invalidate(15, $_card_width = $$value));
-    component_subscribe($$self, _turnPage, ($$value) => $$invalidate(3, $_turnPage = $$value));
-    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(4, $_current_domain = $$value));
-    component_subscribe($$self, _current_bgColor, ($$value) => $$invalidate(20, $_current_bgColor = $$value));
-    component_subscribe($$self, _show_configPanel, ($$value) => $$invalidate(21, $_show_configPanel = $$value));
-    component_subscribe($$self, _iframe_switch, ($$value) => $$invalidate(5, $_iframe_switch = $$value));
-    component_subscribe($$self, _iframe_url, ($$value) => $$invalidate(6, $_iframe_url = $$value));
+    component_subscribe($$self, _Global_Masonry, ($$value) => $$invalidate(14, $_Global_Masonry = $$value));
+    component_subscribe($$self, _card_width, ($$value) => $$invalidate(10, $_card_width = $$value));
+    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(3, $_current_domain = $$value));
+    component_subscribe($$self, _turnPage, ($$value) => $$invalidate(4, $_turnPage = $$value));
+    component_subscribe($$self, _current_bgColor, ($$value) => $$invalidate(15, $_current_bgColor = $$value));
     let { originTable } = $$props;
     let { waterfallNode } = $$props;
-    const CARD = {
-      /** 瀑布流卡片宽度 */
-      CARD_WIDTH: $_card_width,
-      /** NOTE: 瀑布流卡片边框宽度 -> 这个2是真值, 但是边框好像是会随着分辨率和缩放变化, 给高有利大分辨率, 给低有利于小分辨率 */
-      CARD_BORDER: 0,
-      /** 瀑布流卡片索引 */
-      CARD_INDEX: 0,
-      /** 图片悬浮预览方式
-      * 0: 一律放大到全视窗[默认]
-      * 1: 最小为原图
-      */
-      PIC_HOVER_STYLE: 0
-    };
-    const PAGE = {
-      /** 翻页: 底部检测时间间隔 */
-      GAP: 3e3,
-      /** 翻页: 底部检测视点与底部距离 */
-      DISTANCE: 300,
-      /** 翻页: 是否为初始跳转页面 */
-      IS_ORIGIN: true,
-      /** 翻页: 当前页数 */
-      PAGE_CURRENT: 0,
-      /** 翻页: 下一页数 */
-      PAGE_NEXT: 0,
-      /** 翻页: 下一页的链接 */
-      NEXT_URL: "",
-      /** 翻页: 下一页的加载方式: Button | Slip */
-      SWITCH_MODE: "Button"
-    };
-    const ICON = {
-      /** 大小图标 */
-      SIZE: '<img class="size" src="pic/trans.gif" style=" transform: translateY(-0.4px);" alt="size" title="大小">',
-      /** 评论图标 */
-      COMMENT: '<img class="comments" src="pic/trans.gif" alt="comments" title="评论数">',
-      /** 上传人数图标 */
-      SEEDERS: '<img class="seeders" src="pic/trans.gif" alt="seeders" title="种子数">',
-      /** 下载人数图标 */
-      LEECHERS: '<img class="leechers" src="pic/trans.gif" alt="leechers" title="下载数">',
-      /** 已完成人数图标 */
-      SNATCHED: '<img class="snatched" src="pic/trans.gif" alt="snatched" title="完成数">',
-      /** 下载图标 */
-      DOWNLOAD: '<img class="download" src="pic/trans.gif" style=" transform: translateY(1px);" alt="download" title="下载本种">',
-      /** 未收藏图标 */
-      COLLET: '<img class="delbookmark" src="pic/trans.gif" alt="Unbookmarked" title="收藏">',
-      /** 已收藏图标 */
-      COLLETED: '<img class="bookmark" src="pic/trans.gif" alt="Bookmarked">'
-    };
     function GET_CARD_GUTTER(containerDom, card_width) {
       const _width = containerDom.clientWidth;
       const card_real_width = card_width + CARD.CARD_BORDER;
@@ -9634,21 +9643,12 @@
       return Math.floor(gutter);
     }
     function CHANGE_CARD_LAYOUT() {
-      $$invalidate(14, masonry2.options.gutter = GET_CARD_GUTTER(waterfallNode, $_card_width), masonry2);
-      $$invalidate(14, masonry2.options.columnWidth = $_card_width, masonry2);
+      $$invalidate(9, masonry2.options.gutter = GET_CARD_GUTTER(waterfallNode, $_card_width), masonry2);
+      $$invalidate(9, masonry2.options.columnWidth = $_card_width, masonry2);
       sortMasonry("fast");
       sortMasonry("fast");
     }
-    function toggleIframe() {
-      set_store_value(_iframe_switch, $_iframe_switch = 0, $_iframe_switch);
-    }
-    function key_closePanels(event) {
-      if (event.key === "Escape") {
-        console.log(event);
-        set_store_value(_iframe_switch, $_iframe_switch = 0, $_iframe_switch);
-        set_store_value(_show_configPanel, $_show_configPanel = false, $_show_configPanel);
-      }
-    }
+    window.CHANGE_CARD_LAYOUT = CHANGE_CARD_LAYOUT;
     let isButtonDisabled = false;
     let onMountSignal = false;
     const LOAD_TEXT = {
@@ -9670,6 +9670,7 @@
         );
       }
     }
+    window.turnPage = turnPage;
     set_store_value(_current_domain, $_current_domain = GET_CURRENT_PT_DOMAIN(), $_current_domain);
     const mainOuterDOM = document.querySelector("table.mainouter");
     const themeColor = window.getComputedStyle(mainOuterDOM)["background-color"];
@@ -9700,6 +9701,8 @@
       console.log("到页面底部啦!!! Scrolled to bottom!");
       const urlSearchParams = new URLSearchParams(window.location.search);
       PAGE.PAGE_CURRENT = PAGE.IS_ORIGIN ? Number(urlSearchParams.get("page")) : PAGE.PAGE_CURRENT;
+      if (PAGE.IS_ORIGIN)
+        PAGE.PAGE_ORIGIN = PAGE.PAGE_CURRENT;
       if (!PAGE.PAGE_CURRENT) {
         console.log(`网页链接没有page参数, 无法跳转下一页, 生成PAGE.PAGE_CURRENT为0`);
         PAGE.PAGE_CURRENT = 0;
@@ -9711,9 +9714,16 @@
       PAGE.NEXT_URL = window.location.origin + window.location.pathname + "?" + urlSearchParams.toString();
       console.log("New URL:", PAGE.NEXT_URL);
       fetch(PAGE.NEXT_URL).then((response) => response.text()).then((html) => {
+        var _a2, _b;
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
         const table = doc.querySelector(GET_TORRENT_LIST_SELECTOR());
+        const list = Array.from(table.cloneNode(true).children[0].children);
+        list[0].children[1].textContent = `
+        ↓ 新加载第${PAGE.PAGE_NEXT - PAGE.PAGE_ORIGIN}页`;
+        console.log(PAGE.PAGE_ORIGIN);
+        originTable.children[0].append(...list);
+        typeof ((_a2 = SITE[$_current_domain]) == null ? void 0 : _a2.pageLoaded) === "function" ? (_b = SITE[$_current_domain]) == null ? void 0 : _b.pageLoaded() : null;
         $$invalidate(2, infoList = [...infoList, ...config.TORRENT_LIST_TO_JSON(table)]);
         PAGE.IS_ORIGIN = false;
         PAGE.PAGE_CURRENT = PAGE.PAGE_NEXT;
@@ -9730,7 +9740,7 @@
       });
     }
     onMount(() => {
-      $$invalidate(14, masonry2 = new Masonry(
+      $$invalidate(9, masonry2 = new Masonry(
         waterfallNode,
         {
           itemSelector: ".card",
@@ -9766,13 +9776,13 @@
     });
     $$self.$$set = ($$props2) => {
       if ("originTable" in $$props2)
-        $$invalidate(12, originTable = $$props2.originTable);
+        $$invalidate(7, originTable = $$props2.originTable);
       if ("waterfallNode" in $$props2)
-        $$invalidate(13, waterfallNode = $$props2.waterfallNode);
+        $$invalidate(8, waterfallNode = $$props2.waterfallNode);
     };
     $$self.$$.update = () => {
-      if ($$self.$$.dirty[0] & /*masonry, $_card_width, CARD*/
-      49153) {
+      if ($$self.$$.dirty & /*masonry, $_card_width, CARD*/
+      1537) {
         if (masonry2) {
           $$invalidate(0, CARD.CARD_WIDTH = $_card_width, CARD);
           console.log("卡片宽度:	", CARD.CARD_WIDTH);
@@ -9784,13 +9794,8 @@
       CARD,
       isButtonDisabled,
       infoList,
-      $_turnPage,
       $_current_domain,
-      $_iframe_switch,
-      $_iframe_url,
-      ICON,
-      toggleIframe,
-      key_closePanels,
+      $_turnPage,
       LOAD_TEXT,
       turnPage,
       originTable,
@@ -9802,13 +9807,351 @@
   class Index extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance$1, create_fragment, safe_not_equal, { originTable: 12, waterfallNode: 13 }, null, [-1, -1]);
+      init(this, options, instance$2, create_fragment$2, safe_not_equal, { originTable: 7, waterfallNode: 8 });
     }
   }
-  function instance($$self) {
+  function create_else_block(ctx) {
+    let t_value = (
+      /*LOAD_TEXT*/
+      ctx[2].normal + ""
+    );
+    let t;
+    return {
+      c() {
+        t = text(t_value);
+      },
+      m(target, anchor) {
+        insert(target, t, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(t);
+      }
+    };
+  }
+  function create_if_block_1(ctx) {
+    let t_value = (
+      /*LOAD_TEXT*/
+      ctx[2].suspend + ""
+    );
+    let t;
+    return {
+      c() {
+        t = text(t_value);
+      },
+      m(target, anchor) {
+        insert(target, t, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(t);
+      }
+    };
+  }
+  function create_if_block$1(ctx) {
+    let t_value = (
+      /*LOAD_TEXT*/
+      ctx[2].disable + ""
+    );
+    let t;
+    return {
+      c() {
+        t = text(t_value);
+      },
+      m(target, anchor) {
+        insert(target, t, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(t);
+      }
+    };
+  }
+  function create_fragment$1(ctx) {
+    let div;
+    let button;
+    let button_disabled_value;
+    let mounted;
+    let dispose;
+    function select_block_type(ctx2, dirty) {
+      if (
+        /*$_turnPage*/
+        ctx2[1]
+      )
+        return create_if_block$1;
+      if (
+        /*isButtonDisabled*/
+        ctx2[0]
+      )
+        return create_if_block_1;
+      return create_else_block;
+    }
+    let current_block_type = select_block_type(ctx);
+    let if_block = current_block_type(ctx);
+    return {
+      c() {
+        div = element("div");
+        button = element("button");
+        if_block.c();
+        attr(button, "id", "_turnPage");
+        button.disabled = button_disabled_value = /*$_turnPage*/
+        ctx[1] || /*isButtonDisabled*/
+        ctx[0];
+        attr(button, "class", "svelte-2j14uu");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, button);
+        if_block.m(button, null);
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*func*/
+            ctx[3]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (current_block_type === (current_block_type = select_block_type(ctx2)) && if_block) {
+          if_block.p(ctx2, dirty);
+        } else {
+          if_block.d(1);
+          if_block = current_block_type(ctx2);
+          if (if_block) {
+            if_block.c();
+            if_block.m(button, null);
+          }
+        }
+        if (dirty & /*$_turnPage, isButtonDisabled*/
+        3 && button_disabled_value !== (button_disabled_value = /*$_turnPage*/
+        ctx2[1] || /*isButtonDisabled*/
+        ctx2[0])) {
+          button.disabled = button_disabled_value;
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching)
+          detach(div);
+        if_block.d();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  const GAP = 3e3;
+  function instance$1($$self, $$props, $$invalidate) {
+    let $_turnPage;
+    component_subscribe($$self, _turnPage, ($$value) => $$invalidate(1, $_turnPage = $$value));
+    let isButtonDisabled = false;
+    const LOAD_TEXT = {
+      normal: "点击加载下一页",
+      suspend: `下一页加载CD: ${GAP} ms`,
+      disable: "不可用"
+    };
+    function func2(event) {
+      event.preventDefault();
+      window.turnPage(event);
+      if (!isButtonDisabled) {
+        $$invalidate(0, isButtonDisabled = true);
+        setTimeout(
+          () => {
+            $$invalidate(0, isButtonDisabled = false);
+          },
+          GAP
+        );
+      }
+    }
+    return [isButtonDisabled, $_turnPage, LOAD_TEXT, func2];
+  }
+  class BtnTurnPage extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+    }
+  }
+  function create_if_block(ctx) {
+    let div;
+    let iframe;
+    let iframe_src_value;
+    let div_transition;
+    let current;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        iframe = element("iframe");
+        if (!src_url_equal(iframe.src, iframe_src_value = /*$_iframe_url*/
+        ctx[1]))
+          attr(iframe, "src", iframe_src_value);
+        attr(iframe, "frameborder", "0");
+        attr(iframe, "title", "wow");
+        set_style(iframe, "width", (SITE[
+          /*$_current_domain*/
+          ctx[2]
+        ] ? SITE[
+          /*$_current_domain*/
+          ctx[2]
+        ].Iframe_Width : 1e3) + "px");
+        attr(iframe, "class", "svelte-1wevt6e");
+        attr(div, "id", "_iframe");
+        attr(div, "class", "svelte-1wevt6e");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, iframe);
+        current = true;
+        if (!mounted) {
+          dispose = listen(
+            div,
+            "click",
+            /*toggleIframe*/
+            ctx[3]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (!current || dirty & /*$_iframe_url*/
+        2 && !src_url_equal(iframe.src, iframe_src_value = /*$_iframe_url*/
+        ctx2[1])) {
+          attr(iframe, "src", iframe_src_value);
+        }
+        if (!current || dirty & /*$_current_domain*/
+        4) {
+          set_style(iframe, "width", (SITE[
+            /*$_current_domain*/
+            ctx2[2]
+          ] ? SITE[
+            /*$_current_domain*/
+            ctx2[2]
+          ].Iframe_Width : 1e3) + "px");
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        add_render_callback(() => {
+          if (!current)
+            return;
+          if (!div_transition)
+            div_transition = create_bidirectional_transition(div, fade, { duration: 300 }, true);
+          div_transition.run(1);
+        });
+        current = true;
+      },
+      o(local) {
+        if (!div_transition)
+          div_transition = create_bidirectional_transition(div, fade, { duration: 300 }, false);
+        div_transition.run(0);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div);
+        if (detaching && div_transition)
+          div_transition.end();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_fragment(ctx) {
+    let if_block_anchor;
+    let current;
+    let mounted;
+    let dispose;
+    let if_block = (
+      /*$_iframe_switch*/
+      ctx[0] && create_if_block(ctx)
+    );
+    return {
+      c() {
+        if (if_block)
+          if_block.c();
+        if_block_anchor = empty();
+      },
+      m(target, anchor) {
+        if (if_block)
+          if_block.m(target, anchor);
+        insert(target, if_block_anchor, anchor);
+        current = true;
+        if (!mounted) {
+          dispose = listen(
+            window,
+            "keydown",
+            /*key_closePanels*/
+            ctx[4],
+            true
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (
+          /*$_iframe_switch*/
+          ctx2[0]
+        ) {
+          if (if_block) {
+            if_block.p(ctx2, dirty);
+            if (dirty & /*$_iframe_switch*/
+            1) {
+              transition_in(if_block, 1);
+            }
+          } else {
+            if_block = create_if_block(ctx2);
+            if_block.c();
+            transition_in(if_block, 1);
+            if_block.m(if_block_anchor.parentNode, if_block_anchor);
+          }
+        } else if (if_block) {
+          group_outros();
+          transition_out(if_block, 1, 1, () => {
+            if_block = null;
+          });
+          check_outros();
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(if_block);
+        current = true;
+      },
+      o(local) {
+        transition_out(if_block);
+        current = false;
+      },
+      d(detaching) {
+        if (if_block)
+          if_block.d(detaching);
+        if (detaching)
+          detach(if_block_anchor);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance($$self, $$props, $$invalidate) {
+    let $_show_configPanel;
+    let $_iframe_switch;
+    let $_show_mode;
+    let $_iframe_url;
+    let $_current_domain;
+    component_subscribe($$self, _show_configPanel, ($$value) => $$invalidate(9, $_show_configPanel = $$value));
+    component_subscribe($$self, _iframe_switch, ($$value) => $$invalidate(0, $_iframe_switch = $$value));
+    component_subscribe($$self, _show_mode, ($$value) => $$invalidate(5, $_show_mode = $$value));
+    component_subscribe($$self, _iframe_url, ($$value) => $$invalidate(1, $_iframe_url = $$value));
+    component_subscribe($$self, _current_domain, ($$value) => $$invalidate(2, $_current_domain = $$value));
     console.log(`[${( new Date()).toLocaleTimeString()}]<--------------------------HMR-------------------------->`);
     const _ORIGIN_TL_Node2 = document.querySelector(GET_TORRENT_LIST_SELECTOR());
-    _ORIGIN_TL_Node2.style.display = "none";
     while (!Masonry) {
       console.log("等待初始化......");
     }
@@ -9816,6 +10159,19 @@
     const waterfallNode = document.createElement("div");
     waterfallNode.classList.add("waterfall");
     parentNode.insertBefore(waterfallNode, _ORIGIN_TL_Node2.nextSibling);
+    const nextPageNode = document.createElement("div");
+    nextPageNode.classList.add("nextPage");
+    parentNode.insertBefore(nextPageNode, _ORIGIN_TL_Node2.nextSibling);
+    function toggleIframe() {
+      set_store_value(_iframe_switch, $_iframe_switch = 0, $_iframe_switch);
+    }
+    function key_closePanels(event) {
+      if (event.key === "Escape") {
+        console.log(event);
+        set_store_value(_iframe_switch, $_iframe_switch = 0, $_iframe_switch);
+        set_store_value(_show_configPanel, $_show_configPanel = false, $_show_configPanel);
+      }
+    }
     onMount(() => {
       new Sidepanel({
         target: document.body,
@@ -9832,13 +10188,31 @@
           waterfallNode
         }
       });
+      new BtnTurnPage({ target: nextPageNode });
     });
-    return [];
+    $$self.$$.update = () => {
+      if ($$self.$$.dirty & /*$_show_mode*/
+      32) {
+        {
+          _ORIGIN_TL_Node2.style.display = $_show_mode ? "none" : "block";
+          nextPageNode.style.display = $_show_mode ? "none" : "block";
+          waterfallNode.style.display = $_show_mode ? "block" : "none";
+        }
+      }
+    };
+    return [
+      $_iframe_switch,
+      $_iframe_url,
+      $_current_domain,
+      toggleIframe,
+      key_closePanels,
+      $_show_mode
+    ];
   }
   class Main extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, null, safe_not_equal, {});
+      init(this, options, instance, create_fragment, safe_not_equal, {});
     }
   }
   console.log("________PT-TorrentList-Masonry________");
